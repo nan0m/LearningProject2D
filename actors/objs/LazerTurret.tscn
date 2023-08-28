@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=3 uid="uid://3r2xjglryy2d"]
+
+[ext_resource type="Texture2D" uid="uid://dsogtbe36corc" path="res://Assets/Towers/towerDefense_tile180.png" id="1_ex14u"]
+[ext_resource type="Script" path="res://actors/objs/LazerTurret.gd" id="1_ldufp"]
+[ext_resource type="Texture2D" uid="uid://c15nfjccol33n" path="res://Assets/Towers/towerDefense_tile292.png" id="3_17a5r"]
+[ext_resource type="Texture2D" uid="uid://ddsd6f6cy2lsi" path="res://Assets/fx/explosion1.png" id="4_6mqay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_am4iy"]
+size = Vector2(52, 52)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mi5qf"]
+radius = 500.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvbbn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rloe"]
+bg_color = Color(0.396078, 0.8, 1, 1)
+
+[sub_resource type="Theme" id="Theme_4tuyf"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_gvbbn")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_3rloe")
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_ldufp")
+
+[node name="Base" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_ex14u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_am4iy")
+
+[node name="LazerRaycast" type="RayCast2D" parent="."]
+target_position = Vector2(500, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="Cannon" type="Sprite2D" parent="LazerRaycast"]
+position = Vector2(0, 9)
+texture = ExtResource("3_17a5r")
+
+[node name="Lazer" type="Line2D" parent="LazerRaycast"]
+points = PackedVector2Array(27, 0, 70, 0)
+width = 5.0
+default_color = Color(0.627451, 0.737255, 0.905882, 1)
+
+[node name="StartParticles" type="CPUParticles2D" parent="LazerRaycast"]
+z_index = 2
+position = Vector2(24, 0)
+emitting = false
+lifetime = 0.5
+texture = ExtResource("4_6mqay")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+scale_amount_min = 0.5
+color = Color(0.627451, 0.737255, 0.905882, 1)
+
+[node name="EndParticles" type="CPUParticles2D" parent="LazerRaycast"]
+z_index = 2
+position = Vector2(24, 0)
+emitting = false
+lifetime = 0.2
+texture = ExtResource("4_6mqay")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+scale_amount_min = 0.5
+color = Color(0.627451, 0.737255, 0.905882, 1)
+
+[node name="LazerParticles" type="CPUParticles2D" parent="LazerRaycast"]
+z_index = 2
+position = Vector2(24, 0)
+emitting = false
+amount = 25
+lifetime = 0.5
+one_shot = true
+texture = ExtResource("4_6mqay")
+emission_shape = 3
+emission_rect_extents = Vector2(70, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+scale_amount_min = 0.5
+color = Color(0.627451, 0.737255, 0.905882, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mi5qf")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -22.0
+offset_top = 22.0
+offset_right = 24.0
+offset_bottom = 31.0
+theme = SubResource("Theme_4tuyf")
+value = 100.0
+show_percentage = false
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

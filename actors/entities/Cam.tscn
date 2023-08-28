@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://brfqb2kn5wiub"]
+
+[ext_resource type="Script" path="res://actors/entities/Cam.gd" id="1_d1la3"]
+
+[node name="Cam" type="Camera2D"]
+position = Vector2(402, 270)
+script = ExtResource("1_d1la3")
+
+[node name="TL" type="Node2D" parent="."]
+
+[node name="BR" type="Node2D" parent="."]

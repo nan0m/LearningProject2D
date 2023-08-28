@@ -1,0 +1,484 @@
+[gd_scene load_steps=14 format=3 uid="uid://dljxv7r0moi3q"]
+
+[ext_resource type="Script" path="res://Scenes/UI.gd" id="1_axsyv"]
+[ext_resource type="Texture2D" uid="uid://ckl3yxdo8r1pw" path="res://Assets/Player/BC.png" id="1_mgbco"]
+[ext_resource type="PackedScene" uid="uid://plsmifum5itd" path="res://actors/ui/WeaponDisplay.tscn" id="3_7lofs"]
+[ext_resource type="PackedScene" uid="uid://b46axtx4pgpjv" path="res://actors/objs/Slot.tscn" id="3_wwoqq"]
+[ext_resource type="PackedScene" uid="uid://lml1jfd57ls8" path="res://actors/ui/WeaponDescription.tscn" id="4_nomcy"]
+[ext_resource type="AudioStream" uid="uid://fdqir5a6b4t6" path="res://Assets/sfx/building_sound.mp3" id="5_5lytj"]
+[ext_resource type="AudioStream" uid="uid://b3iqxdyyxcvbo" path="res://Assets/sfx/opening_build_menu.mp3" id="6_7fg0y"]
+[ext_resource type="AudioStream" uid="uid://u7ea2pc4jcwc" path="res://Assets/sfx/buttonclick.mp3" id="7_5liu4"]
+[ext_resource type="AudioStream" uid="uid://4ht6xeaslvl5" path="res://Assets/sfx/scrap.mp3" id="9_4st4r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhe8k"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ewqqt"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_py5l2"]
+events = [SubResource("InputEventKey_ewqqt")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u2lnd"]
+font_size = 24
+
+[node name="UI" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_axsyv")
+
+[node name="UpgradePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vhe8k")
+
+[node name="Hide" type="Button" parent="UpgradePanel"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 25.0
+offset_right = 110.0
+offset_bottom = 56.0
+shortcut = SubResource("Shortcut_py5l2")
+text = "Hide"
+
+[node name="Label" type="Label" parent="UpgradePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_top = 28.0
+offset_right = 102.0
+offset_bottom = 65.0
+grow_horizontal = 2
+text = "Upgrades"
+label_settings = SubResource("LabelSettings_u2lnd")
+horizontal_alignment = 1
+
+[node name="Gold" type="Label" parent="UpgradePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_top = 57.0
+offset_right = 102.0
+offset_bottom = 94.0
+grow_horizontal = 2
+text = "999G"
+label_settings = SubResource("LabelSettings_u2lnd")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UpgradePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_mgbco")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WeaponView" type="Panel" parent="UpgradePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -399.0
+offset_top = -159.0
+offset_right = 411.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="WeaponType" type="Label" parent="UpgradePanel/WeaponView"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -106.0
+offset_top = 12.0
+offset_right = -14.0
+offset_bottom = 38.0
+grow_horizontal = 0
+text = "Turret"
+horizontal_alignment = 2
+
+[node name="WeaponStatsBox" type="VBoxContainer" parent="UpgradePanel/WeaponView"]
+unique_name_in_owner = true
+visible = false
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 8.0
+offset_right = -17.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradePanel/WeaponView/WeaponStatsBox"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Attack Damage:"
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer"]
+layout_mode = 2
+text = "999"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Upgrade"
+
+[node name="Scrap" type="Button" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "Scrap"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UpgradePanel/WeaponView/WeaponStatsBox"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Attack Damage:"
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer2"]
+layout_mode = 2
+text = "999"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Upgrade"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UpgradePanel/WeaponView/WeaponStatsBox"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Attack Damage:"
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer3"]
+layout_mode = 2
+text = "999"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Upgrade"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UpgradePanel/WeaponView/WeaponStatsBox"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Attack Damage:"
+vertical_alignment = 1
+
+[node name="Amount" type="Label" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer4"]
+layout_mode = 2
+text = "999"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Upgrade"
+
+[node name="WeaponsSelectionBox" type="HBoxContainer" parent="UpgradePanel/WeaponView"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 53.0
+offset_right = -37.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="WeaponDisplay6" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 6
+
+[node name="WeaponDisplay4" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 4
+
+[node name="WeaponDisplay" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 7
+
+[node name="WeaponDisplay2" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 1
+
+[node name="WeaponDisplay5" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 5
+
+[node name="WeaponDisplay3" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 2
+
+[node name="WeaponDisplay7" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 3
+
+[node name="WeaponDisplay8" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+weapon_type = 8
+
+[node name="Build" type="Button" parent="UpgradePanel/WeaponView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -15.5
+offset_right = 54.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Build"
+
+[node name="WeaponDescriptionBox" type="VBoxContainer" parent="UpgradePanel/WeaponView"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WeaponDescription" parent="UpgradePanel/WeaponView/WeaponDescriptionBox" instance=ExtResource("4_nomcy")]
+layout_mode = 2
+
+[node name="StatsPanel" type="Panel" parent="UpgradePanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -226.0
+offset_top = 10.0
+offset_right = -11.0
+offset_bottom = 153.0
+grow_horizontal = 0
+
+[node name="StatsBox" type="VBoxContainer" parent="UpgradePanel/StatsPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 8.0
+offset_right = -15.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradePanel/StatsPanel/StatsBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer"]
+layout_mode = 2
+text = "HP:"
+
+[node name="Label2" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer"]
+layout_mode = 2
+text = "999"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UpgradePanel/StatsPanel/StatsBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer2"]
+layout_mode = 2
+text = "Armor:"
+
+[node name="Label2" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer2"]
+layout_mode = 2
+text = "999"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UpgradePanel/StatsPanel/StatsBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer3"]
+layout_mode = 2
+text = "Attack:"
+
+[node name="Label2" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer3"]
+layout_mode = 2
+text = "999"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UpgradePanel/StatsPanel/StatsBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer4"]
+layout_mode = 2
+text = "Critical:"
+
+[node name="Label2" type="Label" parent="UpgradePanel/StatsPanel/StatsBox/HBoxContainer4"]
+layout_mode = 2
+text = "999"
+
+[node name="Slots" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Slot" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 172.0
+offset_top = 247.0
+offset_right = 236.0
+offset_bottom = 311.0
+
+[node name="Slot12" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 715.0
+offset_top = 288.0
+offset_right = 795.0
+offset_bottom = 368.0
+
+[node name="Slot5" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 552.0
+offset_top = 158.0
+offset_right = 616.0
+offset_bottom = 222.0
+
+[node name="Slot6" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 609.0
+offset_top = 158.0
+offset_right = 673.0
+offset_bottom = 222.0
+
+[node name="Slot7" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 701.0
+offset_top = 158.0
+offset_right = 765.0
+offset_bottom = 222.0
+
+[node name="Slot8" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 242.0
+offset_top = 109.0
+offset_right = 306.0
+offset_bottom = 173.0
+
+[node name="Slot9" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 311.0
+offset_top = 109.0
+offset_right = 375.0
+offset_bottom = 173.0
+
+[node name="Slot10" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 360.0
+offset_top = 328.0
+offset_right = 408.0
+offset_bottom = 376.0
+
+[node name="Slot11" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 291.0
+offset_top = 328.0
+offset_right = 339.0
+offset_bottom = 376.0
+
+[node name="Slot2" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 895.0
+offset_top = 293.0
+offset_right = 927.0
+offset_bottom = 325.0
+
+[node name="Slot3" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 926.0
+offset_top = 293.0
+offset_right = 958.0
+offset_bottom = 325.0
+
+[node name="Slot4" parent="Slots" instance=ExtResource("3_wwoqq")]
+layout_mode = 1
+offset_left = 957.0
+offset_top = 293.0
+offset_right = 989.0
+offset_bottom = 325.0
+
+[node name="Item_online" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5lytj")
+volume_db = -16.201
+max_polyphony = 5
+
+[node name="Open_build_menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_7fg0y")
+max_polyphony = 5
+
+[node name="button_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_5liu4")
+
+[node name="scrap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4st4r")
+volume_db = -2.46
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="UpgradePanel/Hide" to="." method="_on_hide_pressed"]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer/Button" to="." method="_on_button_pressed" binds= ["range"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer/Scrap" to="." method="_on_scrap_pressed"]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer2/Button" to="." method="_on_button_pressed" binds= ["rof"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer3/Button" to="." method="_on_button_pressed" binds= ["attack"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer4/Button" to="." method="_on_button_pressed" binds= ["critical"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/Build" to="." method="_on_build_pressed"]

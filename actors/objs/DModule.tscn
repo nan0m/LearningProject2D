@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://i66pb57715fo"]
+
+[ext_resource type="Script" path="res://actors/objs/DModule.gd" id="1_s1m01"]
+[ext_resource type="Texture2D" uid="uid://dj7a8ug7yfle" path="res://Assets/Towers/towerDefense_tile268.png" id="2_533u1"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_s1m01")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(11, 8)
+scale = Vector2(0.672, 0.672)
+texture = ExtResource("2_533u1")

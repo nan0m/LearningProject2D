@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://lml1jfd57ls8"]
+
+[ext_resource type="Script" path="res://actors/ui/WeaponDescription.gd" id="1_da5rn"]
+[ext_resource type="AudioStream" uid="uid://cqd4h8rahad48" path="res://Assets/sfx/weapondescrclose.mp3" id="2_kcc1f"]
+
+[node name="WeaponDescription" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 187.0
+offset_top = 83.0
+offset_right = -199.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_da5rn")
+
+[node name="Stats" type="Label" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 152.0
+offset_right = 252.0
+offset_bottom = 333.0
+autowrap_mode = 2
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 52.0
+offset_right = 198.0
+offset_bottom = 142.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 59.0
+offset_bottom = 40.0
+text = "Close"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 375.0
+offset_top = 21.0
+offset_right = 729.0
+offset_bottom = 315.0
+
+[node name="Description" type="Label" parent="ScrollContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_alignment = 3
+autowrap_mode = 3
+
+[node name="CloseWeaponDescription" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_kcc1f")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

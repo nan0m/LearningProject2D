@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bimldqh1asj0a"]
+
+[ext_resource type="Script" path="res://actors/objs/Phalanx.gd" id="1_lgq41"]
+[ext_resource type="Texture2D" uid="uid://drcu8ghvkgckg" path="res://Assets/Towers/towerDefense_tile291.png" id="2_dfsds"]
+[ext_resource type="AudioStream" uid="uid://d3fc2e6pemftx" path="res://Assets/sfx/turret_lazer.wav" id="3_gw5jn"]
+[ext_resource type="Texture2D" uid="uid://x3yu6hcfdwvt" path="res://Assets/Environment/New Project.png" id="4_yyp01"]
+[ext_resource type="Texture2D" uid="uid://dtdmcrefn7tou" path="res://Assets/Environment/New Project (1).png" id="5_6uv4b"]
+[ext_resource type="Script" path="res://actors/objs/AmmoBelt.gd" id="6_nc6gq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_an4ov"]
+
+[node name="Phalanx" type="Node2D"]
+script = ExtResource("1_lgq41")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="TurretSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_dfsds")
+
+[node name="lazer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gw5jn")
+max_polyphony = 10
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="AmmoBelt" type="TextureProgressBar" parent="."]
+offset_left = -25.0
+offset_top = -18.0
+offset_right = -19.0
+offset_bottom = 18.0
+fill_mode = 3
+texture_under = ExtResource("5_6uv4b")
+texture_progress = ExtResource("4_yyp01")
+script = ExtResource("6_nc6gq")
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+light_mask = 0
+visibility_layer = 2
+shape = SubResource("CircleShape2D_an4ov")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
+[connection signal="area_entered" from="Range" to="." method="_on_range_area_entered"]
+[connection signal="area_exited" from="Range" to="." method="_on_range_area_exited"]

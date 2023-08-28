@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmhebfjh8hl55"]
+
+[ext_resource type="Script" path="res://actors/objs/Weapon.gd" id="1_siyjx"]
+[ext_resource type="Texture2D" uid="uid://bx0wyyhgb7ri2" path="res://Assets/Towers/towerDefense_tile249.png" id="2_pck6v"]
+[ext_resource type="AudioStream" uid="uid://d3fc2e6pemftx" path="res://Assets/sfx/turret_lazer.wav" id="3_i8ghd"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_siyjx")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="TurretSprite" type="Sprite2D" parent="."]
+position = Vector2(11, 0)
+texture = ExtResource("2_pck6v")
+
+[node name="lazer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_i8ghd")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

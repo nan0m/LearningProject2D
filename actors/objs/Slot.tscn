@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://b46axtx4pgpjv"]
+
+[ext_resource type="Texture2D" uid="uid://bxnu51escy5qs" path="res://Assets/Towers/towerDefense_tile181.png" id="1_cwkpd"]
+[ext_resource type="Script" path="res://actors/objs/Slot.gd" id="2_m507k"]
+[ext_resource type="Texture2D" uid="uid://bx0wyyhgb7ri2" path="res://Assets/Towers/towerDefense_tile249.png" id="3_34lxp"]
+[ext_resource type="Texture2D" uid="uid://bhk7ev6dylyxi" path="res://Assets/Towers/towerDefense_tile181clicked.png" id="3_avfja"]
+[ext_resource type="AudioStream" uid="uid://u7ea2pc4jcwc" path="res://Assets/sfx/buttonclick.mp3" id="4_cxx2g"]
+
+[node name="Slot" type="TextureButton"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 64.0
+offset_bottom = 64.0
+toggle_mode = true
+action_mode = 0
+keep_pressed_outside = true
+texture_normal = ExtResource("1_cwkpd")
+texture_pressed = ExtResource("3_avfja")
+texture_focused = ExtResource("3_avfja")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_m507k")
+
+[node name="Icon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 9.0
+offset_right = -6.0
+offset_bottom = -9.00002
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_34lxp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WeaponHolder" type="Node2D" parent="."]
+position = Vector2(33, 32)
+
+[node name="clicked" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cxx2g")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

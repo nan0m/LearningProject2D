@@ -1,0 +1,188 @@
+[gd_scene load_steps=11 format=3 uid="uid://bktor42ahn8qq"]
+
+[ext_resource type="Script" path="res://actors/entities/Player_New.gd" id="1_nrdcg"]
+[ext_resource type="Texture2D" uid="uid://ckl3yxdo8r1pw" path="res://Assets/Player/BC.png" id="1_renin"]
+[ext_resource type="PackedScene" uid="uid://b46axtx4pgpjv" path="res://actors/objs/Slot.tscn" id="3_h5b40"]
+[ext_resource type="AudioStream" uid="uid://dr7x8152cnkxk" path="res://Assets/sfx/RailgunPEWSFX.wav" id="5_33us1"]
+[ext_resource type="AudioStream" uid="uid://mk636tsvqkdm" path="res://Assets/sfx/mainlazer.wav" id="5_o58cv"]
+[ext_resource type="AudioStream" uid="uid://b6wqu3l8pnesw" path="res://Assets/sfx/torpedo.wav" id="6_bp3f2"]
+[ext_resource type="AudioStream" uid="uid://5rdpnk41s4mi" path="res://Assets/sfx/alarm.mp3" id="7_gw2ad"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2b5m"]
+bg_color = Color(0.509804, 0.498039, 0.505882, 1)
+skew = Vector2(0.8, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv5gx"]
+bg_color = Color(0.6, 0.215686, 0.219608, 1)
+skew = Vector2(0.8, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hft1i"]
+size = Vector2(436, 104)
+
+[node name="Player_New" type="CharacterBody2D"]
+script = ExtResource("1_nrdcg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.27439, 0.27439)
+texture = ExtResource("1_renin")
+
+[node name="HP" type="ProgressBar" parent="."]
+offset_left = -108.0
+offset_top = -88.0
+offset_right = 105.0
+offset_bottom = -72.0
+theme_override_styles/background = SubResource("StyleBoxFlat_n2b5m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_iv5gx")
+value = 40.0
+show_percentage = false
+
+[node name="Slots" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -166.0
+offset_top = -99.0
+offset_right = -166.0
+offset_bottom = -99.0
+scale = Vector2(0.431, 0.431)
+mouse_filter = 2
+
+[node name="Slot" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 207.0
+offset_right = 67.0
+offset_bottom = 271.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot12" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 546.0
+offset_top = 248.0
+offset_right = 626.0
+offset_bottom = 328.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot5" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 383.0
+offset_top = 118.0
+offset_right = 447.0
+offset_bottom = 182.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot6" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 440.0
+offset_top = 118.0
+offset_right = 504.0
+offset_bottom = 182.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot7" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 532.0
+offset_top = 118.0
+offset_right = 596.0
+offset_bottom = 182.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot8" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 73.0
+offset_top = 69.0
+offset_right = 137.0
+offset_bottom = 133.0
+
+[node name="Slot9" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 142.0
+offset_top = 69.0
+offset_right = 206.0
+offset_bottom = 133.0
+
+[node name="Slot10" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 191.0
+offset_top = 288.0
+offset_right = 239.0
+offset_bottom = 336.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot11" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 122.0
+offset_top = 288.0
+offset_right = 170.0
+offset_bottom = 336.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot2" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 726.0
+offset_top = 253.0
+offset_right = 758.0
+offset_bottom = 285.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot3" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 757.0
+offset_top = 253.0
+offset_right = 789.0
+offset_bottom = 285.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot4" parent="Slots" instance=ExtResource("3_h5b40")]
+layout_mode = 1
+offset_left = 788.0
+offset_top = 253.0
+offset_right = 820.0
+offset_bottom = 285.0
+metadata/_edit_use_anchors_ = true
+
+[node name="RailgunSFX2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_33us1")
+area_mask = 5
+
+[node name="RailgunSFX3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_o58cv")
+area_mask = 5
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="Timer2" type="Timer" parent="."]
+process_callback = 0
+
+[node name="TorpedoSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_bp3f2")
+volume_db = -4.954
+
+[node name="Alarm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_gw2ad")
+volume_db = -4.954
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+position = Vector2(-8, 2)
+shape = SubResource("RectangleShape2D_hft1i")
+
+[node name="Impact" type="Marker2D" parent="."]
+position = Vector2(-204, -31)
+
+[connection signal="ready" from="Timer" to="." method="_on_timer_ready"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="ready" from="Timer2" to="." method="_on_timer_2_ready"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_player_hurtbox_area_entered"]

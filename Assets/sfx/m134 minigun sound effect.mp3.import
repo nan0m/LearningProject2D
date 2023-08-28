@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d0h7s70ikei3e"
+path="res://.godot/imported/m134 minigun sound effect.mp3-bc1c3eb1f2d5df683a86a31644d14f33.mp3str"
+
+[deps]
+
+source_file="res://Assets/sfx/m134 minigun sound effect.mp3"
+dest_files=["res://.godot/imported/m134 minigun sound effect.mp3-bc1c3eb1f2d5df683a86a31644d14f33.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3fc8666y8qba"]
+
+[ext_resource type="Script" path="res://actors/objs/ASM.gd" id="1_e86et"]
+[ext_resource type="AudioStream" uid="uid://cucpelcy5a2ug" path="res://Assets/sfx/fire_missile_homing.wav" id="2_mb762"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mjxad"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_e86et")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="missileSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mb762")
+volume_db = -23.817
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+light_mask = 0
+visibility_layer = 2
+shape = SubResource("CircleShape2D_mjxad")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Range" to="." method="_on_range_area_entered"]
+[connection signal="area_exited" from="Range" to="." method="_on_range_area_exited"]

@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://dm0282tthapfd"]
+
+[ext_resource type="Texture2D" uid="uid://trgicfi61a32" path="res://Assets/Enemies/Cruiser.png" id="1_atrq5"]
+[ext_resource type="Script" path="res://actors/entities/Cruiser.gd" id="2_8wis3"]
+[ext_resource type="AudioStream" uid="uid://rqyg6wryjs6x" path="res://Assets/sfx/enemy_kaboom.mp3" id="3_uea0q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ku6e3"]
+size = Vector2(265.048, 59.8322)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbrio"]
+bg_color = Color(0.509804, 0.498039, 0.505882, 1)
+skew = Vector2(0.8, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7iol"]
+bg_color = Color(0.6, 0.215686, 0.219608, 1)
+skew = Vector2(0.8, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[node name="Enemy" type="Sprite2D"]
+position = Vector2(0.126494, -0.437498)
+scale = Vector2(0.578125, 0.578125)
+texture = ExtResource("1_atrq5")
+flip_h = true
+script = ExtResource("2_8wis3")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-18.1213, 12.5088)
+scale = Vector2(1.601, 1.601)
+shape = SubResource("RectangleShape2D_ku6e3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-23.0246, -0.82283)
+scale = Vector2(20.3492, 3.48004)
+
+[node name="Enemy_Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uea0q")
+pitch_scale = 3.31
+max_polyphony = 10
+
+[node name="HP" type="ProgressBar" parent="."]
+offset_left = -219.0
+offset_top = 69.0
+offset_right = 217.0
+offset_bottom = 76.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qbrio")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b7iol")
+value = 40.0
+show_percentage = false
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

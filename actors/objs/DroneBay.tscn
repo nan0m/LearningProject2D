@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq5gs0sdgrc1p"]
+
+[ext_resource type="Script" path="res://actors/objs/DroneBay.gd" id="1_nu81f"]
+[ext_resource type="Texture2D" uid="uid://d0b7iuvqoiohy" path="res://Assets/Towers/DroneBay.JPG" id="2_hj2c0"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_nu81f")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(3.8147e-06, 0)
+scale = Vector2(0.408289, 0.408289)
+texture = ExtResource("2_hj2c0")
+
+[node name="LaunchTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="SpawnMarker" type="Marker2D" parent="."]
+position = Vector2(0, 8)
+
+[connection signal="timeout" from="LaunchTimer" to="." method="_on_launch_timer_timeout"]

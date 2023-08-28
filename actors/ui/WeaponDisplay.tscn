@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://plsmifum5itd"]
+
+[ext_resource type="Script" path="res://actors/ui/WeaponDisplay.gd" id="1_8abse"]
+[ext_resource type="Texture2D" uid="uid://bx0wyyhgb7ri2" path="res://Assets/Towers/towerDefense_tile249.png" id="1_see3t"]
+[ext_resource type="AudioStream" uid="uid://d3hesfvqss1lu" path="res://Assets/sfx/weapondescr.mp3" id="3_rl3ks"]
+
+[node name="WeaponDisplay" type="Panel"]
+custom_minimum_size = Vector2(100, 100)
+size_flags_vertical = 4
+script = ExtResource("1_8abse")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = -18.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_see3t")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Price" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.5
+offset_top = -31.0
+offset_right = 24.5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1000G"
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -121.0
+offset_right = 23.0
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="OpenWeaponDescription" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rl3ks")
+
+[connection signal="clicked" from="." to="." method="_on_clicked"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

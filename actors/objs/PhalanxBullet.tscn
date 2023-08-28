@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://djj4n27sedav3"]
+
+[ext_resource type="Script" path="res://actors/objs/PhalanxBullet.gd" id="1_g3m6a"]
+[ext_resource type="Texture2D" uid="uid://dqkjkjtiy10bs" path="res://Assets/Towers/phalanx_bullet.png" id="2_gpi78"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1ss3"]
+size = Vector2(2.5, 0.5)
+
+[node name="PhalanxBullet" type="Node2D"]
+z_index = 5
+position = Vector2(0, -1)
+script = ExtResource("1_g3m6a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.00640725, 0.00310437)
+texture = ExtResource("2_gpi78")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(0.15, 0.025)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_a1ss3")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
