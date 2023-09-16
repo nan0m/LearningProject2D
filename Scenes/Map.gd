@@ -12,29 +12,11 @@ extends Node2D
 func _ready():
 	ManagerGame.global_world_ref = self
 	$UICanvas/UI.refresh_info()
-	$GUI/HUD/AbilitiesBar/RailgunCD.max_value = $Sort/Player_New/Timer.wait_time
-	$GUI/HUD/AbilitiesBar/TorpedoCD.max_value = $Sort/Player_New/Timer2.wait_time
 	$AllySpawnTimer.start()
-	
-	
-	#$GUI/HUD/AbilitiesBar/RailgunCD.max_value = get_node()
 	
 
 func _physics_process(delta):
 	parallax.scroll_offset.x -= 70 * delta
-	var timer = $Sort/Player_New/Timer
-	$GUI/HUD/AbilitiesBar/RailgunCD.value = timer.wait_time - timer.time_left#here i need to put the current timer
-	if $GUI/HUD/AbilitiesBar/RailgunCD.value == timer.wait_time:
-		$GUI/HUD/AbilitiesBar/RailgunCD/RailgunCDlabel.text = str(timer.wait_time)
-	else:
-		$GUI/HUD/AbilitiesBar/RailgunCD/RailgunCDlabel.text = str(round(timer.time_left)) #the text of current timer
-	var timer2 = $Sort/Player_New/Timer2
-	$GUI/HUD/AbilitiesBar/TorpedoCD.value = timer2.wait_time - timer2.time_left#here i need to put the current timer
-	if $GUI/HUD/AbilitiesBar/TorpedoCD.value == timer2.wait_time:
-		$GUI/HUD/AbilitiesBar/TorpedoCD/TorpedoCDlabel.text = str(timer2.wait_time)
-	else:
-		$GUI/HUD/AbilitiesBar/TorpedoCD/TorpedoCDlabel.text = str(round(timer2.time_left)) #the text of current timer
-
 
 func spawn_railgun(g_pos: Vector2, dir, damage):
 	var b = load("res://actors/objs/Railgun.tscn").instantiate()
@@ -52,26 +34,26 @@ func spawn_bullet(g_pos: Vector2, dir, damage):
 	b.look_at(get_global_mouse_position())
 	sort.add_child(b)
 
-func spawn_phalanxbullet(g_pos: Vector2, dir, damage):
-	var b = load("res://actors/objs/PhalanxBullet.tscn").instantiate()
-	b.global_position = g_pos
-	b.dir = dir
-	b.damage = damage
-	sort.add_child(b)
+#func spawn_phalanxbullet(g_pos: Vector2, dir, damage):
+#	var b = load("res://actors/objs/PhalanxBullet.tscn").instantiate()
+#	b.global_position = g_pos
+#	b.dir = dir
+#	b.damage = damage
+#	sort.add_child(b)
 
-func spawn_missile(g_pos: Vector2, target, damage):
-	var b = load("res://actors/objs/Missile.tscn").instantiate()
-	b.global_position = g_pos
-	b.target = target
-	b.damage = damage
-	sort.add_child(b)
+#func spawn_missile(g_pos: Vector2, target, damage):
+	#var b = load("res://actors/objs/Missile.tscn").instantiate()
+	#b.global_position = g_pos
+	#b.target = target
+	#b.damage = damage
+	#sort.add_child(b)
 
-func spawn_asmmissile(g_pos: Vector2, target, damage):
-	var b = load("res://actors/objs/ASMMissile.tscn").instantiate()
-	b.global_position = g_pos
-	b.target = target
-	b.damage = damage
-	sort.add_child(b)
+#func spawn_asmmissile(g_pos: Vector2, target, damage):
+#	var b = load("res://actors/objs/ASMMissile.tscn").instantiate()
+#	b.global_position = g_pos
+#	b.target = target
+#	b.damage = damage
+#	sort.add_child(b)
 
 func spawn_torpedo(g_pos: Vector2, target, damage):
 	var b = load("res://actors/objs/Torpedo.tscn").instantiate()
@@ -192,3 +174,7 @@ func spawn_ally(position: Vector2):
 	add_child(ally_instance)
 	
 
+
+
+func _on_gui_update_module_ui():
+	pass # Replace with function body.

@@ -13,6 +13,7 @@ var rof = ManagerGame.weapons_data["dronebay"]["rof"]
 var range = 300
 @export var locked = false
 var target_distance = 90
+var torpedocapacity = 5
 
 signal drone_spawned(ally_instance)
 func _ready():

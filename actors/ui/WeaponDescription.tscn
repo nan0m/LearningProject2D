@@ -21,6 +21,11 @@ offset_left = 34.0
 offset_top = 152.0
 offset_right = 252.0
 offset_bottom = 333.0
+text = "Range: 300 meters
+RoF: 3 rounds per minute
+Attack Power: 15
+Critical Hit Chance: 0%
+"
 autowrap_mode = 2
 
 [node name="Icon" type="TextureRect" parent="."]

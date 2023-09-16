@@ -1,14 +1,14 @@
-AudioStreamPlayer
+Timer
 AudioStreamPlayer2D
+Panel
+AudioStreamPlayer
 ScrollContainer
 VScrollBar
 Button
 TextureRect
 Label
-Panel
 VBoxContainer
 Marker2D
-Timer
 CollisionShape2D
 Area2D
 AnimationPlayer

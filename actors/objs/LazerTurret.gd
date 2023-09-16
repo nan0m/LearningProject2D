@@ -19,25 +19,33 @@ extends Node2D
 
 @export var maxLazerValue=100
 #this is the lazer cooldown value, you can change it anytime
-var ldamage = ManagerGame.weapons_data['lazer']['attack']
-var range = ManagerGame.weapons_data['lazer']['range']
+var damage = ManagerGame.weapons_data['lazer']['attack']
+var shootingRange = ManagerGame.weapons_data['lazer']['range']
+var crit_rate = ManagerGame.weapons_data['lazer']['critical']
+
+var random_generator = null
+var crit_damage_modifier = 3.2
 
 var target=null
 #this is where the enemy is stored
 var apeared=false
 #this tells us if the lazer is being shot or no
 func _ready():
-	_update_stats(ldamage,range)
 	$LazerRaycast/Lazer.width=0
+	random_generator = RandomNumberGenerator.new()
+	random_generator.randomize()
 #this hide the lazer by setting the width to 0
 
-func _update_stats(dam:int=10,ran:int=500):
-	ldamage=dam
-	range=ran
-	FOVshape.shape.radius=range
 #set the shape of the area 2d
-	LazerRaycast.target_position=Vector2(range,0)
+	
 #set the length of the raycast
+
+func update_stats(stat_dictionary):
+	crit_rate = stat_dictionary["critical"]
+	damage = stat_dictionary["attack"]
+	shootingRange = stat_dictionary["range"]
+	FOVshape.shape.radius=shootingRange
+	LazerRaycast.target_position=Vector2(shootingRange,0)
 
 func _process(delta):
 	_detect_enemy(delta)
@@ -75,7 +83,10 @@ func _shoot_lazer(delta):
 	if lazerBar.value>delta*5:
 #if the lazer cooldown bar isn't close to 0, we remove 50 units from it each second
 		lazerBar.value-=delta*50
-		target.get_parent()._hurt(delta*ldamage)
+		if(random_generator.randf_range(0,1)<crit_rate):
+			target.get_parent()._hurt(delta * damage * crit_damage_modifier)
+		else:
+			target.get_parent()._hurt(delta*damage)
 #we hurt the target by ldamage hp each second
 	else:
 #if the lazer cooldown is low
@@ -104,7 +115,6 @@ func _shoot_lazer(delta):
 #we set the length and the position of the lazer particl
 		lazerParticles.position.x=distance/2
 
-
 func _lazer_appear():
 	if !apeared:
 #in this script we check if the lazer didn't apear yet
@@ -130,10 +140,8 @@ func _lazer_disappear():
 		apeared=false
 #we set apeared to false, so this code isn't executed more than once
 
-
 func _on_area_2d_area_entered(area):
 	area.get_parent().add_to_group('Enemy')
-
 
 func _on_area_2d_area_exited(area):
 	area.get_parent().remove_from_group('Enemy')

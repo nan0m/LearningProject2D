@@ -29,4 +29,105 @@
 #The scanner upgrade passively increases the range of all turrets base range +50.
 #	Max levels 10. Total max range +500.
 extends Node2D
+class_name Module
 
+var gui = null
+var hp
+var stage
+var attack
+var cooldown
+
+var railgun_ready = true
+var cooldownRG = 90
+var damageRG = 200
+var shotpstrage = [0,0,0,1,2,3,3,3]
+
+var torpedo_ready = true
+var cooldownTP = 90
+var damageTP = 50
+var torpshotstage = [0,0,3,3,4,5,5,6]
+
+
+func update_stats(stat_dictionary):
+	stage = int(stat_dictionary["stage"])
+	#emit_signal("update_module_UI",stage)
+	gui = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("GUI")
+	#get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("GUI").emit_signal("update_module_UI", stage)
+	gui._on_update_module_ui(stage,cooldownRG,cooldownTP)
+	cooldownRG = float(stat_dictionary["cooldown"])
+	$CDTimerRG.wait_time = cooldownRG
+	gui.set_max(cooldownRG)
+	$CDTimerTP.wait_time = cooldownTP
+	gui.set_max2(cooldownTP)
+	#$ShootdelayTimer.wait_time = float(stat_dictionary["delay"])
+
+func _process(delta):
+	if gui != null:
+		var rgtime = snapped($CDTimerRG.time_left,1) 
+		var tptime = snapped($CDTimerTP.time_left,1)
+		if railgun_ready:
+			rgtime = cooldownRG
+		if torpedo_ready:
+			tptime = cooldownTP
+		gui._on_update_module_ui(stage,rgtime,tptime)
+
+####################################################################################################
+################################## Railgun Functions ###############################################
+####################################################################################################
+func rgshoot():
+	if railgun_ready:
+		railgun_ready = false
+		railgun_burst_fire()
+		$CDTimerRG.start()
+
+func railgun_burst_fire():
+	if shotpstrage[stage] < 3:
+		railgun_fire()
+	else:
+		for i in range(shotpstrage[stage]):
+			railgun_fire()
+			$ShootdelayTimer.start()
+
+func railgun_fire():
+	$RailgunSFX.play()
+	var railgunSpawnPosition = global_position + Vector2(195, 0)
+	var fixedDirection = Vector2.RIGHT
+	ManagerGame.global_world_ref.spawn_railgun(railgunSpawnPosition, fixedDirection, damageRG) 
+
+func _on_cd_timer_rg_timeout():
+	railgun_ready = true 
+
+func _on_shootdelay_timer_timeout():
+	railgun_fire()
+
+####################################################################################################
+################################## Torpedo Functions ###############################################
+####################################################################################################
+func tplaunch():
+	if torpedo_ready:
+		torpedo_ready = false
+		torpedoSalvoLaunch()
+		$CDTimerTP.start()
+		
+func torpedoSalvoLaunch():
+	for i in range(torpshotstage[stage]):
+		torpedolaunch()
+		print("1stTorpAways")
+		$torpedodelay.start()
+		
+
+func torpedolaunch():
+	$TorpedoSFX.play()
+	var torpedoSpawnPosition = global_position + Vector2(195, 0)
+	var fixedDirection = Vector2.RIGHT
+	ManagerGame.global_world_ref.spawn_torpedo(torpedoSpawnPosition, fixedDirection, damageTP)
+	#var e = ManagerGame.global_world_ref.get_closest(global_position)
+	#if e:
+	#	ManagerGame.global_world_ref.spawn_torpedo(torpedoSpawnPosition, e, damageTP)
+
+func _on_cd_timer_tp_timeout():
+	torpedo_ready = true 
+
+func _on_torpedodelay_timeout():
+	torpedolaunch()
+	print("NextTorp")

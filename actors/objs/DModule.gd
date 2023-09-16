@@ -26,6 +26,7 @@
 #The Cooldown upgrade reduces all abilities cooldowns by -2s. (At max level -10s to defensive abilities' cooldowns). 
 
 extends Node2D
+class_name Module2
 
 var max_hp := 100  # Set the initial MAX_HP value here
 var current_hp := max_hp
@@ -38,8 +39,18 @@ var damage_control_cooldown := 90  # Cooldown period for the damage control abil
 var damage_control_ready := true  # Flag to track if the ability is ready
 var damage_control_level := 1
 
-func _ready():
-	pass# Your initialization code goes here
+var gui = null
+
+func update_stats(stat_dictionary):
+	max_hp = stat_dictionary["hp"]
+	damage_control_level = int(stat_dictionary["stage"])
+	passive_repair_rate = int(stat_dictionary["restore"])
+	gui = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("GUI")
+	gui._on_update_modele_d_ui(damage_control_level,damage_control_cooldown)
+	damage_control_cooldown = float(stat_dictionary["cooldown"])
+	$DamagecontrolCD.wait_time = damage_control_cooldown
+	gui.set_max3(damage_control_cooldown)
+	
 
 func _process(delta):
 	var passive_repair_amount : float = max_hp * passive_repair_rate * passive_repair_level * delta
@@ -50,27 +61,35 @@ func _process(delta):
 		if damage_control_cooldown <= 0:
 			damage_control_ready = true
 
+func damagecontrol():
+	if damage_control_ready:
+		damage_control_ready = false
+		activate_damage_control()
+		$CDTimerRG.start()
+
 func activate_damage_control():
 	if damage_control_ready:
 		var recovery_percent : float = damage_control_levels[damage_control_level - 1]
 		var recovery_amount := max_hp * recovery_percent
 		current_hp = min(current_hp + recovery_amount, max_hp)
 		damage_control_ready = false
-		damage_control_cooldown = 90  # Reset cooldown timer
 
 # Function to upgrade the passive repair ability
-func upgrade_passive_repair():
-	if passive_repair_level < 20:
-		passive_repair_level += 1
-		passive_repair_rate += passive_repair_upgrade
+#func upgrade_passive_repair():
+#	if passive_repair_level < 20:
+#		passive_repair_level += 1
+#		passive_repair_rate += passive_repair_upgrade
 
-# Function to upgrade the damage control ability
-func upgrade_damage_control():
-	if damage_control_level < 5:
-		damage_control_level += 1
+#Function to upgrade the damage control ability
+#func upgrade_damage_control():
+#	if damage_control_level < 5:
+#		damage_control_level += 1
 
 # Handle input, e.g., Q button press to activate damage control ability
-func _input(event):
-	if event is InputEventKey and event.scancode == KEY_Q and event.is_pressed():
-		activate_damage_control()
+#func _input(event):
+#	if event is InputEventKey and event.scancode == KEY_Q and event.is_pressed():
+#		activate_damage_control()
 
+
+func _on_damagecontrol_cd_timeout():
+	damage_control_ready = true

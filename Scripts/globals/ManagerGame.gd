@@ -25,6 +25,8 @@ var global_player_ref = null
 var weapons_data = {
 	'turret': {
 		'range': 800,  #+2% per upgrade in range (similar of all other turrets)  
+		#'range_upgrades': [820,840,850],
+		#'range_upgrade_cost': [100,200,500],
 		'rof': 1,      #+5% per upgrade (max 5) #Rate of Fire
 		'attack': 10,  #+1 AD per upgrade
 		'critical': 0, #for each upgrade (200levels) +0.5 crit-chance: 0/0.5/1/1.5/2/2.5/3/3.5/........
@@ -69,7 +71,7 @@ var weapons_data = {
 		'hp': 200,     #0.02 * 200 Bonus to Player's HP per level
 		'stage': 1,    #level 1 allows torpedo launcher ability. level 2, unlocks 1 railgun shot. Level 3, unlocks 2nd railgun shot. Lvl 4 unlocks the final 3rd shot. Lvl 5 gives + 25% damage to all abilities
 		'attack': 5,   #abilities damage + 5% per updrade (max 5)
-		'cooldown': 2, #attack abilities cooldown bonus + 2% per upgrade (max 5)
+		'cooldown': 90, #attack abilities cooldown bonus + 2% per upgrade (max 5)
 		'price': 4000
 	},
 	'defmodule': {     #Thise module requires different upgrade costs!!!!!
@@ -88,6 +90,53 @@ var weapons_data = {
 	}
 }
 
+func formatted_stats(weapon_type):
+	var stats = ""
+	var data = weapons_data[weapon_type]
+	if data.has('range'):
+		stats +=  "Range: " + str(data['range']) + " meters\n"
+	if data.has('rof'):
+		stats += "RoF: " + str(data['rof']) + " rounds per minute\n"
+	if data.has('attack'):
+		stats += "Attack Power: " + str(data['attack']) + "\n"
+	if data.has('critical'):
+		stats += "Critical Hit Chance: " + str(data['critical']) + "%\n"
+	if data.has('ammobelt'):
+		stats += "Ammo belt capacity:: " + str(data['ammobelt']) + "\n"
+	if data.has('stage'):
+		stats += "Stage: " + str(data['stage']) + "\n"
+	if data.has('hp'):
+		stats += "HP: " + str(data['hp']) + "\n"
+	if data.has('cooldown'):
+		stats += "Cooldown duration: " + str(data['cooldown']) + "s\n"
+	if data.has('restore'):
+		stats += "Restore amount: " + str(data['restore']) + "\n"
+	if data.has('drones'):
+		stats += "Drone amount: " + str(data['drones']) + "\n"
+	if data.has('replenish'):
+		stats += "Replenish amount: " + str(data['replenish']) + "\n"
+	return stats
+		
+func get_upgradeable_fields(weapon_type):
+	match weapon_type:
+		'turret': 
+			return ['range', 'rof', 'attack', 'critical']
+		'blaster':
+			return ['range', 'rof', 'attack', 'critical']
+		'missile': 
+			return ['range', 'rof', 'attack', 'critical']
+		'asm':
+			return ['range', 'rof', 'attack', 'critical']
+		'lazer':
+			return ['range', 'rof', 'attack', 'critical']
+		'phalanx':
+			return ['rof', 'ammobelt']
+		'module':
+			return ['hp', 'stage', 'attack', 'cooldown']
+		'defmodule':
+			return ['hp', 'stage', 'restore', 'cooldown']
+		'dronebay':
+			return ['drones', 'rof', 'attack', 'replenish']
 
 var weapons_dscr = {
 	'turret': {
@@ -125,7 +174,6 @@ var weapons_dscr = {
 		'description': str('This drone')
 	}
 }
-
 
 ###################################################################################################
 ##################################### ENEMIES #####################################################

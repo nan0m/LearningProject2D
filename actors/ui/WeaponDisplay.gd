@@ -9,7 +9,6 @@ signal rclicked(weapons_dscr)
 var price
 var can_buy = true
 
-
 func _ready():
 	match weapon_type:
 		ManagerGame.WEAPON_TYPE.TURRET: 
@@ -35,12 +34,11 @@ func _ready():
 	$Name.text = ManagerGame.WEAPON_TYPE.find_key(weapon_type)
 	$Price.text = '%sG' % price
 
-
 func _on_gui_input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_LEFT && can_buy:
 			clicked.emit(weapon_type)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			rclicked.emit(weapons_dscr)
+			rclicked.emit(weapon_type)
 			$OpenWeaponDescription.play()
 #add here the command/function to open the WeaponDescription

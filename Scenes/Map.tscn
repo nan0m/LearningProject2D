@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://co7loqedfsp3v"]
+[gd_scene load_steps=12 format=3 uid="uid://co7loqedfsp3v"]
 
 [ext_resource type="Script" path="res://Scenes/Map.gd" id="1_bkylh"]
 [ext_resource type="Texture2D" uid="uid://csx37mtdxbjne" path="res://Assets/Environment/Starfield_02-512x512.png" id="1_yi813"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dljxv7r0moi3q" path="res://Scenes/UI.tscn" id="3_shvpw"]
 [ext_resource type="PackedScene" uid="uid://nk7ajylmjwe5" path="res://Scenes/pause_menu.tscn" id="6_ty56v"]
 [ext_resource type="Texture2D" uid="uid://s0d7ekja0nvq" path="res://Assets/Environment/RailgunIcon.png" id="7_8wjpg"]
+[ext_resource type="Script" path="res://Scenes/ModuleGUI.gd" id="7_ug4q7"]
 [ext_resource type="Texture2D" uid="uid://dfcqls8568aal" path="res://Assets/Environment/Capture.png" id="8_qux1w"]
 [ext_resource type="AudioStream" uid="uid://d0scj4spp17po" path="res://Assets/sfx/ost1.mp3" id="8_v6bi0"]
+[ext_resource type="Texture2D" uid="uid://c8m8uxlnv1gg5" path="res://Assets/Environment/DC.jpg" id="10_yselv"]
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_bkylh")
@@ -57,7 +59,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="AllySpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 50.0
 autostart = true
 
 [node name="Sort" type="Node2D" parent="."]
@@ -73,6 +75,7 @@ position = Vector2(245, 273)
 map = NodePath("../..")
 
 [node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("7_ug4q7")
 
 [node name="HUD" type="Control" parent="GUI"]
 layout_mode = 3
@@ -128,6 +131,23 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="DamageControl" type="TextureProgressBar" parent="GUI/HUD/AbilitiesBar"]
+custom_minimum_size = Vector2(40, 40)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+value = 55.0
+fill_mode = 4
+texture_under = ExtResource("10_yselv")
+texture_progress = ExtResource("10_yselv")
+tint_under = Color(0.196078, 0.196078, 0.196078, 1)
+tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
+
+[node name="DClabel" type="Label" parent="GUI/HUD/AbilitiesBar/DamageControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_v6bi0")
 volume_db = -30.198
@@ -135,5 +155,7 @@ autoplay = true
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="AllySpawnTimer" to="." method="_on_ally_spawn_timer_timeout"]
+[connection signal="update_modeleD_UI" from="GUI" to="GUI" method="_on_update_modele_d_ui" binds= [0]]
+[connection signal="update_module_UI" from="GUI" to="GUI" method="_on_update_module_ui" binds= [0]]
 
 [editable path="Cam"]

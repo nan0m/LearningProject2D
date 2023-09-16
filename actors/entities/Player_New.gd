@@ -58,7 +58,6 @@ func _ready():
 	ManagerGame.global_player_ref = self  
 	$HP.max_value = player_data['stats']['hp'] #loads the max HP of the player (in case for healing)
 	$HP.value = player_data['stats']['hp']     #loads the current value of stats of the player
-	
 
 
 func on_weapon_equipped(slot_name, icon, weapon_type): #This function loads the respective weapon that has been selected.
@@ -93,77 +92,41 @@ func scrap_turret(slot_name):
 ####################################################################################################
 var railgun_ready = true
 var torpedoL_ready = true
+var damage_control_ready = true
+
 func _unhandled_input(event): #this function allows the player to shoot with either the mouse-click ro touchscreen
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
 			ManagerGame.global_world_ref.spawn_bullet(global_position, global_position.direction_to(get_global_mouse_position()), 6)
-			$RailgunSFX3.play()
+			$PlayerTurret.play()
 		if event.button_index == MOUSE_BUTTON_RIGHT and !event.pressed and railgun_ready:
 			railgun_burst_fire()
-			railgun_ready = false
-			$Timer.start()
-			if $Timer.time_left == 0:
-				_on_timer_timeout()
 	if event.is_action_pressed("torpedo"):
 		if torpedoL_ready:
 			torpedoSalvoLaunch()
-			torpedoL_ready = false
-			$Timer2.start()
-			if $Timer2.time_left == 0:
-				_on_timer_2_timeout()
+	if event.is_action_pressed("damage_control"):
+		if damage_control_ready:
+			damage_control()
 			
-	#if event is InputEventScreenTouch and !event.pressed: #when pressed the bullet is spawned. 
-	#	ManagerGame.global_world_ref.spawn_bullet(global_position, global_position.direction_to(get_global_mouse_position()))
-
-#Railgun
-var railgunCD = 90
-
-func railgun_fire():
-	$RailgunSFX2.play()
-	var railgunSpawnPosition = global_position + Vector2(195, 0)
-	var fixedDirection = Vector2.RIGHT
-	ManagerGame.global_world_ref.spawn_railgun(railgunSpawnPosition, fixedDirection, 200) #200 is the damage
-
+#Railgun Shooter
 func railgun_burst_fire():
-	
-	for i in range(3):
-		railgun_fire()
-		await get_tree().create_timer(0.2).timeout #here is the cooldown of the shot interval
-	await get_tree().create_timer(railgunCD).timeout  #here is the cooldown of the ability
-	
-	railgun_ready = true
-
-func _on_timer_ready():
-	$Timer.wait_time = railgunCD# Replace with function body.
-	
-
-func _on_timer_timeout():
-	$Timer.stop() # Replace with function body.
-
-
-#Torpedo Launcher
-var torpedoCD = 90
-func torpedolaunch():
-	$TorpedoSFX.play()
-	var torpedoSpawnPosition = global_position + Vector2(195, 0)
-	var e = ManagerGame.global_world_ref.get_closest(global_position)
-	if e:
-		ManagerGame.global_world_ref.spawn_torpedo(torpedoSpawnPosition, e, 50) #50 is the damage of the torpedo
-
+	for child in get_node("Slots").get_children():
+		if child.get_node("WeaponHolder").get_child_count() > 0:
+			if child.get_node("WeaponHolder").get_child(0) is Module:
+				child.get_node("WeaponHolder").get_child(0).rgshoot()
+#Torpedo Launch
 func torpedoSalvoLaunch():
-	for i in range(6):
-		torpedolaunch()
-		await get_tree().create_timer(0.5).timeout
-	await get_tree().create_timer(torpedoCD).timeout
-	torpedoL_ready = true
+	for child in get_node("Slots").get_children():
+		if child.get_node("WeaponHolder").get_child_count() > 0:
+			if child.get_node("WeaponHolder").get_child(0) is Module:
+				child.get_node("WeaponHolder").get_child(0).tplaunch()
+#Damage Control
+func damage_control():
+	for child in get_node("Slots").get_children():
+		if child.get_node("WeaponHolder").get_child_count() > 0:
+			if child.get_node("WeaponHolder").get_child(0) is Module2:
+				child.get_node("WeaponHolder").get_child(0).damagecontrol()
 
-
-func _on_timer_2_timeout():
-	$Timer2.stop()# # Replace with function body.
-
-
-func _on_timer_2_ready():
-	$Timer2.wait_time = torpedoCD # Replace with function body. # Replace with function body.
 
 ##################################################################################
 ########################### Player getting damaged! ##############################

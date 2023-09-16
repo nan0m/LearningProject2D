@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dljxv7r0moi3q"]
+[gd_scene load_steps=15 format=3 uid="uid://dljxv7r0moi3q"]
 
 [ext_resource type="Script" path="res://Scenes/UI.gd" id="1_axsyv"]
 [ext_resource type="Texture2D" uid="uid://ckl3yxdo8r1pw" path="res://Assets/Player/BC.png" id="1_mgbco"]
 [ext_resource type="PackedScene" uid="uid://plsmifum5itd" path="res://actors/ui/WeaponDisplay.tscn" id="3_7lofs"]
 [ext_resource type="PackedScene" uid="uid://b46axtx4pgpjv" path="res://actors/objs/Slot.tscn" id="3_wwoqq"]
-[ext_resource type="PackedScene" uid="uid://lml1jfd57ls8" path="res://actors/ui/WeaponDescription.tscn" id="4_nomcy"]
+[ext_resource type="Script" path="res://actors/ui/WeaponDescription.gd" id="4_oyrk4"]
 [ext_resource type="AudioStream" uid="uid://fdqir5a6b4t6" path="res://Assets/sfx/building_sound.mp3" id="5_5lytj"]
+[ext_resource type="AudioStream" uid="uid://cqd4h8rahad48" path="res://Assets/sfx/weapondescrclose.mp3" id="5_yohud"]
 [ext_resource type="AudioStream" uid="uid://b3iqxdyyxcvbo" path="res://Assets/sfx/opening_build_menu.mp3" id="6_7fg0y"]
 [ext_resource type="AudioStream" uid="uid://u7ea2pc4jcwc" path="res://Assets/sfx/buttonclick.mp3" id="7_5liu4"]
 [ext_resource type="AudioStream" uid="uid://4ht6xeaslvl5" path="res://Assets/sfx/scrap.mp3" id="9_4st4r"]
@@ -93,14 +94,13 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="WeaponView" type="Panel" parent="UpgradePanel"]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -399.0
+offset_left = -444.0
 offset_top = -159.0
 offset_right = 411.0
 offset_bottom = -10.0
@@ -272,6 +272,7 @@ layout_mode = 2
 weapon_type = 8
 
 [node name="Build" type="Button" parent="UpgradePanel/WeaponView"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -287,13 +288,74 @@ grow_vertical = 2
 text = "Build"
 
 [node name="WeaponDescriptionBox" type="VBoxContainer" parent="UpgradePanel/WeaponView"]
+unique_name_in_owner = true
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WeaponDescription" type="Panel" parent="UpgradePanel/WeaponView/WeaponDescriptionBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("4_oyrk4")
+
+[node name="Panel" type="Panel" parent="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription"]
+custom_minimum_size = Vector2(810, 300)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="WeaponDescription" parent="UpgradePanel/WeaponView/WeaponDescriptionBox" instance=ExtResource("4_nomcy")]
+[node name="Stats" type="Label" parent="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 152.0
+offset_right = 252.0
+offset_bottom = 333.0
+text = "Range: 300 meters
+RoF: 3 rounds per minute
+Attack Power: 15
+Critical Hit Chance: 0%
+"
+autowrap_mode = 2
+
+[node name="Icon" type="TextureRect" parent="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 52.0
+offset_right = 198.0
+offset_bottom = 142.0
+
+[node name="Button" type="Button" parent="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 59.0
+offset_bottom = 40.0
+text = "Close"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 375.0
+offset_top = 21.0
+offset_right = 729.0
+offset_bottom = 315.0
+
+[node name="Description" type="Label" parent="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription/ScrollContainer"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_alignment = 3
+autowrap_mode = 3
+
+[node name="CloseWeaponDescription" type="AudioStreamPlayer2D" parent="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription"]
+stream = ExtResource("5_yohud")
 
 [node name="StatsPanel" type="Panel" parent="UpgradePanel"]
 layout_mode = 1
@@ -476,9 +538,10 @@ volume_db = -2.46
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="UpgradePanel/Hide" to="." method="_on_hide_pressed"]
-[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer/Button" to="." method="_on_button_pressed" binds= ["range"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer/Button" to="." method="_on_button_pressed" binds= ["0"]]
 [connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer/Scrap" to="." method="_on_scrap_pressed"]
-[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer2/Button" to="." method="_on_button_pressed" binds= ["rof"]]
-[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer3/Button" to="." method="_on_button_pressed" binds= ["attack"]]
-[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer4/Button" to="." method="_on_button_pressed" binds= ["critical"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer2/Button" to="." method="_on_button_pressed" binds= ["1"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer3/Button" to="." method="_on_button_pressed" binds= ["2"]]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponStatsBox/HBoxContainer4/Button" to="." method="_on_button_pressed" binds= ["3"]]
 [connection signal="pressed" from="UpgradePanel/WeaponView/Build" to="." method="_on_build_pressed"]
+[connection signal="pressed" from="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription/Button" to="UpgradePanel/WeaponView/WeaponDescriptionBox/WeaponDescription" method="_on_button_pressed" flags=18]

@@ -6,8 +6,10 @@ signal clicked
 var data = {
 	'level': 0
 }
-
+var corresponding_slot = null
 func _ready():
+	corresponding_slot = get_node("../../../../Sort/Player_New/Slots/" + name + "/WeaponHolder")
+	#NOT IDEAL, but will work with current structure. I didn't know where you had the connection to it, so used this to grab
 	pass#get_node(".").turret_is_online.connect(_on_turret_is_online())
 	#.connect('turret_is_online',_on_turret_is_online())
 	#connect("turret_is_online", self, "_on_turret_is_online")
@@ -51,6 +53,9 @@ func _on_gui_input(event):
 		$clicked.play()
 		clicked.emit(self)
 
+func upgrade(stats_dictionary):
+	if(corresponding_slot.get_child(0)!=null):
+		corresponding_slot.get_child(0).update_stats(stats_dictionary)
 
 #func _on_turret_is_online():
 	# Turn off toggle mode here
