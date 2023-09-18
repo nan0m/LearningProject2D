@@ -58,6 +58,7 @@ func _ready():
 	ManagerGame.global_player_ref = self  
 	$HP.max_value = player_data['stats']['hp'] #loads the max HP of the player (in case for healing)
 	$HP.value = player_data['stats']['hp']     #loads the current value of stats of the player
+	sort = get_parent().get_parent().get_node('Sort')
 
 
 func on_weapon_equipped(slot_name, icon, weapon_type): #This function loads the respective weapon that has been selected.
@@ -93,11 +94,12 @@ func scrap_turret(slot_name):
 var railgun_ready = true
 var torpedoL_ready = true
 var damage_control_ready = true
-
+var sort = null
+var playerbullet := preload("res://actors/objs/Bullet.tscn")
 func _unhandled_input(event): #this function allows the player to shoot with either the mouse-click ro touchscreen
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
-			ManagerGame.global_world_ref.spawn_bullet(global_position, global_position.direction_to(get_global_mouse_position()), 6)
+			spawn_bullet(global_position, global_position.direction_to(get_global_mouse_position()), 6)
 			$PlayerTurret.play()
 		if event.button_index == MOUSE_BUTTON_RIGHT and !event.pressed and railgun_ready:
 			railgun_burst_fire()
@@ -107,7 +109,16 @@ func _unhandled_input(event): #this function allows the player to shoot with eit
 	if event.is_action_pressed("damage_control"):
 		if damage_control_ready:
 			damage_control()
-			
+
+#Player Shooter
+func spawn_bullet(g_pos: Vector2, dir, damage):
+	var b = playerbullet.instantiate()
+	b.global_position = g_pos
+	b.dir = dir
+	b.damage = damage
+	b.look_at(get_global_mouse_position())
+	sort.add_child(b)
+
 #Railgun Shooter
 func railgun_burst_fire():
 	for child in get_node("Slots").get_children():
@@ -147,7 +158,7 @@ func _on_player_hurtbox_area_entered(area):
 	var damage = area.get_parent().damage
 	hit(damage)
 
-
+#this makes a small explosion appear, making the ship look damaged (not pretty though)
 var explosion = preload("res://actors/extras/explosion.tscn")
 @onready var explosion_area = get_node("Impact") 
 func impacted():

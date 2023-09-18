@@ -7,7 +7,7 @@ var crit_rate = ManagerGame.weapons_data['missile']['critical']
 var random_generator = null
 var crit_damage_modifier = 1.5
 var sort = null
-
+var missileahoy := preload("res://actors/objs/Missile.tscn")
 func _ready():
 	$Range/CollisionShape2D.shape.radius = shootingRange
 	print($Range/CollisionShape2D.shape.radius)
@@ -19,7 +19,7 @@ func shoot():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
 	if sort != null:
 		if e and global_position.distance_to(e.global_position) <= shootingRange:
-			var distance = global_position.distance_to(e.global_position)
+			#var distance = global_position.distance_to(e.global_position)
 			if(random_generator.randf_range(0,1)<crit_rate):
 				spawn_missile(global_position, e, damage * crit_damage_modifier)
 			else:
@@ -27,7 +27,7 @@ func shoot():
 			$missileSFX.play()
 
 func spawn_missile(g_pos: Vector2, target, damage):
-	var b = load("res://actors/objs/Missile.tscn").instantiate()
+	var b = missileahoy.instantiate()
 	b.global_position = g_pos
 	b.target = target
 	b.damage = damage

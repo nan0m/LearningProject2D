@@ -14,8 +14,12 @@ var range = 300
 @export var locked = false
 var target_distance = 90
 var torpedocapacity = 5
-
+var droneexplosion := preload("res://actors/objs/Explosion.tscn")
 signal drone_spawned(ally_instance)
+var sort = null
+var dronemissileallyahoy := preload("res://actors/objs/Missile.tscn")
+var dronebulletallyahoy := preload("res://actors/objs/Bullet.tscn")
+
 func _ready():
 	$HP.max_value = hp
 	$HP.value = hp
@@ -23,6 +27,7 @@ func _ready():
 	$AttackTimer5.wait_time = (rof + 3)
 	$Range/CollisionShape2D.shape.radius = range
 	emit_signal("drone_spawned", self)
+	sort = get_parent().get_parent().get_node("Sort")
 
 func _physics_process(delta):
 	ally_movement(delta)
@@ -43,7 +48,7 @@ func ally_movement(delta):
 ################################## ALLY GETTING HIT ####################################
 ########################################################################################
 func _on_hurtbox_area_entered(area):
-	var explosion = load("res://actors/objs/Explosion.tscn").instantiate()
+	var explosion = droneexplosion.instantiate()
 	ManagerGame.global_world_ref.spawn_obj(explosion, global_position)
 	# this will get the bullet node itself which will contain a "damage" variable
 	# this way, we can set a different damage for every bullet that will collide with
@@ -61,7 +66,7 @@ func hit(damage: int = 1):
 	$HP.value = hp
 
 ######################################################################################
-################################## ALLY-SHOOTING #####################################
+################################# DRONE-SHOOTING #####################################
 ######################################################################################
 func _on_range_area_entered(area):
 	area.get_parent().add_to_group('Enemy')
@@ -71,15 +76,30 @@ func _on_range_area_exited(area):
 
 func shoot():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
-	
-	if e and get_node("W5").global_position.distance_to(e.global_position) <= range:
-		var distance = get_node("W5").global_position.distance_to(e.global_position)
-		ManagerGame.global_world_ref.spawn_missile(get_node("W5").global_position, e, adamage * 3)
+	if sort != null:
+		if e and get_node("W5").global_position.distance_to(e.global_position) <= range:
+			var distance = get_node("W5").global_position.distance_to(e.global_position)
+			spawn_missile1a(get_node("W5").global_position, e, adamage * 3)
+
+func spawn_missile1a(g_pos: Vector2, target, damage):
+	var b = dronemissileallyahoy.instantiate()
+	b.global_position = g_pos
+	b.target = target
+	b.damage = damage
+	sort.add_child(b)
 
 func shootL1():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
 	if e:
-		ManagerGame.global_world_ref.spawn_bullet(get_node("W1").global_position, get_node("W1").global_position.direction_to(e.global_position), adamage)
+		spawn_bullet1a(get_node("W1").global_position, get_node("W1").global_position.direction_to(e.global_position), adamage)
+
+func spawn_bullet1a(g_pos: Vector2, dir, damage):
+	var b = dronebulletallyahoy.instantiate()
+	b.global_position = g_pos
+	b.dir = dir
+	b.damage = damage
+	#b.look_at(get_global_mouse_position())
+	sort.add_child(b)
 
 func _on_attack_timer_timeout():
 	shootL1()

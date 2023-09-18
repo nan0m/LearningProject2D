@@ -17,7 +17,7 @@ func _physics_process(delta):
 		_current_velocity *= 0.5
 	var direction := Vector2.RIGHT.rotated(rotation).normalized()
 	var desired_velocity = direction * max_speed
-	var previous_velocity = _current_velocity
+	#var previous_velocity = _current_velocity
 	var change = (desired_velocity - _current_velocity) * drag_factor
 	if target and is_instance_valid(target):
 		direction = global_position.direction_to(target.global_position)
@@ -28,7 +28,7 @@ func _physics_process(delta):
 	_current_velocity += change
 	global_position += _current_velocity * delta
 	look_at(global_position + _current_velocity)
-	
+	#Replicating this tutorial: https://www.youtube.com/watch?v=Yg1uacsMSl8
 
 
 

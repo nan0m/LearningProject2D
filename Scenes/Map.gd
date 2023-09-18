@@ -18,21 +18,21 @@ func _ready():
 func _physics_process(delta):
 	parallax.scroll_offset.x -= 70 * delta
 
-func spawn_railgun(g_pos: Vector2, dir, damage):
-	var b = load("res://actors/objs/Railgun.tscn").instantiate()
-	b.global_position = g_pos
-	b.dir = dir
-	b.damage = damage
-	sort.add_child(b)
+#func spawn_railgun(g_pos: Vector2, dir, damage):
+#	var b = load("res://actors/objs/Railgun.tscn").instantiate()
+#	b.global_position = g_pos
+#	b.dir = dir
+#	b.damage = damage
+#	sort.add_child(b)
 
 
-func spawn_bullet(g_pos: Vector2, dir, damage):
-	var b = load("res://actors/objs/Bullet.tscn").instantiate()
-	b.global_position = g_pos
-	b.dir = dir
-	b.damage = damage
-	b.look_at(get_global_mouse_position())
-	sort.add_child(b)
+#func spawn_bullet(g_pos: Vector2, dir, damage):
+#	var b = load("res://actors/objs/Bullet.tscn").instantiate()
+#	b.global_position = g_pos
+#	b.dir = dir
+#	b.damage = damage
+#	b.look_at(get_global_mouse_position())
+#	sort.add_child(b)
 
 #func spawn_phalanxbullet(g_pos: Vector2, dir, damage):
 #	var b = load("res://actors/objs/PhalanxBullet.tscn").instantiate()
@@ -42,11 +42,11 @@ func spawn_bullet(g_pos: Vector2, dir, damage):
 #	sort.add_child(b)
 
 #func spawn_missile(g_pos: Vector2, target, damage):
-	#var b = load("res://actors/objs/Missile.tscn").instantiate()
-	#b.global_position = g_pos
-	#b.target = target
-	#b.damage = damage
-	#sort.add_child(b)
+#	var b = load("res://actors/objs/Missile.tscn").instantiate()
+#	b.global_position = g_pos
+#	b.target = target
+#	b.damage = damage
+#	sort.add_child(b)
 
 #func spawn_asmmissile(g_pos: Vector2, target, damage):
 #	var b = load("res://actors/objs/ASMMissile.tscn").instantiate()
@@ -55,33 +55,49 @@ func spawn_bullet(g_pos: Vector2, dir, damage):
 #	b.damage = damage
 #	sort.add_child(b)
 
-func spawn_torpedo(g_pos: Vector2, target, damage):
-	var b = load("res://actors/objs/Torpedo.tscn").instantiate()
-	b.global_position = g_pos
-	b.target = target
-	sort.add_child(b)
-	b.damage = damage
+#func spawn_torpedo(g_pos: Vector2, target, damage):
+#	var b = load("res://actors/objs/Torpedo.tscn").instantiate()
+#	b.global_position = g_pos
+#	b.target = target
+#	sort.add_child(b)
+#	b.damage = damage
 
 #func spawn_drone(g_pos = $SpawnMarker.position):
 #	var b = load("res://actors/entities/Drone.tscn").instantiate()
 #	b.global_position = g_pos
 #	sort.add_child(b)
-
-
+var frigate_scene = preload("res://actors/entities/Frigate.tscn")
+var destroyer_scene = preload("res://actors/entities/Destroyer.tscn")
+var cruiser_scene = preload("res://actors/entities/Cruiser.tscn")
+var battleship_scene = preload("res://actors/entities/Battleship.tscn")
 func spawn_enemy(g_pos: Vector2):
 	var rand_value = randf()   # Generates a random float between 0 and 1
-	var enemy_scene_path: String
+	var enemy_scene: PackedScene
 	if rand_value < 0.25:
-		enemy_scene_path = "res://actors/entities/Destroyer.tscn"
+		enemy_scene = destroyer_scene
 	elif 0.25 <= rand_value and rand_value <0.5:
-		enemy_scene_path = "res://actors/entities/Frigate.tscn"
+		enemy_scene = frigate_scene
 	elif 0.5 <= rand_value and rand_value < 0.75:
-		enemy_scene_path = "res://actors/entities/Cruiser.tscn"
+		enemy_scene = cruiser_scene
 	else:
-		enemy_scene_path = "res://actors/entities/Battleship.tscn"
-	var e = load(enemy_scene_path).instantiate()
+		enemy_scene = battleship_scene
+	var e = enemy_scene.instantiate()
 	e.global_position = g_pos
 	sort.add_child(e)
+#func spawn_enemy(g_pos: Vector2):
+#	var rand_value = randf()   # Generates a random float between 0 and 1
+#	var enemy_scene_path: String
+#	if rand_value < 0.25:
+#		enemy_scene_path = "res://actors/entities/Destroyer.tscn"
+#	elif 0.25 <= rand_value and rand_value <0.5:
+#		enemy_scene_path = "res://actors/entities/Frigate.tscn"
+#	elif 0.5 <= rand_value and rand_value < 0.75:
+#		enemy_scene_path = "res://actors/entities/Cruiser.tscn"
+#	else:
+#		enemy_scene_path = "res://actors/entities/Battleship.tscn"
+#	var e = load(enemy_scene_path).instantiate()
+#	e.global_position = g_pos
+#	sort.add_child(e)
 
 
 func spawn_obj(i, g_pos):
@@ -96,25 +112,32 @@ func spawn_obj(i, g_pos):
 # see ManagerGame.ENEMY_TYPE enum
 # by default "-1" it just gets the closest enemy regardless of type which means it searches for the closest fighter or capital enemy
 # when you pass "1" or ManagerGame.ENEMY_TYPE.CAPITAL it just searches for the nearest capital enemy
-
 func get_closest(g_pos):
 	var enemies = get_tree().get_nodes_in_group('Enemy')
 	if enemies.is_empty():
 		return null
-	
-	var e = enemies[0]
-	
-	var distance = g_pos.distance_to(e.global_position)
+	var closest_enemy = enemies[0]
+	var closest_distance = g_pos.distance_to(closest_enemy.global_position)
 	for enemy in enemies:
 		var dist = g_pos.distance_to(enemy.global_position)
-		e = enemy
-		distance = dist
+		if dist < closest_distance:
+			closest_enemy = enemy
+			closest_distance = dist
+	return closest_enemy
+#func get_closest(g_pos):
+#	var enemies = get_tree().get_nodes_in_group('Enemy')
+#	if enemies.is_empty():
+#		return null
+#	var e = enemies[0]
+#	var distance = g_pos.distance_to(e.global_position)
+#	for enemy in enemies:
+#		var dist = g_pos.distance_to(enemy.global_position)
+#		e = enemy
+#		distance = dist
 	
 	# checks if the latest enemy being referenced matches the filter we are looking for
 	# if the enemy type is a fighther, and we are looking for a capital, it is now invalid and thus turn the e = null
-	
-	
-	return e
+	#return e
 
 
 func _on_enemy_timer_timeout():
@@ -140,8 +163,7 @@ var game_paused : bool = false:
 func _input(event: InputEvent):
 	if(event.is_action_pressed("ui_cancel")):
 		game_paused = !game_paused
-		
-		
+
 
 ####################################################################################################
 ###################################### Ally-Spawner ################################################
@@ -171,7 +193,7 @@ func spawn_ally(position: Vector2):
 	# Set the ally's initial position
 	ally_instance.global_position = position
 	# Add the ally to the scene
-	add_child(ally_instance)
+	sort.add_child(ally_instance)
 	
 
 

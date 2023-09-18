@@ -59,7 +59,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="AllySpawnTimer" type="Timer" parent="."]
-wait_time = 50.0
+wait_time = 5.0
 autostart = true
 
 [node name="Sort" type="Node2D" parent="."]

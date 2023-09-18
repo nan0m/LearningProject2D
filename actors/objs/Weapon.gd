@@ -8,7 +8,7 @@ var crit_rate = ManagerGame.weapons_data["turret"]["critical"]
 var random_generator = null
 var crit_damage_modifier = 1.2
 var sort = null
-
+var bulletahoy := preload("res://actors/objs/Bullet.tscn")
 func _ready():
 	random_generator = RandomNumberGenerator.new()
 	random_generator.randomize()
@@ -46,7 +46,7 @@ func update_stats(stat_dictionary):
 	shootingRange = stat_dictionary["range"]
 
 func spawn_bullet(g_pos: Vector2, dir, damage):
-	var b = load("res://actors/objs/Bullet.tscn").instantiate()
+	var b = bulletahoy.instantiate()
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage

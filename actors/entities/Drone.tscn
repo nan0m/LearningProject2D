@@ -27,7 +27,7 @@ border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
 
 [node name="Drone" type="Sprite2D"]
-scale = Vector2(0.457668, 0.457668)
+scale = Vector2(0.053, 0.053)
 texture = ExtResource("1_caywf")
 script = ExtResource("2_7t1j7")
 
@@ -79,7 +79,6 @@ wait_time = 3.0
 autostart = true
 
 [node name="AttackTimer5" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

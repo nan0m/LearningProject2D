@@ -6,6 +6,7 @@ var crit_rate =  ManagerGame.weapons_data['asm']['critical']
 var crit_damage_modifier = 1.1
 var random_generator
 var sort = null
+var asmmissileahoy := preload("res://actors/objs/ASMMissile.tscn")
 
 func _ready():
 	$Range/CollisionShape2D.shape.radius = range
@@ -16,17 +17,17 @@ func _ready():
 
 func shoot():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
-	
-	if e and global_position.distance_to(e.global_position) <= range:
-		var distance = global_position.distance_to(e.global_position)
-		if(random_generator.randf_range(0,1) < crit_rate):
-			spawn_asmmissile(global_position, e, damage * crit_damage_modifier)
-		else:
-			spawn_asmmissile(global_position, e, damage)
-		$missileSFX.play()
+	if sort != null:
+		if e and global_position.distance_to(e.global_position) <= range:
+			var distance = global_position.distance_to(e.global_position)
+			if(random_generator.randf_range(0,1) < crit_rate):
+				spawn_asmmissile(global_position, e, damage * crit_damage_modifier)
+			else:
+				spawn_asmmissile(global_position, e, damage)
+			$missileSFX.play()
 
 func spawn_asmmissile(g_pos: Vector2, target, damage):
-	var b = load("res://actors/objs/ASMMissile.tscn").instantiate()
+	var b = asmmissileahoy.instantiate()
 	b.global_position = g_pos
 	b.target = target
 	b.damage = damage

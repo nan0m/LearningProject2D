@@ -6,19 +6,22 @@ var max_drones = 1  # Number of drones to launch
 var drone_cost = 100
 var spawn_location
 var damage = ManagerGame.weapons_data['dronebay']['attack']
-
+var sort = null
 
 func _ready():
 	# Initialize the launch timer
 	launch_timer = $LaunchTimer
-	spawn_location = $SpawnMarker.position
+	spawn_location = $SpawnMarker.global_position
+	print(spawn_location)
+	sort = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Sort")
 
 func launch_drone():
 	# Instantiate a new drone and set its position to the module's position
 	var new_drone = drone_scene.instantiate()
-	new_drone.position = spawn_location  # Set the drone's position to the module's position
+	new_drone.global_position = spawn_location  # Set the drone's position to the module's position
+	print(new_drone.position)
 	new_drone.adamage = damage
-	add_child(new_drone)  # Add the drone as a child of the module
+	sort.add_child(new_drone)  # Add the drone as a child of the module
 	ManagerGame.global_player_ref.player_data['gold'] -= drone_cost
 
 func _on_launch_timer_timeout():

@@ -7,9 +7,9 @@ var ReloadTime = 10
 var isReloading = false
 var bulletSpreadAngle = 5.0
 var damage = ManagerGame.weapons_data['phalanx']['attack']
-var range = ManagerGame.weapons_data['phalanx']['range']
+var phalanxrange = ManagerGame.weapons_data['phalanx']['range']
 var sort = null
-
+var phalanxahoy := preload("res://actors/objs/PhalanxBullet.tscn")
 var random_generator = null
 var crit_damage_modifier = 2
 #func _unhandled_input(event):
@@ -19,7 +19,7 @@ func _ready():
 	$ReloadTimer.wait_time = ReloadTime
 	$ReloadTimer.one_shot = true
 	$AmmoBelt.max_value = maxAmmoCount
-	$Range/CollisionShape2D.shape.radius = range
+	$Range/CollisionShape2D.shape.radius = phalanxrange
 	random_generator = RandomNumberGenerator.new()
 	random_generator.randomize()
 	sort = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Sort")
@@ -63,7 +63,7 @@ func _on_timer_timeout():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
 	if e:
 		var distance = global_position.distance_to(e.global_position)
-		if distance <= range:
+		if distance <= phalanxrange:
 			shoot()
 
 func _on_range_area_entered(area):
@@ -78,7 +78,7 @@ func update_stats(stat_dictionary):
 	maxAmmoCount = stat_dictionary["ammobelt"]
 
 func spawn_phalanxbullet(g_pos: Vector2, dir, damage):
-	var b = load("res://actors/objs/PhalanxBullet.tscn").instantiate()
+	var b = phalanxahoy.instantiate()
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage

@@ -27,7 +27,7 @@ func update_content():
 			$Icon.texture = load("res://Assets/Towers/DroneBay.JPG")
 	
 	var weapon_type_str = ManagerGame.WEAPON_TYPE.find_key(weapon_type).to_lower()
-	var stats = ManagerGame.weapons_data[weapon_type_str]
+	#var stats = ManagerGame.weapons_data[weapon_type_str]
 	var description = ManagerGame.weapons_dscr[weapon_type_str]['description']
 	
 	var formatted_stats = ManagerGame.formatted_stats(weapon_type_str)
