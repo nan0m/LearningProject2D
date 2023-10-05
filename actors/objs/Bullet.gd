@@ -8,8 +8,11 @@ var damage
 func _physics_process(delta):
 	global_position += dir * speed * delta
 
-func set_direction(direction: Vector2):
-	dir = direction.normalized()
+func _ready():
+	pass#look_at(get_global_mouse_position())
+#func set_direction(direction: Vector2):
+#	dir = direction.normalized()
+#	print(dir)
 
 func _on_area_2d_area_entered(_area):
 	queue_free()

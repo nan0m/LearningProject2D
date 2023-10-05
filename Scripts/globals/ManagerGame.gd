@@ -340,3 +340,90 @@ var enemy_data = {
 	}
 }
 
+###################################################################################################
+##################################### ENCYCLOPEDIA ################################################
+###################################################################################################
+enum ENCYCLO_PEDIA{
+	DORIA,   
+	IONIA,  
+	IW,   
+	STROGG
+}
+
+
+var faction_details = {
+	'doria': {
+		'Homeworld': 'Doria',  
+		'Population': "84.7B",
+		'Government': "Militarised Republic",
+		'Leader': "Efialtes",
+		'Colonies': 8,     
+		'Stations': 25 
+	},
+	'ionia': {
+		'Homeworld': 'Ionia',  
+		'Population': "211M",
+		'Government': "Monarchy",
+		'Leader': "Heron",
+		'Colonies': 0,     
+		'Stations': 2 
+	},
+	'iw': {
+		'Homeworld': 'None',  
+		'Population': "Unknown",
+		'Government': "Anarchy",
+		'Leader': "None",
+		'Colonies': "80+",     
+		'Stations': "128+" 
+	},
+	'strogg': {
+		'Homeworld': 'Daemon',  
+		'Population': "1000T+",
+		'Government': "Hive-Collective",
+		'Leader': "Strogg",
+		'Colonies': "1000+",     
+		'Stations': "Unknown" 
+	}
+	}
+#if data.has('range'):
+#		stats +=  "Range: " + str(data['range']) + " meters\n"
+func formatted_descr(encyclo_pedia):
+	var stats = ""
+	var data = faction_details[encyclo_pedia]
+	if data.has('Homeworld'):
+		stats +=  "Homeworld: " + str(data['Homeworld']) + "\n"
+	if data.has('Population'):
+		stats += "Population: " + str(data['Population']) + " citizens\n"
+	if data.has('Government'):
+		stats += "Government: " + str(data['Government']) + "\n"
+	if data.has('Leader'):
+		stats += "Leader: " + str(data['Leader']) + "\n"
+	if data.has('Colonies'):
+		stats += "Colonies: " + str(data['Colonies']) + " planet(s)\n"
+	if data.has('Stations'):
+		stats += "Stations: " + str(data['Stations']) + "\n"
+	return stats
+
+var encyclopedia = {
+	'doria': {
+		'description': str("Introduction:
+The Dorian League is a prominent interstellar faction originating from the mineral-rich planet of Doria, distinguished by its remarkable journey from a fragmented mining colony to a unified, formidable power within the galaxy. This wiki page delves deeper into the League's history, culture, governance, and recent developments. \n
+Dorian leadership has invested a huge amount of resources in establishing a strong military presence, one that would prevent any potential uprising, and also inspire awe to its citizens. One of the latest achievement is the technological marvel of Achilleus. A capital class on its own, it combines the firepower of a Battleship, and
+the troop deployment of a carrier.\n [img={300}]res://Assets/Player/BC.png[/img] \n It's hangars are able to house up to ten [url={add link here}]{A1-1:Roc}[/url] Fighter-Bombers. It also contains a manufacturing line that can replenish its destroyed fighters while deployed in the field. The advanced AI system is rendering pilot personell obsolete, thus human resources are reserved for ground missions. Furthermore
+Achilleus is boasting a powerfull powercore, one that is able to sustain a plethora of weapons turrets with simultaneous fire.")
+	},
+	'ionia': {
+		'description': str('This blast')
+	},
+	'iw': {
+		'description': str("Doria is a planet that has engaged in conquests and conquered nearby planets and systems. However, the Mycenae after the disaster of project Troy, has been warped in unknown space. Those systems seem to not be following
+		any specific centralised law. Anarchy is emminent throughout those systems. Factions have set up a system of city-states in which they constantly constest other settlements for resources, equipement, and slaves. Individual rights are not existent,
+		and individuals are used in any way so that the status of that Faction is maintained or enhance. A truly barbaric state. The constant thirst for war, one would expect to have caused a limit to resources and research endeavours. On the contrary, while
+		these factions prefer the flexibility of spacecraft, they have devised large vessels that can deploy an immense amount of fighters, and weapon platforms that can dish out an surprising amount of firepower. War is their business.")
+	},
+	'strogg': {      #Thise module requires different upgrade costs!!!!!
+		'description': str('This drone')
+	}
+}
+
+

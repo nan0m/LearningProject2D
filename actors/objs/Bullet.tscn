@@ -11,7 +11,6 @@ z_index = 5
 script = ExtResource("1_elyox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
 scale = Vector2(2.86521, 2.86521)
 texture = ExtResource("1_rgwuw")
 

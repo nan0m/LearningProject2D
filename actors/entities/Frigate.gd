@@ -17,6 +17,7 @@ func _ready():
 	$HP.value = hp
 	$AttackTimer.wait_time = rof
 	screen_size = get_viewport().get_visible_rect().size
+	add_to_group("Small_enemies")
 
 func _physics_process(delta):
 	global_position += Vector2.LEFT * int(move_speed) * delta
@@ -33,8 +34,6 @@ func _physics_process(delta):
 	elif distance_to_player < (target_distance + 100):
 		move_speed = lerp(move_speed, 10, delta * deceleration_factor)
 		move_speed = int(move_speed)
-
-
 
 
 func _on_hurtbox_area_entered(area):
@@ -60,6 +59,7 @@ func _fire_to_player():
 			var b = load("res://actors/objs/EnemyBullet.tscn").instantiate()
 			b.dir = global_position.direction_to(ManagerGame.global_player_ref.global_position)
 			b.damage = edamage
+			b.look_at(ManagerGame.global_player_ref.global_position)
 			ManagerGame.global_world_ref.spawn_obj(b, global_position)
 			await get_tree().create_timer(0.2).timeout
 

@@ -4,9 +4,11 @@ extends Node2D
 var speed = 500.0
 var dir = Vector2.ZERO
 var damage
+#var missilehp = 3
 
 func _ready():
 	look_at(global_position + dir)
+	add_to_group("Enemy_missiles")
 
 
 func _physics_process(delta):

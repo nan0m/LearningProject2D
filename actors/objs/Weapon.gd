@@ -25,11 +25,12 @@ func _physics_process(_delta):
 func shoot():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
 	if e:
-		if(random_generator.randf_range(0, 1) < crit_rate):
-			spawn_bullet(global_position, global_position.direction_to(e.global_position), damage * crit_damage_modifier)
-		else:
-			spawn_bullet(global_position, global_position.direction_to(e.global_position), damage)
-		$lazer.play()
+		if e.is_in_group("Small_enemies") or e.is_in_group("big_enemies"):
+			if(random_generator.randf_range(0, 1) < crit_rate):
+				spawn_bullet(global_position, global_position.direction_to(e.global_position), damage * crit_damage_modifier)
+			else:
+				spawn_bullet(global_position, global_position.direction_to(e.global_position), damage)
+			$lazer.play()
 
 func _on_timer_timeout():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
@@ -50,5 +51,5 @@ func spawn_bullet(g_pos: Vector2, dir, damage):
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage
-	b.look_at(get_global_mouse_position())
+	b.look_at(dir)
 	sort.add_child(b)

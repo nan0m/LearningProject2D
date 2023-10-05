@@ -17,6 +17,7 @@ func _ready():
 	$HP.value = hp
 	$AttackTimer.wait_time = rof
 	screen_size = get_viewport().get_visible_rect().size
+	add_to_group("big_enemies")
 
 
 func _physics_process(delta):

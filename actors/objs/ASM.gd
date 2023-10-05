@@ -18,7 +18,7 @@ func _ready():
 func shoot():
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
 	if sort != null:
-		if e and global_position.distance_to(e.global_position) <= range:
+		if e and e.is_in_group("Small_enenies") and global_position.distance_to(e.global_position) <= range:
 			var distance = global_position.distance_to(e.global_position)
 			if(random_generator.randf_range(0,1) < crit_rate):
 				spawn_asmmissile(global_position, e, damage * crit_damage_modifier)

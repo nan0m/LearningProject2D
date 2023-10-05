@@ -9,7 +9,7 @@ var rng = ManagerGame.enemy_data['destroyer']['range'] #enemy range
 var notu = ManagerGame.enemy_data['destroyer']['not']  #number of turret
 @export var locked = false
 var target_distance = rng
-
+var ebullet := preload("res://actors/objs/EnemyBullet.tscn")
  
 var screen_size
 func _ready():
@@ -17,6 +17,7 @@ func _ready():
 	$HP.value = hp
 	$AttackTimer.wait_time = rof
 	screen_size = get_viewport().get_visible_rect().size
+	add_to_group("big_enemies")
 
 
 func _physics_process(delta):
@@ -74,8 +75,9 @@ func _fire_to_player():
 	var distance_to_player = global_position.distance_to(ManagerGame.global_player_ref.global_position)
 	if distance_to_player <= rng:
 		for i in range(notu):
-			var b = load("res://actors/objs/EnemyBullet.tscn").instantiate()
+			var b = ebullet.instantiate()
 			b.dir = global_position.direction_to(ManagerGame.global_player_ref.global_position)
 			b.damage = edamage
+			b.look_at(ManagerGame.global_player_ref.global_position) #"Sort/Player_New"
 			ManagerGame.global_world_ref.spawn_obj(b, global_position)
 			await get_tree().create_timer(0.2).timeout

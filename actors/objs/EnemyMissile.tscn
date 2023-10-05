@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1ss3"]
 size = Vector2(35, 27)
 
-[node name="EnemyMissile" type="Node2D"]
+[node name="EnemyMissile" type="Node2D" groups=["enemymissiles"]]
 z_index = 5
 scale = Vector2(0.423, 0.423)
 script = ExtResource("1_mu4i4")

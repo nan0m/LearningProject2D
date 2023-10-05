@@ -7,7 +7,7 @@ var ReloadTime = 10
 var isReloading = false
 var bulletSpreadAngle = 5.0
 var damage = ManagerGame.weapons_data['phalanx']['attack']
-var phalanxrange = ManagerGame.weapons_data['phalanx']['range']
+var phalanxrange = ManagerGame.weapons_data['phalanx']['range']+200
 var sort = null
 var phalanxahoy := preload("res://actors/objs/PhalanxBullet.tscn")
 var random_generator = null
@@ -28,15 +28,17 @@ func _ready():
 func _physics_process(_delta):
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
 	if e:
-		look_at(e.global_position)
+		if e.is_in_group("Enemy_missiles"):
+			look_at(e.global_position)
+		elif e.is_in_group("Small_enemies"):
+			look_at(e.global_position)
 
 func shoot():
 	if isReloading:
 		return
 	var e = ManagerGame.global_world_ref.get_closest(global_position)
-	if e:
+	if e.is_in_group("Enemy_missiles") or e.is_in_group("Small_enemies"):
 		$lazer.play()
-		
 		spawn_phalanxbullet(global_position, global_position.direction_to(e.global_position),damage)
 		var direction = global_position.direction_to(e.global_position)
 		direction = applyBulletSpread(direction)

@@ -74,9 +74,9 @@ func spawn_enemy(g_pos: Vector2):
 	var rand_value = randf()   # Generates a random float between 0 and 1
 	var enemy_scene: PackedScene
 	if rand_value < 0.25:
-		enemy_scene = destroyer_scene
-	elif 0.25 <= rand_value and rand_value <0.5:
 		enemy_scene = frigate_scene
+	elif 0.25 <= rand_value and rand_value <0.5:
+		enemy_scene = destroyer_scene
 	elif 0.5 <= rand_value and rand_value < 0.75:
 		enemy_scene = cruiser_scene
 	else:
@@ -198,5 +198,5 @@ func spawn_ally(position: Vector2):
 
 
 
-func _on_gui_update_module_ui():
-	pass # Replace with function body.
+#func _on_gui_update_module_ui():
+#	pass # Replace with function body.

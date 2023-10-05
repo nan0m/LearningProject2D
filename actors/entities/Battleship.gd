@@ -9,7 +9,7 @@ var rng = ManagerGame.enemy_data['battleship']['range'] #enemy range
 var notu = ManagerGame.enemy_data['battleship']['not']  #number of turret
 @export var locked = false
 var target_distance = rng
-
+var mi_damage = edamage*2
  
 var screen_size
 func _ready():
@@ -17,6 +17,7 @@ func _ready():
 	$HP.value = hp
 	$AttackTimer.wait_time = rof
 	screen_size = get_viewport().get_visible_rect().size
+	add_to_group("big_enemies")
 
 
 func _physics_process(delta):
@@ -50,7 +51,7 @@ func _on_hurtbox_area_entered(area):
 	$HP.value = hp
 
 func _on_attack_timer_timeout():
-	_fire_to_player()
+	_fire_missile()
 	$AttackTimer.start()
 
 func _fire_to_player():
@@ -62,6 +63,13 @@ func _fire_to_player():
 			b.damage = edamage
 			ManagerGame.global_world_ref.spawn_obj(b, global_position)
 			await get_tree().create_timer(0.2).timeout
+
+func _fire_missile():
+	var m = load("res://actors/objs/EnemyMissile.tscn").instantiate()
+	m.dir = global_position.direction_to(ManagerGame.global_player_ref.global_position)
+	m.damage = mi_damage
+	ManagerGame.global_world_ref.spawn_obj(m, global_position)
+
 
 
 func _hurt(damage):
