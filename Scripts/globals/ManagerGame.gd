@@ -427,3 +427,17 @@ Achilleus is boasting a powerfull powercore, one that is able to sustain a pleth
 }
 
 
+var wiki_entries = {
+	'roc': {
+		'description': str("1")
+	},
+	'skafos2': {
+		'description': str('This blast')
+	},
+	'skafo3': {
+		'description': str("2")
+	},
+	'papki1': {      #Thise module requires different upgrade costs!!!!!
+		'description': str('This drone')
+	}
+}

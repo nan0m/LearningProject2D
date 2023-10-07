@@ -57,10 +57,10 @@ func _fire_to_player():
 	if distance_to_player <= rng:
 		for i in range(notu):
 			var b = load("res://actors/objs/EnemyBullet.tscn").instantiate()
+			ManagerGame.global_world_ref.spawn_obj(b, global_position)
 			b.dir = global_position.direction_to(ManagerGame.global_player_ref.global_position)
 			b.damage = edamage
 			b.look_at(ManagerGame.global_player_ref.global_position)
-			ManagerGame.global_world_ref.spawn_obj(b, global_position)
 			await get_tree().create_timer(0.2).timeout
 
 

@@ -48,8 +48,9 @@ func update_stats(stat_dictionary):
 
 func spawn_bullet(g_pos: Vector2, dir, damage):
 	var b = bulletahoy.instantiate()
+	sort.add_child(b)
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage
 	b.look_at(dir)
-	sort.add_child(b)
+	

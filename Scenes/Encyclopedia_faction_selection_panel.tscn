@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://rmwvbu5br247"]
+
+[ext_resource type="Script" path="res://EncyclopediaFactionSelection.gd" id="1_mouny"]
+[ext_resource type="Texture2D" uid="uid://bnbeekjq0oj7i" path="res://Assets/icons/encyclopRest.png" id="2_4xrvt"]
+[ext_resource type="Texture2D" uid="uid://cs0qld0oetw1a" path="res://Assets/icons/encyclopPressed.png" id="3_d7ek0"]
+
+[node name="SelectionPanel" type="Panel"]
+custom_minimum_size = Vector2(250, 435)
+offset_right = 250.0
+offset_bottom = 435.0
+script = ExtResource("1_mouny")
+
+[node name="FactionName" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 303.0
+offset_right = 252.0
+offset_bottom = 355.0
+bbcode_enabled = true
+
+[node name="FactionIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 45.0
+offset_right = 248.0
+offset_bottom = 231.0
+
+[node name="Button3" type="TextureButton" parent="."]
+self_modulate = Color(0.0784314, 0.917647, 1, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("2_4xrvt")
+texture_pressed = ExtResource("3_d7ek0")
+stretch_mode = 0
+
+[connection signal="clicked" from="." to="." method="_on_clicked"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]

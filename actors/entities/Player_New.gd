@@ -113,11 +113,12 @@ func _unhandled_input(event): #this function allows the player to shoot with eit
 #Player Shooter
 func spawn_bullet(g_pos: Vector2, dir, damage):
 	var b = playerbullet.instantiate()
+	sort.add_child(b)
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage
 	b.look_at(get_global_mouse_position())
-	sort.add_child(b)
+	
 
 #Railgun Shooter
 func railgun_burst_fire():

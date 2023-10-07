@@ -1,8 +1,6 @@
 extends Panel
 
-
 @export var weapon_type: ManagerGame.WEAPON_TYPE
-
 
 func _ready():
 	update_content()

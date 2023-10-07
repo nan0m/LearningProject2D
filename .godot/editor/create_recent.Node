@@ -1,12 +1,13 @@
-RichTextLabel
-Label
 Panel
-TextureRect
+Label
 HBoxContainer
-Button
-ScrollContainer
-TextureButton
 VBoxContainer
+TextureRect
+RichTextLabel
+Node
+ScrollContainer
+Button
+TextureButton
 Timer
 AudioStreamPlayer2D
 AudioStreamPlayer
@@ -19,7 +20,6 @@ Sprite2D
 AnimatedSprite2D
 GPUParticles2D
 Line2D
-Node
 RayCast2D
 Node2D
 RemoteTransform2D

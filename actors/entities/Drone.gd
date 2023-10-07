@@ -98,7 +98,7 @@ func spawn_bullet1a(g_pos: Vector2, dir, damage):
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage
-	#b.look_at(get_global_mouse_position())
+	b.look_at(dir)
 	sort.add_child(b)
 
 func _on_attack_timer_timeout():
