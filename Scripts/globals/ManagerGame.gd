@@ -409,7 +409,7 @@ var encyclopedia = {
 		'description': str("Introduction:
 The Dorian League is a prominent interstellar faction originating from the mineral-rich planet of Doria, distinguished by its remarkable journey from a fragmented mining colony to a unified, formidable power within the galaxy. This wiki page delves deeper into the League's history, culture, governance, and recent developments. \n
 Dorian leadership has invested a huge amount of resources in establishing a strong military presence, one that would prevent any potential uprising, and also inspire awe to its citizens. One of the latest achievement is the technological marvel of Achilleus. A capital class on its own, it combines the firepower of a Battleship, and
-the troop deployment of a carrier.\n [img={300}]res://Assets/Player/BC.png[/img] \n It's hangars are able to house up to ten [url={add link here}]{A1-1:Roc}[/url] Fighter-Bombers. It also contains a manufacturing line that can replenish its destroyed fighters while deployed in the field. The advanced AI system is rendering pilot personell obsolete, thus human resources are reserved for ground missions. Furthermore
+the troop deployment of a carrier.\n [img={300}]res://Assets/Player/BC.png[/img] \n It's hangars are able to house up to ten [url=a11roc]{A1-1:Roc}[/url] Fighter-Bombers. It also contains a manufacturing line that can replenish its destroyed fighters while deployed in the field. The advanced AI system is rendering pilot personell obsolete, thus human resources are reserved for ground missions. Furthermore
 Achilleus is boasting a powerfull powercore, one that is able to sustain a plethora of weapons turrets with simultaneous fire.")
 	},
 	'ionia': {
@@ -423,21 +423,70 @@ Achilleus is boasting a powerfull powercore, one that is able to sustain a pleth
 	},
 	'strogg': {      #Thise module requires different upgrade costs!!!!!
 		'description': str('This drone')
+	},
+	'a11roc': {
+		'description': str("Dorian Leadership commissionned the Ishukone corporation with the task of developing a spacecraft that would be able to deliver a message to their targets. The message was best described as: Annihilation. The A1-1 is a vessel that is capable of achieving
+		an insane amount of G-Forces in it manouverability, thus only the best and borderline insane pilots can even dream of stepping inside the cockpit of this craft of death. The frame and armor of the Roc are capable of dealing with some of the harshes of space, but it will not survive long
+		under fire. It purpose is primarily to outmanouver the enemy capital weaponry and perform a classic torpedo run, releasing its CX-125 Nova Torpedoes. With a total capacity of five torpedoes, no enemy station or ship could continue to pose a threat to the Dorian League.")
+	}}
+
+var wiki_entries = { #start
+	'a11roc': {
+		'description': str("This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description
+		This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description 
+		This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description 
+		 This is the ships description This is the ships description This is the ships description This is the ships descriptionThis is the ships description This is the ships descriptionThis is the ships description
+		 This is the ships description This is the ships description This is the ships descriptionThis is the ships descriptionThis is the ships descriptionThis is the ships descriptionThis is the ships descriptionThis is the ships description
+		This is the ships descriptionThis is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description")
+	},
+	
+	'achilleus': {
+		'description': str("This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description
+		This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description 
+		This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description 
+		 This is the ships description This is the ships description This is the ships description This is the ships descriptionThis is the ships description This is the ships descriptionThis is the ships description
+		 This is the ships description This is the ships description This is the ships descriptionThis is the ships descriptionThis is the ships descriptionThis is the ships descriptionThis is the ships descriptionThis is the ships description
+		This is the ships descriptionThis is the ships description This is the ships description This is the ships description This is the ships description This is the ships description This is the ships description")
 	}
-}
+	} #end
 
 
-var wiki_entries = {
-	'roc': {
-		'description': str("1")
+enum wiki_items{
+	a11roc,
+	bob
+}  
+
+var wiki_item_details = {
+	'a11roc': {
+		'Code-Name': 'Roc',  
+		'Production': "Ishucone",
+		'Crew': "2",
+		'Speed': 300,
+		'Effective_Range': "1AU" 
 	},
-	'skafos2': {
-		'description': str('This blast')
-	},
-	'skafo3': {
-		'description': str("2")
-	},
-	'papki1': {      #Thise module requires different upgrade costs!!!!!
-		'description': str('This drone')
+	'bob': {
+		'Code-Name': 'Roc',  
+		'Production': "Ishucone",
+		'Crew': "2",
+		'Speed': 300,
+		'Effective_Range': "1AU" 
 	}
-}
+	}
+#if data.has('range'):
+#		stats +=  "Range: " + str(data['range']) + " meters\n"
+func formatted_wiki_item(wiki_items):
+	var stats = ""
+	var data = wiki_item_details[wiki_items]
+	if data.has('Code-Name'):
+		stats +=  "Code-Name: " + str(data['Code-Name']) + "\n"
+	if data.has('Production'):
+		stats += "Production: " + str(data['Production']) + " Corporation\n"
+	if data.has('Crew'):
+		stats += "Crew: " + str(data['Crew']) + " \n"
+	if data.has('Speed'):
+		stats += "Speed: " + str(data['Speed']) + "\n"
+	if data.has('Effective_Range'):
+		stats += "Effective Range: " + str(data['Effective_Range']) + "\n"
+	if data.has('Stations'):
+		stats += "Stations: " + str(data['Stations']) + "\n"
+	return stats

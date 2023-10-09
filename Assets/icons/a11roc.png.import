@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvs557i7u37b"
-path="res://.godot/imported/420px-WeaponImage_AIM-9D_Sidewinder-fotor-bg-remover-20230817183210.png-1fbdd40e59c74bcf82779bbdc14fae51.ctex"
+uid="uid://dcp64xupucvfx"
+path="res://.godot/imported/a11roc.png-a65953d6e2e4866930284f473e2585cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/420px-WeaponImage_AIM-9D_Sidewinder-fotor-bg-remover-20230817183210.png"
-dest_files=["res://.godot/imported/420px-WeaponImage_AIM-9D_Sidewinder-fotor-bg-remover-20230817183210.png-1fbdd40e59c74bcf82779bbdc14fae51.ctex"]
+source_file="res://Assets/icons/a11roc.png"
+dest_files=["res://.godot/imported/a11roc.png-a65953d6e2e4866930284f473e2585cd.ctex"]
 
 [params]
 

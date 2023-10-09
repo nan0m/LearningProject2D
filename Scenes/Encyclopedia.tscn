@@ -73,16 +73,16 @@ script = ExtResource("3_7tqen")
 
 [node name="WikiIcon" type="TextureRect" parent="Wikipage"]
 layout_mode = 0
-offset_left = 751.5
+offset_left = 747.5
 offset_top = 22.0
-offset_right = 945.5
+offset_right = 941.5
 offset_bottom = 201.0
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="Wikipage"]
 layout_mode = 0
-offset_left = -5.0
+offset_left = 13.0
 offset_top = 72.0
-offset_right = 715.0
+offset_right = 733.0
 offset_bottom = 466.0
 
 [node name="Main" type="RichTextLabel" parent="Wikipage/ScrollContainer2"]
@@ -100,4 +100,21 @@ offset_top = 224.0
 offset_right = 962.5
 offset_bottom = 488.0
 
+[node name="Button" type="Button" parent="Wikipage"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 47.0
+offset_bottom = 31.0
+text = "Main"
+
+[node name="Button2" type="Button" parent="Wikipage"]
+layout_mode = 0
+offset_left = 54.0
+offset_right = 99.0
+offset_bottom = 31.0
+text = "Back"
+
 [connection signal="pressed" from="Panel/Close" to="." method="_on_close_pressed"]
+[connection signal="meta_clicked" from="Wikipage/ScrollContainer2/Main" to="." method="_on_main_meta_clicked"]
+[connection signal="pressed" from="Wikipage/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Wikipage/Button2" to="." method="_on_button_2_pressed"]

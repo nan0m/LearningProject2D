@@ -1,9 +1,7 @@
-res://EncyclopediaFactionSelection.gd
-res://Scenes/Encyclopedia_faction_selection_panel.tscn
-res://Scenes/MainMenu.tscn
 res://Scenes/Encyclopedia.tscn
+res://Scenes/Encyclopedia_faction_selection_panel.tscn
 res://Scenes/UI.tscn
-res://actors/ui/WeaponDisplay.tscn
 res://Scenes/Encyclopedia.gd
-res://Wikipage.gd
 res://Scripts/globals/ManagerGame.gd
+res://actors/objs/Module.gd
+res://actors/objs/Module.tscn

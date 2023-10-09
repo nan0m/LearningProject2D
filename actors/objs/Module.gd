@@ -84,12 +84,14 @@ func rgshoot():
 		$CDTimerRG.start()
 
 func railgun_burst_fire():
-	if shotpstrage[stage] < 3:
+	#if shotpstrage[stage] < 3:
+	#	railgun_fire()
+	#else:
+	for i in range(shotpstrage[stage]):
+		#railgun_fire()
+		#$ShootdelayTimer.start()
 		railgun_fire()
-	else:
-		for i in range(shotpstrage[stage]):
-			railgun_fire()
-			$ShootdelayTimer.start()
+		await get_tree().create_timer(0.2).timeout
 
 func railgun_fire():
 	$RailgunSFX.play()
@@ -122,8 +124,9 @@ func tplaunch():
 func torpedoSalvoLaunch():
 	for i in range(torpshotstage[stage]):
 		torpedolaunch()
-		print("1stTorpAways")
-		$torpedodelay.start()
+		await get_tree().create_timer(0.5).timeout#torpedolaunch()
+		print("TorpAways")
+		#$torpedodelay.start()
 		
 
 func torpedolaunch():
