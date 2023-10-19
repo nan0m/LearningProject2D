@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 signal update_module_UI(level)
-signal update_modeleD_UI(level)
+signal update_moduleD_UI(level)
 var max_timer = 0  #timer for the RG
 var max_timer2 = 0 #timer for the Torp
 var max_timer3 = 0 #timer for the DamageControl
@@ -29,7 +29,7 @@ func _on_update_module_ui(level,timeleftRG,timeleftTP):
 		$HUD/AbilitiesBar/RailgunCD.show()
 		$HUD/AbilitiesBar/RailgunCD/RailgunCDlabel.text = str(timeleftRG)
 
-func _on_update_modele_d_ui(level, timeleftDC):
+func _on_update_module_d_ui(level, timeleftDC):
 	if level > 1:
 		$HUD/AbilitiesBar/DamageControl.show()
 		if max_timer3 == timeleftDC:
@@ -37,6 +37,7 @@ func _on_update_modele_d_ui(level, timeleftDC):
 		else:
 			$HUD/AbilitiesBar/DamageControl.value = max_timer3 - timeleftDC
 		$HUD/AbilitiesBar/DamageControl/DClabel.text = str(timeleftDC)
+		
 
 
 func set_max(seconds):

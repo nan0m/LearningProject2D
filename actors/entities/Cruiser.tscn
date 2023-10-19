@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dm0282tthapfd"]
 
-[ext_resource type="Texture2D" uid="uid://trgicfi61a32" path="res://Assets/Enemies/Cruiser.png" id="1_atrq5"]
+[ext_resource type="Texture2D" uid="uid://krymuf5k3chd" path="res://Assets/Enemies/Cruiser.png" id="1_g03h3"]
 [ext_resource type="Script" path="res://actors/entities/Cruiser.gd" id="2_8wis3"]
 [ext_resource type="AudioStream" uid="uid://rqyg6wryjs6x" path="res://Assets/sfx/enemy_kaboom.mp3" id="3_uea0q"]
 
@@ -27,7 +27,7 @@ border_color = Color(1, 1, 1, 1)
 [node name="Enemy" type="Sprite2D"]
 position = Vector2(0.126494, -0.437498)
 scale = Vector2(0.578125, 0.578125)
-texture = ExtResource("1_atrq5")
+texture = ExtResource("1_g03h3")
 flip_h = true
 script = ExtResource("2_8wis3")
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bape504hkmbmi"
-path="res://.godot/imported/Frigate2.png-dc8df3bd3427ebe071e1ce8d5b18b05e.ctex"
+uid="uid://cpxojsb0t4j0l"
+path="res://.godot/imported/Chapter2.png-0040b2521c1493403a979125f5e540df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemies/Frigate2.png"
-dest_files=["res://.godot/imported/Frigate2.png-dc8df3bd3427ebe071e1ce8d5b18b05e.ctex"]
+source_file="res://Assets/Images/Chapter2.png"
+dest_files=["res://.godot/imported/Chapter2.png-0040b2521c1493403a979125f5e540df.ctex"]
 
 [params]
 

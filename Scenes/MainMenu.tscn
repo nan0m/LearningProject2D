@@ -1,7 +1,7 @@
 [gd_scene load_steps=177 format=3 uid="uid://bh0mmims31l3b"]
 
+[ext_resource type="Script" path="res://Scenes/MainMenu.gd" id="1_nu8xm"]
 [ext_resource type="Texture2D" uid="uid://b4oq0itstfeex" path="res://Assets/Environment/menuSS.png" id="1_pek1l"]
-[ext_resource type="Script" path="res://Scenes/CanvasLayer.gd" id="2_d3cfi"]
 [ext_resource type="AudioStream" uid="uid://dojkr0senyrni" path="res://Assets/sfx/main_menu_theme.mp3" id="3_7gdc3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dvt1b"]
@@ -1230,7 +1230,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("2_d3cfi")
+script = ExtResource("1_nu8xm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 90.0

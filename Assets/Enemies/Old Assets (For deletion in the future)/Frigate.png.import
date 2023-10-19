@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qvm76kihpjji"
-path="res://.godot/imported/drone.png-630c50ff65328656cf979ff9618025eb.ctex"
+uid="uid://cmcqab045iayr"
+path="res://.godot/imported/Frigate.png-546bffcb638c2ee9ba235287c079884c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemies/drone.png"
-dest_files=["res://.godot/imported/drone.png-630c50ff65328656cf979ff9618025eb.ctex"]
+source_file="res://Assets/Enemies/Old Assets (For deletion in the future)/Frigate.png"
+dest_files=["res://.godot/imported/Frigate.png-546bffcb638c2ee9ba235287c079884c.ctex"]
 
 [params]
 

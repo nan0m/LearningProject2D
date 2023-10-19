@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cha4ac42avxdf"]
 
-[ext_resource type="Texture2D" uid="uid://ba6obcj67ryhm" path="res://Assets/Enemies/ally.png" id="1_1au1m"]
+[ext_resource type="Texture2D" uid="uid://b0oqxfcf0pi5i" path="res://Assets/Enemies/ally.png" id="1_ts1pv"]
 [ext_resource type="Script" path="res://actors/entities/Ally.gd" id="2_dmhtl"]
 [ext_resource type="AudioStream" uid="uid://rqyg6wryjs6x" path="res://Assets/sfx/enemy_kaboom.mp3" id="3_21j7v"]
 
@@ -28,7 +28,7 @@ border_color = Color(1, 1, 1, 1)
 
 [node name="Ally" type="Sprite2D"]
 scale = Vector2(0.46, 0.46)
-texture = ExtResource("1_1au1m")
+texture = ExtResource("1_ts1pv")
 script = ExtResource("2_dmhtl")
 
 [node name="Hurtbox" type="Area2D" parent="."]

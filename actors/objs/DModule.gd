@@ -34,62 +34,71 @@ var passive_repair_rate := 0.02  # Initial passive repair rate
 var passive_repair_upgrade := 0.005  # Increase in repair rate per upgrade
 var passive_repair_level := 1  # Initial repair level
 
-var damage_control_levels := [0.15, 0.2, 0.25, 0.3, 0.35]  # HP recovery percentages for different levels
-var damage_control_cooldown := 90  # Cooldown period for the damage control ability
-var damage_control_ready := true  # Flag to track if the ability is ready
-var damage_control_level := 1
+var damage_control_levels = [0.15, 0.2, 0.25, 0.3, 0.35]  # HP recovery percentages for different levels
+var passive_damage_control_levels = [0.0001, 0.0002, 0.0003, 0.0004, 0.0005]  # HP recovery percentages for different levels
+var damage_control_cooldown = 60  # Cooldown period for the damage control ability
+var damage_control_ready = true  # Flag to track if the ability is ready
+var damage_control_level = 1
 
+var can_repair = false
 var gui = null
+var sort = null
+var DmoduleOnline = false
+
+func _ready():
+	DmoduleOnline = true
+	print(DmoduleOnline)
 
 func update_stats(stat_dictionary):
 	max_hp = stat_dictionary["hp"]
 	damage_control_level = int(stat_dictionary["stage"])
 	passive_repair_rate = int(stat_dictionary["restore"])
 	gui = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("GUI")
-	gui._on_update_modele_d_ui(damage_control_level,damage_control_cooldown)
-	damage_control_cooldown = float(stat_dictionary["cooldown"])
+	sort = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Sort")
+	gui._on_update_module_d_ui(damage_control_level,damage_control_cooldown)
+	#damage_control_cooldown = float(stat_dictionary["cooldown"])
 	$DamagecontrolCD.wait_time = damage_control_cooldown
 	gui.set_max3(damage_control_cooldown)
-	
+	#print(damage_control_cooldown)
 
 func _process(delta):
-	var passive_repair_amount : float = max_hp * passive_repair_rate * passive_repair_level * delta
-	current_hp = min(current_hp + passive_repair_amount, max_hp)
-	# Damage control cooldown logic
-	if !damage_control_ready:
-		damage_control_cooldown -= delta
-		if damage_control_cooldown <= 0:
-			damage_control_ready = true
+	var currentHP = ManagerGame.global_player_ref.player_data['stats']['hp']
+	if currentHP < 5000:
+		can_repair = true
+		passive_repair(delta)
+	else:
+		can_repair = false
+		#print("No_Repairs_Needed")
+	if gui != null:
+		var dctime = snapped($DamagecontrolCD.time_left,1) 
+		if damage_control_ready:
+			dctime = damage_control_cooldown
+		gui._on_update_module_d_ui(damage_control_level,dctime)
+
+func passive_repair(delta):
+	#print("Passive_Rep_Online")
+	if can_repair == true && DmoduleOnline == true:
+		ManagerGame.global_player_ref.player_data['stats']['hp'] += delta*passive_damage_control_levels[damage_control_level-1]*5000
+		print("repaired")
+
 
 func damagecontrol():
-	if damage_control_ready:
+	if can_repair == true && damage_control_ready:
 		damage_control_ready = false
 		activate_damage_control()
-		$CDTimerRG.start()
+		$DamagecontrolCD.start()
 
 func activate_damage_control():
-	if damage_control_ready:
-		var recovery_percent : float = damage_control_levels[damage_control_level - 1]
-		var recovery_amount := max_hp * recovery_percent
-		current_hp = min(current_hp + recovery_amount, max_hp)
-		damage_control_ready = false
-
-# Function to upgrade the passive repair ability
-#func upgrade_passive_repair():
-#	if passive_repair_level < 20:
-#		passive_repair_level += 1
-#		passive_repair_rate += passive_repair_upgrade
-
-#Function to upgrade the damage control ability
-#func upgrade_damage_control():
-#	if damage_control_level < 5:
-#		damage_control_level += 1
-
-# Handle input, e.g., Q button press to activate damage control ability
-#func _input(event):
-#	if event is InputEventKey and event.scancode == KEY_Q and event.is_pressed():
-#		activate_damage_control()
-
+	#print("Repairs_Engaged")
+	var recovery_percent : float = damage_control_levels[damage_control_level-1]
+	for i in range(1,5):
+		ManagerGame.global_player_ref.player_data['stats']['hp'] += (recovery_percent*(5000-ManagerGame.global_player_ref.player_data['stats']['hp']))/4
+		await get_tree().create_timer(0.4).timeout
+		#print(str((recovery_percent*(5000-ManagerGame.global_player_ref.player_data['stats']['hp']))/4)+"REPAIRED")
+	#print("Missing_HP" + str(5000-ManagerGame.global_player_ref.player_data['stats']['hp']))
+	#print(recovery_percent)
+	#print(str(recovery_percent*(5000-ManagerGame.global_player_ref.player_data['stats']['hp'])))
+	damage_control_ready = false
 
 func _on_damagecontrol_cd_timeout():
 	damage_control_ready = true

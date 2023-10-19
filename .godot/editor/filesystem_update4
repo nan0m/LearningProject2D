@@ -1,7 +1,8 @@
-res://Scenes/Encyclopedia.tscn
-res://Scenes/Encyclopedia_faction_selection_panel.tscn
-res://Scenes/UI.tscn
-res://Scenes/Encyclopedia.gd
-res://Scripts/globals/ManagerGame.gd
-res://actors/objs/Module.gd
-res://actors/objs/Module.tscn
+res://Scenes/MainMenu.tscn
+res://actors/entities/Frigate.tscn
+res://actors/entities/Destroyer.tscn
+res://actors/entities/Cruiser.tscn
+res://actors/entities/Battleship.tscn
+res://actors/entities/Ally.tscn
+res://actors/entities/Player_New.tscn
+res://actors/objs/DModule.gd

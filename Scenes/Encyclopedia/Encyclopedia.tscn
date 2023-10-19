@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf6wc24otbh55"]
 
-[ext_resource type="Script" path="res://Scenes/Encyclopedia.gd" id="1_har18"]
-[ext_resource type="PackedScene" uid="uid://rmwvbu5br247" path="res://Scenes/Encyclopedia_faction_selection_panel.tscn" id="2_cnpyg"]
-[ext_resource type="Script" path="res://Wikipage.gd" id="3_7tqen"]
+[ext_resource type="Script" path="res://Scenes/Encyclopedia/Encyclopedia.gd" id="1_har18"]
+[ext_resource type="PackedScene" uid="uid://rmwvbu5br247" path="res://Scenes/Encyclopedia/Encyclopedia_faction_selection_panel.tscn" id="2_cnpyg"]
+[ext_resource type="Script" path="res://Scenes/Encyclopedia/Wikipage.gd" id="3_e1xeq"]
 
 [node name="Encyclopedia" type="Control"]
 layout_mode = 3
@@ -69,7 +69,7 @@ offset_left = 75.0
 offset_top = 26.0
 offset_right = 1063.0
 offset_bottom = 513.0
-script = ExtResource("3_7tqen")
+script = ExtResource("3_e1xeq")
 
 [node name="WikiIcon" type="TextureRect" parent="Wikipage"]
 layout_mode = 0

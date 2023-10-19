@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba5gbnx8cinw2"
-path="res://.godot/imported/spaceship5-2.png-c8517343c5154636ea12810dbdc9e78b.ctex"
+uid="uid://trgicfi61a32"
+path="res://.godot/imported/Cruiser.png-7bb48a28dd72e48aff2dcade23a34e7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemies/spaceship5-2.png"
-dest_files=["res://.godot/imported/spaceship5-2.png-c8517343c5154636ea12810dbdc9e78b.ctex"]
+source_file="res://Assets/Enemies/Old Assets (For deletion in the future)/Cruiser.png"
+dest_files=["res://.godot/imported/Cruiser.png-7bb48a28dd72e48aff2dcade23a34e7c.ctex"]
 
 [params]
 

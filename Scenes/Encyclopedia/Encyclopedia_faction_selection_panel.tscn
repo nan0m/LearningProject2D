@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://rmwvbu5br247"]
 
-[ext_resource type="Script" path="res://EncyclopediaFactionSelection.gd" id="1_mouny"]
-[ext_resource type="Texture2D" uid="uid://bnbeekjq0oj7i" path="res://Assets/icons/encyclopRest.png" id="2_4xrvt"]
-[ext_resource type="Texture2D" uid="uid://cs0qld0oetw1a" path="res://Assets/icons/encyclopPressed.png" id="3_d7ek0"]
+[ext_resource type="Script" path="res://Scenes/Encyclopedia/EncyclopediaFactionSelection.gd" id="1_o2mp6"]
+[ext_resource type="Texture2D" uid="uid://bnbeekjq0oj7i" path="res://Assets/icons/encyclopRest.png" id="2_vn07i"]
+[ext_resource type="Texture2D" uid="uid://cs0qld0oetw1a" path="res://Assets/icons/encyclopPressed.png" id="3_c0ixl"]
 
 [node name="SelectionPanel" type="Panel"]
 custom_minimum_size = Vector2(250, 435)
 offset_right = 250.0
 offset_bottom = 435.0
-script = ExtResource("1_mouny")
+script = ExtResource("1_o2mp6")
 
 [node name="FactionName" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -32,8 +32,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("2_4xrvt")
-texture_pressed = ExtResource("3_d7ek0")
+texture_normal = ExtResource("2_vn07i")
+texture_pressed = ExtResource("3_c0ixl")
 stretch_mode = 0
 
 [connection signal="clicked" from="." to="." method="_on_clicked"]

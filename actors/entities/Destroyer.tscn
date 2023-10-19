@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cayg1yekc3fx7"]
 
-[ext_resource type="Texture2D" uid="uid://wipgv06ckjjf" path="res://Assets/Enemies/Destroyer.png" id="1_exyhu"]
+[ext_resource type="Texture2D" uid="uid://dk6y43it213is" path="res://Assets/Enemies/Destroyer.png" id="1_85dfo"]
 [ext_resource type="Script" path="res://actors/entities/Destroyer.gd" id="2_3cn6l"]
 [ext_resource type="AudioStream" uid="uid://rqyg6wryjs6x" path="res://Assets/sfx/enemy_kaboom.mp3" id="3_7y4qu"]
 
@@ -26,7 +26,7 @@ border_color = Color(1, 1, 1, 1)
 
 [node name="Enemy" type="Sprite2D"]
 scale = Vector2(0.546875, 0.546875)
-texture = ExtResource("1_exyhu")
+texture = ExtResource("1_85dfo")
 flip_h = true
 script = ExtResource("2_3cn6l")
 

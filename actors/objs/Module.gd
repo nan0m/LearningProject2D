@@ -57,7 +57,7 @@ func update_stats(stat_dictionary):
 	sort = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Sort")
 	#get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("GUI").emit_signal("update_module_UI", stage)
 	gui._on_update_module_ui(stage,cooldownRG,cooldownTP)
-	cooldownRG = float(stat_dictionary["cooldown"])
+	#cooldownRG = float(stat_dictionary["cooldown"])
 	$CDTimerRG.wait_time = cooldownRG
 	gui.set_max(cooldownRG)
 	$CDTimerTP.wait_time = cooldownTP

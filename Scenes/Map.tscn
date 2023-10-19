@@ -55,7 +55,7 @@ position = Vector2(1284, 0)
 position = Vector2(1725, 301)
 
 [node name="EnemyTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 11.038
 autostart = true
 
 [node name="AllySpawnTimer" type="Timer" parent="."]
@@ -156,7 +156,7 @@ autoplay = true
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="AllySpawnTimer" to="." method="_on_ally_spawn_timer_timeout"]
-[connection signal="update_modeleD_UI" from="GUI" to="GUI" method="_on_update_modele_d_ui" binds= [0]]
+[connection signal="update_moduleD_UI" from="GUI" to="GUI" method="_on_update_module_d_ui" binds= [0]]
 [connection signal="update_module_UI" from="GUI" to="GUI" method="_on_update_module_ui" binds= [0]]
 
 [editable path="Cam"]

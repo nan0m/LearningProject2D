@@ -1,0 +1,222 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj1w7ychtwf4a"]
+
+[ext_resource type="Script" path="res://Scenes/LevelSelection/level_selection.gd" id="1_d6dmh"]
+[ext_resource type="Texture2D" uid="uid://cj3jpf58vn7mb" path="res://Assets/icons/blue_button02.png" id="1_h3m8m"]
+[ext_resource type="Texture2D" uid="uid://bg445aqpior4u" path="res://Assets/icons/blue_button01.png" id="2_34lqv"]
+[ext_resource type="Texture2D" uid="uid://bg0d8wsmb8hl2" path="res://Assets/icons/blue_button03.png" id="3_440s7"]
+[ext_resource type="Texture2D" uid="uid://6tc5e73h8i1f" path="res://Assets/icons/blue_button04.png" id="4_xi1cg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ww2e"]
+texture = ExtResource("1_h3m8m")
+
+[node name="LevelSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d6dmh")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(0.160784, 0.364706, 0.968627, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+offset_left = 88.0
+offset_top = 29.0
+offset_right = 414.0
+offset_bottom = 544.0
+theme_override_constants/separation = 4
+
+[node name="ChapterButton1" type="TextureButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(310, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_h3m8m")
+texture_pressed = ExtResource("2_34lqv")
+texture_focused = ExtResource("4_xi1cg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ChapterButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Prelude
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ChapterButton2" type="TextureButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(310, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+texture_normal = ExtResource("1_h3m8m")
+texture_pressed = ExtResource("2_34lqv")
+texture_disabled = ExtResource("3_440s7")
+texture_focused = ExtResource("4_xi1cg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ChapterButton2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chapter 1
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ChapterButton3" type="TextureButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(310, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+texture_normal = ExtResource("1_h3m8m")
+texture_pressed = ExtResource("2_34lqv")
+texture_disabled = ExtResource("3_440s7")
+texture_focused = ExtResource("4_xi1cg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ChapterButton3"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chapter 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ChapterButton4" type="TextureButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(310, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+texture_normal = ExtResource("1_h3m8m")
+texture_pressed = ExtResource("2_34lqv")
+texture_disabled = ExtResource("3_440s7")
+texture_focused = ExtResource("4_xi1cg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ChapterButton4"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chapter 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ChapterButton5" type="TextureButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(310, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+texture_normal = ExtResource("1_h3m8m")
+texture_pressed = ExtResource("2_34lqv")
+texture_disabled = ExtResource("3_440s7")
+texture_focused = ExtResource("4_xi1cg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ChapterButton5"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chapter 4"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ChapterButton6" type="TextureButton" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(310, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+texture_normal = ExtResource("1_h3m8m")
+texture_pressed = ExtResource("2_34lqv")
+texture_disabled = ExtResource("3_440s7")
+texture_focused = ExtResource("4_xi1cg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/ChapterButton6"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chapter 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="BackToMenu" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(75, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_6ww2e")
+text = "BACK"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 809.0
+offset_top = 460.0
+offset_right = 919.0
+offset_bottom = 506.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_6ww2e")
+text = "START
+"
+
+[node name="ChapterDescription" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 618.0
+offset_top = 48.0
+offset_right = 1082.0
+offset_bottom = 422.0
+theme_override_constants/separation = 20
+
+[node name="ChapterImage" type="TextureRect" parent="ChapterDescription"]
+layout_mode = 2
+
+[node name="ChapterDebrief" type="RichTextLabel" parent="ChapterDescription"]
+custom_minimum_size = Vector2(0, 85.045)
+layout_mode = 2
+bbcode_enabled = true
+
+[connection signal="pressed" from="Panel/VBoxContainer/ChapterButton1" to="." method="_on_chapter_button_pressed" binds= ["ChapterButton1"]]
+[connection signal="pressed" from="Panel/VBoxContainer/ChapterButton2" to="." method="_on_chapter_button_pressed" binds= ["ChapterButton2"]]
+[connection signal="pressed" from="Panel/VBoxContainer/ChapterButton3" to="." method="_on_chapter_button_pressed" binds= ["ChapterButton3"]]
+[connection signal="pressed" from="Panel/VBoxContainer/ChapterButton4" to="." method="_on_chapter_button_pressed" binds= ["ChapterButton4"]]
+[connection signal="pressed" from="Panel/VBoxContainer/ChapterButton5" to="." method="_on_chapter_button_pressed" binds= ["ChapterButton5"]]
+[connection signal="pressed" from="Panel/VBoxContainer/ChapterButton6" to="." method="_on_chapter_button_pressed" binds= ["ChapterButton6"]]
+[connection signal="pressed" from="Panel/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://kax6f6tmshv6"]
 
-[ext_resource type="Texture2D" uid="uid://duqvvruitt6fr" path="res://Assets/Enemies/Battleship.png" id="1_iejfp"]
+[ext_resource type="Texture2D" uid="uid://cfafa1hb353nq" path="res://Assets/Enemies/Battleship.png" id="1_4vet7"]
 [ext_resource type="Script" path="res://actors/entities/Battleship.gd" id="2_k754i"]
 [ext_resource type="AudioStream" uid="uid://rqyg6wryjs6x" path="res://Assets/sfx/enemy_kaboom.mp3" id="3_r3bf7"]
 
@@ -26,7 +26,7 @@ border_color = Color(1, 1, 1, 1)
 
 [node name="Enemy" type="Sprite2D"]
 scale = Vector2(0.806402, 0.806402)
-texture = ExtResource("1_iejfp")
+texture = ExtResource("1_4vet7")
 flip_h = true
 script = ExtResource("2_k754i")
 

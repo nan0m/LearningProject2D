@@ -5,7 +5,7 @@ extends CanvasLayer
 
 
 func _on_new_game_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/Map.tscn") #change to the actual first map of the first chapter. 
+	get_tree().change_scene_to_file("res://Scenes/LevelSelection/level_selection.tscn") #change to the actual first map of the first chapter. 
 
 func _on_survival_pressed(): 
 	get_tree().change_scene_to_file("res://Scenes/Map.tscn") #currently this scene technically is the survival mode. 
@@ -16,7 +16,7 @@ func _on_survival_pressed():
 #The game will this way incorporate steam achievements. The first time you kill that enemy you will unlock that datapoint in the
 #encyclopedia. 
 func _on_data_pressed():
-	get_tree().change_scene_to_file("res://Scenes/Encyclopedia.tscn") # Replace with function body.
+	get_tree().change_scene_to_file("res://Scenes/Encyclopedia/Encyclopedia.tscn") # Replace with function body.
 
 #Options
 

@@ -200,3 +200,7 @@ func spawn_ally(position: Vector2):
 
 #func _on_gui_update_module_ui():
 #	pass # Replace with function body.
+
+
+func _on_update_module_d_ui(level, extra_arg_0):
+	pass # Replace with function body.
