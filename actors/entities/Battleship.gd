@@ -10,7 +10,8 @@ var notu = ManagerGame.enemy_data['battleship']['not']  #number of turret
 @export var locked = false
 var target_distance = rng
 var mi_damage = edamage*2
- 
+var tclicks = 0
+
 var screen_size
 func _ready():
 	$HP.max_value = hp
@@ -34,9 +35,6 @@ func _physics_process(delta):
 	elif distance_to_player < (target_distance + 100):
 		move_speed = lerp(move_speed, 10, delta * deceleration_factor)
 		move_speed = int(move_speed)
-
-
-
 
 func _on_hurtbox_area_entered(area):
 	var explosion = load("res://actors/objs/Explosion.tscn").instantiate()
@@ -70,8 +68,6 @@ func _fire_missile():
 	m.damage = mi_damage
 	ManagerGame.global_world_ref.spawn_obj(m, global_position)
 
-
-
 func _hurt(damage):
 	#var damage = area.get_parent().damage
 	hp -= damage
@@ -86,5 +82,20 @@ func _hurt(damage):
 		queue_free()
 		$Enemy_Death.play()
 
-
+var click_processed = false
+func _on_hurtbox_input_event(viewport, event, shape_idx):
+	click_processed = false
+	if event is InputEventMouseButton and event.pressed:
+		if Input.is_action_pressed("TorpedoTargetSelection") and !click_processed:
+			tclicks += 1
+			click_processed = true
+		if Input.is_action_pressed("TorpedoTargetDeSelection") and !click_processed:
+			tclicks -= 1
+			click_processed = true
+	if tclicks <= 0:
+		$Node2D.hide()
+	else:
+		$Node2D.show()
+	$Node2D/TTarget.get_node('Label').text = str(tclicks) #tclicks for torpedo clicks
+	print(tclicks)
 

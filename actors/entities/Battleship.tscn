@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://kax6f6tmshv6"]
+[gd_scene load_steps=8 format=3 uid="uid://kax6f6tmshv6"]
 
 [ext_resource type="Texture2D" uid="uid://cfafa1hb353nq" path="res://Assets/Enemies/Battleship.png" id="1_4vet7"]
 [ext_resource type="Script" path="res://actors/entities/Battleship.gd" id="2_k754i"]
 [ext_resource type="AudioStream" uid="uid://rqyg6wryjs6x" path="res://Assets/sfx/enemy_kaboom.mp3" id="3_r3bf7"]
+[ext_resource type="PackedScene" uid="uid://bgtflim44a81b" path="res://actors/extras/TTarget.tscn" id="4_fmi66"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ku6e3"]
 size = Vector2(287.043, 99.3823)
@@ -62,5 +63,12 @@ show_percentage = false
 wait_time = 3.0
 autostart = true
 
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+position = Vector2(233.134, -89.2855)
+
+[node name="TTarget" parent="Node2D" instance=ExtResource("4_fmi66")]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="input_event" from="Hurtbox" to="." method="_on_hurtbox_input_event"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

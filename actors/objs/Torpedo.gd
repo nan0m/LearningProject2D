@@ -1,6 +1,6 @@
 extends Node2D
 
-
+var range = 2000
 var target = null
 var max_speed = 500
 var _current_velocity := Vector2.ZERO
@@ -11,7 +11,7 @@ func _ready():
 	#_current_velocity = max_speed * Vector2.RIGHT.rotated(rotation)
 	_current_velocity = max_speed * Vector2.UP.rotated(rotation)
 
-func _physics_process(delta):
+func _physics_process(delta): #reset this whole shit.
 	if count > 0:
 		count -= 1
 		_current_velocity *= 0.5
@@ -19,7 +19,8 @@ func _physics_process(delta):
 	var desired_velocity = direction * max_speed
 	#var previous_velocity = _current_velocity
 	var change = (desired_velocity - _current_velocity) * drag_factor
-	if target and is_instance_valid(target):
+	if target and is_instance_valid(target) and global_position.distance_to(target.global_position) <= range:
+		print("target") 
 		direction = global_position.direction_to(target.global_position)
 		#look_at(global_position + direction)
 		look_at(target.global_position - global_position)

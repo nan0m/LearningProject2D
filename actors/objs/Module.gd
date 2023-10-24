@@ -145,6 +145,15 @@ func spawn_torpedo(g_pos: Vector2, target, damage):
 	sort.add_child(b)
 	b.damage = damage
 
+#? hmmm
+signal torp_targeter(targets)
+
+func _on_torp_targeter(targets):
+	if torpedo_ready:
+		emit_signal("torpedotargets",targets)
+		print("Torp_targeter")
+
+
 func _on_cd_timer_tp_timeout():
 	torpedo_ready = true 
 

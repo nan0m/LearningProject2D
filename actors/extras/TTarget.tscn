@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgtflim44a81b"]
+
+[ext_resource type="Script" path="res://actors/extras/TTarget.gd" id="1_h5euj"]
+[ext_resource type="Texture2D" uid="uid://cqeh50kfdetn6" path="res://Assets/fx/TargetRect.png" id="2_yhk3y"]
+
+[node name="TTarget" type="Node2D"]
+z_index = 99
+script = ExtResource("1_h5euj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_yhk3y")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 35.0
+offset_bottom = 33.0
+text = "1"
+horizontal_alignment = 1

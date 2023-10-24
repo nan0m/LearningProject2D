@@ -1,6 +1,7 @@
-RichTextLabel
-TextureRect
+Node2D
 Label
+TextureRect
+RichTextLabel
 VBoxContainer
 Button
 GridContainer
@@ -24,7 +25,6 @@ AnimatedSprite2D
 GPUParticles2D
 Line2D
 RayCast2D
-Node2D
 RemoteTransform2D
 CanvasLayer
 TextureProgressBar

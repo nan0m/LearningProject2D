@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://dr7x8152cnkxk" path="res://Assets/sfx/RailgunPEWSFX.wav" id="3_ge52p"]
 [ext_resource type="AudioStream" uid="uid://b6wqu3l8pnesw" path="res://Assets/sfx/torpedo.wav" id="4_n3xlh"]
 
-[node name="Weapon" type="Node2D"]
+[node name="Module" type="Node2D"]
 script = ExtResource("1_bdfdy")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -16,16 +16,8 @@ texture = ExtResource("2_uwehx")
 [node name="CDTimerRG" type="Timer" parent="."]
 one_shot = true
 
-[node name="ShootdelayTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
 [node name="CDTimerTP" type="Timer" parent="."]
 wait_time = 90.0
-one_shot = true
-
-[node name="torpedodelay" type="Timer" parent="."]
-wait_time = 0.6
 one_shot = true
 
 [node name="RailgunSFX" type="AudioStreamPlayer2D" parent="."]
@@ -35,7 +27,6 @@ max_polyphony = 3
 [node name="TorpedoSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_n3xlh")
 
+[connection signal="torp_targeter" from="." to="." method="_on_torp_targeter"]
 [connection signal="timeout" from="CDTimerRG" to="." method="_on_cd_timer_rg_timeout"]
-[connection signal="timeout" from="ShootdelayTimer" to="." method="_on_shootdelay_timer_timeout"]
 [connection signal="timeout" from="CDTimerTP" to="." method="_on_cd_timer_tp_timeout"]
-[connection signal="timeout" from="torpedodelay" to="." method="_on_torpedodelay_timeout"]
