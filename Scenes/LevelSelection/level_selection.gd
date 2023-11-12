@@ -11,7 +11,7 @@ func _on_back_to_menu_pressed():
 
 func _on_start_pressed():
 	# Change to the scene associated with the selected chapter.
-	var scene_path = "res://Scenes/Chapter" + str(selected_chapter) + ".tscn"
+	var scene_path = "res://Scenes/Chapters/Chapter" + str(selected_chapter) + ".tscn"
 	print(scene_path)
 	if ResourceLoader.exists(scene_path):
 		get_tree().change_scene_to_file(scene_path)
@@ -44,11 +44,11 @@ rearmament at Sparta Shipyard. Systems are online.
 	2: {"image": preload("res://Assets/Images/Chapter1.png"),
 	"debrief": "Lead the Dorian Fleet to the Ionian Homeplanet and force their surrender."},
 	3: {"image": preload("res://Assets/Images/Chapter2.png"),
-	"debrief": "Repair, Scan, Identify, Survive..."},
+	"debrief": "Status: Unknown..."},
 	4: {"image": preload("res://Assets/Images/Chapter3.png"),
-	"debrief": "This is the debrief for Chapter 3."},
+	"debrief": "Find out more about the Independent Worlds."},
 	5: {"image": preload("res://Assets/Images/Chapter4.png"),
-	"debrief": "This is the debrief for Chapter 4."},
+	"debrief": "Find out about the Empire."},
 	6: {"image": preload("res://Assets/Images/Chapter5.png"),
-	"debrief": "This is the debrief for Chapter 5."}
+	"debrief": "Push with your allies the Strogg Homeworld."}
 	}

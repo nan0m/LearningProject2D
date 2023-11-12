@@ -51,7 +51,6 @@ func player_movement(delta):
 		velocity = velocity.limit_length(max_speed)
 	move_and_slide()
 ################################################################################
-
 func _ready():
 	ManagerGame.weapon_equipped.connect(on_weapon_equipped) #This function loads the player with the
 	#weapons that have been selected
@@ -59,7 +58,6 @@ func _ready():
 	$HP.max_value = player_data['stats']['hp'] #loads the max HP of the player (in case for healing)
 	$HP.value = player_data['stats']['hp']     #loads the current value of stats of the player
 	sort = get_parent().get_parent().get_node('Sort')
-
 
 func on_weapon_equipped(slot_name, icon, weapon_type): #This function loads the respective weapon that has been selected.
 	var n = $Slots.get_node('%s' % slot_name)
@@ -87,10 +85,9 @@ func scrap_turret(slot_name):
 	var n = $Slots.get_node('%s' % slot_name)
 	n.get_node('WeaponHolder').get_child(0).queue_free()
 
-
-####################################################################################################
-############################## Player Turret + Abilities ###########################################
-####################################################################################################
+#####################################################################################
+############################## Player Turret + Abilities ############################
+#####################################################################################
 var railgun_ready = true
 var torpedoL_ready = true
 var damage_control_ready = true
@@ -118,7 +115,6 @@ func spawn_bullet(g_pos: Vector2, dir, damage):
 	b.dir = dir
 	b.damage = damage
 	b.look_at(get_global_mouse_position())
-	
 
 #Railgun Shooter
 func railgun_burst_fire():
@@ -139,39 +135,18 @@ func damage_control():
 			if child.get_node("WeaponHolder").get_child(0) is Module2:
 				child.get_node("WeaponHolder").get_child(0).damagecontrol()
 
-
 ##################################################################################
-########################### Player getting damaged! ##############################
+########################### Player getting damaged ###############################
 ##################################################################################
+signal health_changed(new_health)
+signal player_hit(damage)
 
 func hit(damage: int = 1):
 	player_data['stats']['hp'] -= damage
 	$HP.value = player_data['stats']['hp']
-	var explosion = load("res://actors/objs/Explosion.tscn").instantiate()
-	ManagerGame.global_world_ref.spawn_obj(explosion, global_position)
-	var impactThresholds = [0.9, 0.85,0.8,0.75,0.7,0.65,0.6,0.55,0.5,0.45,0.4,0.35,0.3,0.25,0.2,0.15,0.1,0.05] #thresholds of damages
-	for threshold in impactThresholds:
-		if $HP.value/$HP.max_value < threshold:
-			impacted()
-			break
+	emit_signal("health_changed", player_data['stats']['hp'])
+	#emit_signal("player_hit", damage)
 
 func _on_player_hurtbox_area_entered(area):
 	var damage = area.get_parent().damage
 	hit(damage)
-
-#this makes a small explosion appear, making the ship look damaged (not pretty though)
-var explosion = preload("res://actors/extras/explosion.tscn")
-@onready var explosion_area = get_node("Impact") 
-func impacted():
-	randomize()
-	var x_pos = randi() % 409
-	randomize()
-	var y_pos = randi() % 63
-	var explosion_location = Vector2(x_pos,y_pos)
-	var new_explosion = explosion.instantiate()
-	new_explosion.position = explosion_location
-	explosion_area.add_child(new_explosion)
-
-
-
-

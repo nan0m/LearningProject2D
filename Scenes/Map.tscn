@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://co7loqedfsp3v"]
+[gd_scene load_steps=16 format=3 uid="uid://co7loqedfsp3v"]
 
 [ext_resource type="Script" path="res://Scenes/Map.gd" id="1_bkylh"]
 [ext_resource type="Texture2D" uid="uid://csx37mtdxbjne" path="res://Assets/Environment/Starfield_02-512x512.png" id="1_yi813"]
@@ -10,7 +10,15 @@
 [ext_resource type="Script" path="res://Scenes/ModuleGUI.gd" id="7_ug4q7"]
 [ext_resource type="Texture2D" uid="uid://dfcqls8568aal" path="res://Assets/Environment/Capture.png" id="8_qux1w"]
 [ext_resource type="AudioStream" uid="uid://d0scj4spp17po" path="res://Assets/sfx/ost1.mp3" id="8_v6bi0"]
-[ext_resource type="Texture2D" uid="uid://c8m8uxlnv1gg5" path="res://Assets/Environment/DC.jpg" id="10_yselv"]
+[ext_resource type="Texture2D" uid="uid://c71d4a73qk5eu" path="res://Assets/Environment/DC.png" id="10_bp7a7"]
+[ext_resource type="Texture2D" uid="uid://b68e8v6mqmkd1" path="res://Assets/Environment/shieldability.png" id="11_2nby2"]
+[ext_resource type="Texture2D" uid="uid://d37j0h7sikdrm" path="res://Assets/Environment/allyability.png" id="12_kairu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk3kq"]
+bg_color = Color(0.0235294, 0.364706, 0.270588, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xl4fr"]
+bg_color = Color(0.764706, 0, 0, 1)
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_bkylh")
@@ -139,8 +147,8 @@ layout_mode = 2
 size_flags_horizontal = 0
 value = 55.0
 fill_mode = 4
-texture_under = ExtResource("10_yselv")
-texture_progress = ExtResource("10_yselv")
+texture_under = ExtResource("10_bp7a7")
+texture_progress = ExtResource("10_bp7a7")
 tint_under = Color(0.196078, 0.196078, 0.196078, 1)
 tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
 
@@ -148,6 +156,80 @@ tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Shield" type="TextureProgressBar" parent="GUI/HUD/AbilitiesBar"]
+custom_minimum_size = Vector2(40, 40)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+value = 55.0
+fill_mode = 4
+texture_under = ExtResource("11_2nby2")
+texture_progress = ExtResource("11_2nby2")
+tint_under = Color(0.196078, 0.196078, 0.196078, 1)
+tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
+
+[node name="ShieldCDlabel" type="Label" parent="GUI/HUD/AbilitiesBar/Shield"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Ally" type="TextureProgressBar" parent="GUI/HUD/AbilitiesBar"]
+custom_minimum_size = Vector2(40, 40)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+value = 55.0
+fill_mode = 4
+texture_under = ExtResource("12_kairu")
+texture_progress = ExtResource("12_kairu")
+tint_under = Color(0.196078, 0.196078, 0.196078, 1)
+tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
+
+[node name="AllyCDlabel" type="Label" parent="GUI/HUD/AbilitiesBar/Ally"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CheckButton" type="CheckButton" parent="GUI/HUD"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = -496.0
+offset_right = 549.0
+offset_bottom = -465.0
+text = "Launch Drones"
+alignment = 1
+
+[node name="PLayerHP" type="ProgressBar" parent="GUI"]
+offset_left = 17.0
+offset_top = 4.0
+offset_right = 284.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_kk3kq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xl4fr")
+value = 100.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Label" type="Label" parent="GUI/PLayerHP"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = -1.0
+offset_right = 159.0
+offset_bottom = 25.0
+text = "50000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resources" type="RichTextLabel" parent="GUI"]
+offset_left = 297.0
+offset_top = 4.0
+offset_right = 384.0
+offset_bottom = 27.0
+bbcode_enabled = true
+text = "9999"
+fit_content = true
+scroll_active = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_v6bi0")
@@ -158,5 +240,6 @@ autoplay = true
 [connection signal="timeout" from="AllySpawnTimer" to="." method="_on_ally_spawn_timer_timeout"]
 [connection signal="update_moduleD_UI" from="GUI" to="GUI" method="_on_update_module_d_ui" binds= [0]]
 [connection signal="update_module_UI" from="GUI" to="GUI" method="_on_update_module_ui" binds= [0]]
+[connection signal="toggled" from="GUI/HUD/CheckButton" to="." method="_on_check_button_toggled"]
 
 [editable path="Cam"]

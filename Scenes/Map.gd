@@ -1,19 +1,14 @@
 class_name Map
-
 extends Node2D
-
-
 @onready var parallax = $ParallaxBackground
 @onready var sort = $Sort
 @onready var spawn_point = $SpawnPoint
 @onready var speed = 10.0
 
-
 func _ready():
 	ManagerGame.global_world_ref = self
 	$UICanvas/UI.refresh_info()
 	$AllySpawnTimer.start()
-	
 
 func _physics_process(delta):
 	parallax.scroll_offset.x -= 70 * delta
@@ -24,7 +19,6 @@ func _physics_process(delta):
 #	b.dir = dir
 #	b.damage = damage
 #	sort.add_child(b)
-
 
 #func spawn_bullet(g_pos: Vector2, dir, damage):
 #	var b = load("res://actors/objs/Bullet.tscn").instantiate()
@@ -74,11 +68,11 @@ func spawn_enemy(g_pos: Vector2):
 	var rand_value = randf()   # Generates a random float between 0 and 1
 	var enemy_scene: PackedScene
 	if rand_value < 0.25:
-		enemy_scene = frigate_scene
+		enemy_scene = battleship_scene
 	elif 0.25 <= rand_value and rand_value <0.5:
-		enemy_scene = destroyer_scene
+		enemy_scene = battleship_scene
 	elif 0.5 <= rand_value and rand_value < 0.75:
-		enemy_scene = cruiser_scene
+		enemy_scene = battleship_scene
 	else:
 		enemy_scene = battleship_scene
 	var e = enemy_scene.instantiate()
@@ -98,7 +92,6 @@ func spawn_enemy(g_pos: Vector2):
 #	var e = load(enemy_scene_path).instantiate()
 #	e.global_position = g_pos
 #	sort.add_child(e)
-
 
 func spawn_obj(i, g_pos):
 	# i have used this to spawn the blast animation and the damage floater
@@ -134,18 +127,16 @@ func get_closest(g_pos):
 #		var dist = g_pos.distance_to(enemy.global_position)
 #		e = enemy
 #		distance = dist
-	
+
 	# checks if the latest enemy being referenced matches the filter we are looking for
 	# if the enemy type is a fighther, and we are looking for a capital, it is now invalid and thus turn the e = null
 	#return e
-
 
 func _on_enemy_timer_timeout():
 	var pos = Vector2.ZERO
 	pos.x = spawn_point.global_position.x
 	pos.y = randf_range(spawn_point.global_position.y - 200, spawn_point.global_position.y + 200)
 	spawn_enemy(pos)
-
 
 ####################################################################################################
 ###################################### In-Game-Menu ################################################
@@ -164,7 +155,6 @@ func _input(event: InputEvent):
 	if(event.is_action_pressed("ui_cancel")):
 		game_paused = !game_paused
 
-
 ####################################################################################################
 ###################################### Ally-Spawner ################################################
 ####################################################################################################
@@ -181,7 +171,6 @@ func _on_ally_spawn_timer_timeout():
 	pos.y = randf_range(spawn_point.global_position.y - 200, spawn_point.global_position.y + 200)
 	# Spawn the ally
 	spawn_ally(pos)
-	
 
 func spawn_ally(position: Vector2):
 	# Check if there's already an ally instance, if yes, return
@@ -194,13 +183,13 @@ func spawn_ally(position: Vector2):
 	ally_instance.global_position = position
 	# Add the ally to the scene
 	sort.add_child(ally_instance)
-	
-
-
 
 #func _on_gui_update_module_ui():
 #	pass # Replace with function body.
 
-
 func _on_update_module_d_ui(level, extra_arg_0):
 	pass # Replace with function body.
+
+
+func _on_check_button_toggled(button_pressed):
+	ManagerGame.emit_signal("toggle_drones", button_pressed)

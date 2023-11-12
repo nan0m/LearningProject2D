@@ -12,7 +12,7 @@ scale = Vector2(0.408289, 0.408289)
 texture = ExtResource("2_hj2c0")
 
 [node name="LaunchTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true
 
 [node name="SpawnMarker" type="Marker2D" parent="."]

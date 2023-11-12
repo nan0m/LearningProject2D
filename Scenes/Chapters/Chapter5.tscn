@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=3 uid="uid://b7tbjgq3h57yr"]
+
+[ext_resource type="Script" path="res://Scenes/Chapters/Chapter5.gd" id="1_0lvve"]
+[ext_resource type="Texture2D" uid="uid://csx37mtdxbjne" path="res://Assets/Environment/Starfield_02-512x512.png" id="2_o50kj"]
+[ext_resource type="PackedScene" uid="uid://dljxv7r0moi3q" path="res://Scenes/UI.tscn" id="3_n68dt"]
+[ext_resource type="PackedScene" uid="uid://brfqb2kn5wiub" path="res://actors/entities/Cam.tscn" id="4_cua12"]
+[ext_resource type="PackedScene" uid="uid://bktor42ahn8qq" path="res://actors/entities/Player_New.tscn" id="5_locgr"]
+[ext_resource type="PackedScene" uid="uid://c7lp0hggiv5ys" path="res://Scenes/Chapters/PauseMenus/Ch5pm.tscn" id="6_oot47"]
+[ext_resource type="Script" path="res://Scenes/ModuleGUI.gd" id="7_3ay25"]
+[ext_resource type="Texture2D" uid="uid://s0d7ekja0nvq" path="res://Assets/Environment/RailgunIcon.png" id="8_y6gxf"]
+[ext_resource type="Texture2D" uid="uid://dfcqls8568aal" path="res://Assets/Environment/Capture.png" id="9_curbt"]
+[ext_resource type="Texture2D" uid="uid://c8m8uxlnv1gg5" path="res://Assets/Environment/DC.jpg" id="10_wrxgh"]
+[ext_resource type="AudioStream" uid="uid://d0scj4spp17po" path="res://Assets/sfx/ost1.mp3" id="11_gg2uf"]
+
+[node name="Chapter5" type="Node2D"]
+script = ExtResource("1_0lvve")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = -100
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -90
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(512, 512)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_o50kj")
+centered = false
+
+[node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="UICanvas" instance=ExtResource("3_n68dt")]
+visible = false
+
+[node name="Cam" parent="." instance=ExtResource("4_cua12")]
+
+[node name="TL" parent="Cam" index="0"]
+position = Vector2(-586, 0)
+
+[node name="BR" parent="Cam" index="1"]
+position = Vector2(1284, 0)
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(1725, 301)
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 11.038
+autostart = true
+
+[node name="AllySpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Sort" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-17, 1)
+
+[node name="Player_New" parent="Sort" instance=ExtResource("5_locgr")]
+position = Vector2(245, 273)
+
+[node name="IngameMenu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="IngameMenu" node_paths=PackedStringArray("chapterfive") instance=ExtResource("6_oot47")]
+chapterfive = NodePath("../..")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("7_3ay25")
+
+[node name="HUD" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 496.0
+offset_right = -1032.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AbilitiesBar" type="VBoxContainer" parent="GUI/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 300.0
+grow_vertical = 0
+
+[node name="RailgunCD" type="TextureProgressBar" parent="GUI/HUD/AbilitiesBar"]
+custom_minimum_size = Vector2(40, 40)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+value = 55.0
+fill_mode = 4
+texture_under = ExtResource("8_y6gxf")
+texture_progress = ExtResource("8_y6gxf")
+tint_under = Color(0.196078, 0.196078, 0.196078, 1)
+tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
+
+[node name="RailgunCDlabel" type="Label" parent="GUI/HUD/AbilitiesBar/RailgunCD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TorpedoCD" type="TextureProgressBar" parent="GUI/HUD/AbilitiesBar"]
+custom_minimum_size = Vector2(40, 40)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+value = 55.0
+fill_mode = 4
+texture_under = ExtResource("9_curbt")
+texture_progress = ExtResource("9_curbt")
+tint_under = Color(0.196078, 0.196078, 0.196078, 1)
+tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
+
+[node name="TorpedoCDlabel" type="Label" parent="GUI/HUD/AbilitiesBar/TorpedoCD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="DamageControl" type="TextureProgressBar" parent="GUI/HUD/AbilitiesBar"]
+custom_minimum_size = Vector2(40, 40)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 0
+value = 55.0
+fill_mode = 4
+texture_under = ExtResource("10_wrxgh")
+texture_progress = ExtResource("10_wrxgh")
+tint_under = Color(0.196078, 0.196078, 0.196078, 1)
+tint_progress = Color(0.996078, 0.996078, 0.996078, 1)
+
+[node name="DClabel" type="Label" parent="GUI/HUD/AbilitiesBar/DamageControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_gg2uf")
+volume_db = -30.198
+autoplay = true
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="AllySpawnTimer" to="." method="_on_ally_spawn_timer_timeout"]
+[connection signal="update_moduleD_UI" from="GUI" to="GUI" method="_on_update_module_d_ui" binds= [0]]
+[connection signal="update_module_UI" from="GUI" to="GUI" method="_on_update_module_ui" binds= [0]]
+
+[editable path="Cam"]

@@ -1,7 +1,7 @@
 extends Node2D
 
 var target = null
-var shootingRange = ManagerGame.weapons_data["turret"]["range"]
+var shootingRange = ManagerGame.weapons_data["turret"]["range"]*3
 var damage = ManagerGame.weapons_data["turret"]["attack"] 
 var ReloadTime = 1
 var crit_rate = ManagerGame.weapons_data["turret"]["critical"] 
@@ -48,9 +48,8 @@ func update_stats(stat_dictionary):
 
 func spawn_bullet(g_pos: Vector2, dir, damage):
 	var b = bulletahoy.instantiate()
-	sort.add_child(b)
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage
 	b.look_at(dir)
-	
+	sort.add_child(b)

@@ -37,9 +37,6 @@ func _physics_process(delta):
 		move_speed = int(move_speed)
 
 func _on_hurtbox_area_entered(area):
-	var explosion = load("res://actors/objs/Explosion.tscn").instantiate()
-	ManagerGame.global_world_ref.spawn_obj(explosion, global_position)
-	
 	# this will get the bullet node itself which will contain a "damage" variable
 	# this way, we can set a different damage for every bullet that will collide with
 	# this enemy
@@ -83,8 +80,9 @@ func _hurt(damage):
 		$Enemy_Death.play()
 
 var click_processed = false
-func _on_hurtbox_input_event(viewport, event, shape_idx):
+func _on_hurtbox_input_event(_viewport, event, _shape_idx):
 	click_processed = false
+	tclicks = max(tclicks,0)
 	if event is InputEventMouseButton and event.pressed:
 		if Input.is_action_pressed("TorpedoTargetSelection") and !click_processed:
 			tclicks += 1
@@ -94,8 +92,10 @@ func _on_hurtbox_input_event(viewport, event, shape_idx):
 			click_processed = true
 	if tclicks <= 0:
 		$Node2D.hide()
+		remove_from_group("TorpedoTarget")
 	else:
 		$Node2D.show()
+		add_to_group("TorpedoTarget")
 	$Node2D/TTarget.get_node('Label').text = str(tclicks) #tclicks for torpedo clicks
 	print(tclicks)
 

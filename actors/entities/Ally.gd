@@ -55,8 +55,6 @@ func ally_movement(delta):
 ################################## ALLY GETTING HIT ####################################
 ########################################################################################
 func _on_hurtbox_area_entered(area):
-	var explosion = load("res://actors/objs/Explosion.tscn").instantiate()
-	ManagerGame.global_world_ref.spawn_obj(explosion, global_position)
 	# this will get the bullet node itself which will contain a "damage" variable
 	# this way, we can set a different damage for every bullet that will collide with
 	# this enemy
@@ -66,7 +64,6 @@ func _on_hurtbox_area_entered(area):
 	$HP.value = hp
 	if hp <= 0:
 		queue_free()
-		
 
 func hit(damage: int = 1):
 	hp -= damage

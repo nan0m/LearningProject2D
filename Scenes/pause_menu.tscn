@@ -50,6 +50,11 @@ layout_mode = 2
 text = "Resume
 "
 
+[node name="Restart" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Restart
+"
+
 [node name="Save" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Save
@@ -67,4 +72,5 @@ text = "Exit
 "
 
 [connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

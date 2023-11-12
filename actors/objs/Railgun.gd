@@ -1,7 +1,6 @@
 extends Node2D
 
-
-var speed = 1200.0
+var speed = 1000.0
 var dir = Vector2.ZERO
 var damage = 200
 
@@ -18,3 +17,8 @@ func set_direction(direction: Vector2):
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
+func _on_area_2d_area_entered(area):
+	$Collision.show()
+
+func _on_area_2d_area_exited(area):
+	$Collision.hide()

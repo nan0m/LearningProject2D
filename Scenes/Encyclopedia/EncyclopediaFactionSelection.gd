@@ -2,7 +2,7 @@ extends Panel
 
 signal clicked(info)
 @export var info: ManagerGame.ENCYCLO_PEDIA
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	match info:
 		ManagerGame.ENCYCLO_PEDIA.DORIA: 
@@ -19,3 +19,6 @@ func _ready():
 func _on_button_3_pressed():
 	print("I_AM_CLICKED_1")
 	clicked.emit(info)
+
+func _on_clicked(info_id):
+	return(info_id)

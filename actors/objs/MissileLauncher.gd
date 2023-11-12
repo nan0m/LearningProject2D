@@ -26,7 +26,7 @@ func shoot():
 				spawn_missile(global_position, e, damage)
 			$missileSFX.play()
 
-func spawn_missile(g_pos: Vector2, target, damage):
+func spawn_missile(g_pos: Vector2, target, damage_to_target):
 	var b = missileahoy.instantiate()
 	b.global_position = g_pos
 	b.target = target

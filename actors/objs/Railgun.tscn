@@ -1,10 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://djng1copk4dmj"]
+[gd_scene load_steps=5 format=3 uid="uid://djng1copk4dmj"]
 
 [ext_resource type="Script" path="res://actors/objs/Railgun.gd" id="1_7q7bo"]
 [ext_resource type="Texture2D" uid="uid://d03kdt3qs3jdb" path="res://Assets/Towers/Railgun2.png" id="2_i5dfi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1ss3"]
 size = Vector2(22, 7)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cwf0r"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 18.17
+gravity = Vector3(-100, 0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_max = 59.63
+damping_min = 15.596
+damping_max = 33.945
+color = Color(0.65098, 0.027451, 0, 1)
+turbulence_noise_strength = 4.25
 
 [node name="Railgun" type="Node2D"]
 z_index = 5
@@ -28,4 +44,22 @@ collision_mask = 2
 position = Vector2(1, 1.5)
 shape = SubResource("RectangleShape2D_a1ss3")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(16, 2)
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_cwf0r")
+fixed_fps = 120
+trail_enabled = true
+trail_lifetime = 0.04
+
+[node name="Collision" type="GPUParticles2D" parent="."]
+position = Vector2(16, 2)
+amount = 1500
+process_material = SubResource("ParticleProcessMaterial_cwf0r")
+fixed_fps = 120
+trail_enabled = true
+trail_lifetime = 0.04
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

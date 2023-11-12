@@ -7,6 +7,9 @@ var drone_cost = 100
 var spawn_location
 var damage = ManagerGame.weapons_data['dronebay']['attack']
 var sort = null
+var total_drones = 0  #number of present drones (docked or not)
+var drones_ready = 0  #number of drones ready to launch
+var toggle_drone_launch = false
 
 func _ready():
 	# Initialize the launch timer
@@ -14,21 +17,40 @@ func _ready():
 	spawn_location = $SpawnMarker.global_position
 	print(spawn_location)
 	sort = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Sort")
-
-func launch_drone():
-	# Instantiate a new drone and set its position to the module's position
-	var new_drone = drone_scene.instantiate()
-	new_drone.global_position = spawn_location  # Set the drone's position to the module's position
-	print(new_drone.position)
-	new_drone.adamage = damage
-	sort.add_child(new_drone)  # Add the drone as a child of the module
-	ManagerGame.global_player_ref.player_data['gold'] -= drone_cost
+	#I need to connect here the signal from the button that controls the dock-undock function of the drone bay
+	ManagerGame.connect("toggle_drones", Callable(self, "_on_toggle_drones"))
 
 func _on_launch_timer_timeout():
-	# Launch drones when the timer ticks
-	for i in range(max_drones):
-		launch_drone()
-		print("drone launched")
+	# Replenish drones when the timer ticks
+	if drones_ready < max_drones and total_drones < max_drones:
+		drones_ready += 1
+		total_drones += 1
+		if not toggle_drone_launch:  # Launch immediately if toggle is off
+			launch_drone()
+			drones_ready -= 1
+		else:
+			print("Drone ready and docked")
+
+func _on_toggle_drones(toggled):
+	toggle_drone_launch = toggled
+	if not toggled:
+		#Launch all ready drones when toggle is turned off
+		while drones_ready > 0:
+			launch_drone()
+			drones_ready -= 1
+			await get_tree().create_timer(0.3).timeout
+
+func launch_drone():
+	# Instantiate a new drone and set its position
+	if total_drones <= max_drones:
+		var new_drone = drone_scene.instantiate()
+		new_drone.global_position = spawn_location
+		print(new_drone.position)
+		new_drone.adamage = damage
+		sort.add_child(new_drone)
+		ManagerGame.global_player_ref.player_data['gold'] -= drone_cost
+	else:
+		print("MAX DRONES REACHED")
 
 func update_stats(stat_dictionary):
 	damage = stat_dictionary["attack"]

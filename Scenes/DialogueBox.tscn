@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://casswsroyn5ox"]
+
+[ext_resource type="Texture2D" uid="uid://caf8f8j76hs22" path="res://Assets/icons/220px-Flag-corsairs.png" id="1_0umkb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogueBox" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 420.0
+offset_right = 909.0
+offset_bottom = 528.0
+color = Color(0.0980392, 0.027451, 0.227451, 1)
+
+[node name="Name" type="RichTextLabel" parent="DialogueBox"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 3.0
+offset_right = 578.0
+offset_bottom = 25.0
+
+[node name="Text" type="RichTextLabel" parent="DialogueBox"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 41.0
+offset_right = 704.0
+offset_bottom = 104.0
+
+[node name="Polygon2D" type="Polygon2D" parent="DialogueBox"]
+
+[node name="Portrait" type="Sprite2D" parent="DialogueBox"]
+position = Vector2(24.538, 22.625)
+scale = Vector2(0.177618, 0.25)
+texture = ExtResource("1_0umkb")
+
+[node name="Timer" type="Timer" parent="DialogueBox"]

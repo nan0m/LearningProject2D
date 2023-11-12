@@ -14,7 +14,7 @@ var range = 300
 @export var locked = false
 var target_distance = 90
 var torpedocapacity = 5
-var droneexplosion := preload("res://actors/objs/Explosion.tscn")
+#var droneexplosion := preload("res://actors/objs/Explosion.tscn")
 signal drone_spawned(ally_instance)
 var sort = null
 var dronemissileallyahoy := preload("res://actors/objs/Missile.tscn")
@@ -48,8 +48,8 @@ func ally_movement(delta):
 ################################## ALLY GETTING HIT ####################################
 ########################################################################################
 func _on_hurtbox_area_entered(area):
-	var explosion = droneexplosion.instantiate()
-	ManagerGame.global_world_ref.spawn_obj(explosion, global_position)
+	#var explosion = droneexplosion.instantiate()
+	#ManagerGame.global_world_ref.spawn_obj(explosion, global_position)
 	# this will get the bullet node itself which will contain a "damage" variable
 	# this way, we can set a different damage for every bullet that will collide with
 	# this enemy

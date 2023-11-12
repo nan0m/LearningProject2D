@@ -3,6 +3,12 @@ extends Node
 signal weapon_equipped(slot_name)
 signal gold_changed
 signal weapon_scrapped(slot_name)
+signal toggle_drones(toggled)
+var testmouse = preload("res://Assets/MouseCursor/mouse2.png")
+var testmouse2 = preload("res://Assets/MouseCursor/mouse.png")
+func _ready():
+	Input.set_custom_mouse_cursor(testmouse,Input.CURSOR_POINTING_HAND)
+	Input.set_custom_mouse_cursor(testmouse2,Input.CURSOR_ARROW)
 
 enum WEAPON_TYPE{
 	TURRET,   #artillery turret, long range, good damage
@@ -474,9 +480,9 @@ var wiki_item_details = {
 	}
 #if data.has('range'):
 #		stats +=  "Range: " + str(data['range']) + " meters\n"
-func formatted_wiki_item(wiki_items):
+func formatted_wiki_item(wiki_items_id):
 	var stats = ""
-	var data = wiki_item_details[wiki_items]
+	var data = wiki_item_details[wiki_items_id]
 	if data.has('Code-Name'):
 		stats +=  "Code-Name: " + str(data['Code-Name']) + "\n"
 	if data.has('Production'):
@@ -490,3 +496,21 @@ func formatted_wiki_item(wiki_items):
 	if data.has('Stations'):
 		stats += "Stations: " + str(data['Stations']) + "\n"
 	return stats
+
+################################################################################
+############################## Dialogue-Box ####################################
+################################################################################
+var chapter_texts = {
+	2: ["Captain of Achilleus, destroy any Ionian vessel on sight. Their navy is inferior to ours,
+	and their weapons ancient. They are easy pickings.",
+	"Easy enemies, they are not even trying!",
+	"Enemy Cruiser is heading our way.",
+	"This is a cakewalk"],
+	
+	3: ["Wave 1 is attacking.", "Wave 2 is engaging us.", "Wave 3 is approaching."],
+	
+	4: ["Another line for Chapter 3", "Second line for Chapter 3"],
+	
+	5: ["Another line for Chapter 4", "Second line for Chapter 4"]
+	# ... (other chapters)
+}

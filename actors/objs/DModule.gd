@@ -40,6 +40,15 @@ var damage_control_cooldown = 60  # Cooldown period for the damage control abili
 var damage_control_ready = true  # Flag to track if the ability is ready
 var damage_control_level = 1
 
+var spawn_ally_cooldown = 150
+var spawn_ally_ready = true
+#var spawn_ally_level = 1
+
+var shield_cooldown = 90
+var shield_ready = true
+var shield_length = [5,6,7,8,10]
+#var shield_level = 5
+
 var can_repair = false
 var gui = null
 var sort = null
@@ -102,3 +111,12 @@ func activate_damage_control():
 
 func _on_damagecontrol_cd_timeout():
 	damage_control_ready = true
+
+################################################################################
+################################ Shield ########################################
+################################################################################
+
+
+################################################################################
+################################# Ally #########################################
+################################################################################

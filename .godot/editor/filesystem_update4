@@ -1,5 +1,5 @@
-res://actors/extras/TTarget.tscn
-res://actors/entities/Battleship.gd
-res://actors/objs/Module.gd
-res://actors/entities/Battleship.tscn
-res://actors/objs/Module.tscn
+res://Scenes/Map.tscn
+res://actors/entities/Player_New.gdshader
+res://Scenes/Chapters/Chapter2.tscn
+res://actors/entities/Player_New.tscn
+res://actors/objs/DModule.gd
