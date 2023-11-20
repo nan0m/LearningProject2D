@@ -13,4 +13,10 @@ texture = ExtResource("2_533u1")
 
 [node name="DamagecontrolCD" type="Timer" parent="."]
 
+[node name="AllyCD" type="Timer" parent="."]
+
+[node name="ShieldCD" type="Timer" parent="."]
+
 [connection signal="timeout" from="DamagecontrolCD" to="." method="_on_damagecontrol_cd_timeout"]
+[connection signal="timeout" from="AllyCD" to="." method="_on_ally_cd_timeout"]
+[connection signal="timeout" from="ShieldCD" to="." method="_on_shield_cd_timeout"]

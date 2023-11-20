@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq8ygrvjfeqmk"]
+
+[ext_resource type="Texture2D" uid="uid://b36l40gn035eq" path="res://Assets/fx/glowing_circle.png" id="1_hmr0t"]
+[ext_resource type="Script" path="res://Assets/fx/Shield/Gate.gd" id="1_u65th"]
+
+[sub_resource type="Curve" id="Curve_cwhad"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.35567, 0.863158), 0.0, 0.0, 0, 0, Vector2(0.510309, 1), -0.0400408, -0.0400408, 0, 0, Vector2(0.71134, 0.852632), -1.0448, -1.0448, 0, 0, Vector2(1, 0.273684), -3.04314, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_2avp7"]
+curve = SubResource("Curve_cwhad")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dp053"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = 100.0
+angular_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_2avp7")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+turbulence_enabled = true
+
+[node name="Node2D" type="Node2D"]
+z_index = -1
+script = ExtResource("1_u65th")
+
+[node name="Gate1" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_dp053")
+texture = ExtResource("1_hmr0t")
+lifetime = 2.0
+one_shot = true
+
+[node name="Gate2" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_dp053")
+texture = ExtResource("1_hmr0t")
+lifetime = 2.0
+one_shot = true
+trail_enabled = true
+trail_lifetime = 0.9

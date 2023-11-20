@@ -91,12 +91,19 @@ func scrap_turret(slot_name):
 var railgun_ready = true
 var torpedoL_ready = true
 var damage_control_ready = true
+var ally_spawn_ready = true
+var shield_ready = true
 var sort = null
 var playerbullet := preload("res://actors/objs/Bullet.tscn")
+@onready var playerturretshotmarkerposition = $PlayerTurret2.get_node("ShotSpawner")
 func _unhandled_input(event): #this function allows the player to shoot with either the mouse-click ro touchscreen
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
-			spawn_bullet(global_position, global_position.direction_to(get_global_mouse_position()), 6)
+			#Use this code when the turret just looks at the mouse
+			#spawn_bullet(playerturretshotmarkerposition.global_position, playerturretshotmarkerposition.global_position.direction_to(get_global_mouse_position()), 6)
+			#Use this code when the turret has a specific rotation speed:
+			var bullet_direction = Vector2(1, 0).rotated($PlayerTurret.rotation)
+			spawn_bullet(playerturretshotmarkerposition.global_position,bullet_direction , 6)
 			$PlayerTurret.play()
 		if event.button_index == MOUSE_BUTTON_RIGHT and !event.pressed and railgun_ready:
 			railgun_burst_fire()
@@ -106,6 +113,15 @@ func _unhandled_input(event): #this function allows the player to shoot with eit
 	if event.is_action_pressed("damage_control"):
 		if damage_control_ready:
 			damage_control()
+	if event.is_action_pressed("Ally"):
+		if ally_spawn_ready:
+			$AllySpawnPoint/Node2D.get_node("Gate1").emitting = true
+			$AllySpawnPoint/Node2D.get_node("Gate2").emitting = true
+			await get_tree().create_timer(0.4).timeout
+			ally_spawner()
+	if event.is_action_pressed("Shield"):
+		if shield_ready:
+			shield_ability()
 
 #Player Shooter
 func spawn_bullet(g_pos: Vector2, dir, damage):
@@ -114,8 +130,8 @@ func spawn_bullet(g_pos: Vector2, dir, damage):
 	b.global_position = g_pos
 	b.dir = dir
 	b.damage = damage
-	b.look_at(get_global_mouse_position())
-
+	b.rotation = dir.angle()
+	#b.look_at(get_global_mouse_position())
 #Railgun Shooter
 func railgun_burst_fire():
 	for child in get_node("Slots").get_children():
@@ -134,6 +150,20 @@ func damage_control():
 		if child.get_node("WeaponHolder").get_child_count() > 0:
 			if child.get_node("WeaponHolder").get_child(0) is Module2:
 				child.get_node("WeaponHolder").get_child(0).damagecontrol()
+#Ally Spawner
+func ally_spawner():
+	for child in get_node("Slots").get_children():
+		if child.get_node("WeaponHolder").get_child_count() > 0:
+			if child.get_node("WeaponHolder").get_child(0) is Module2:
+				var spawn_position = $AllySpawnPoint.global_position
+				spawn_position.y -= 30  # Add 10 to the Y coordinate
+				child.get_node("WeaponHolder").get_child(0).spawn_ally(spawn_position)
+#Shield
+func shield_ability():
+	for child in get_node("Slots").get_children():
+		if child.get_node("WeaponHolder").get_child_count() > 0:
+			if child.get_node("WeaponHolder").get_child(0) is Module2:
+				child.get_node("WeaponHolder").get_child(0).shield_ability_activated()
 
 ##################################################################################
 ########################### Player getting damaged ###############################

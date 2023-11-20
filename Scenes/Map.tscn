@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://co7loqedfsp3v"]
+[gd_scene load_steps=18 format=3 uid="uid://co7loqedfsp3v"]
 
 [ext_resource type="Script" path="res://Scenes/Map.gd" id="1_bkylh"]
 [ext_resource type="Texture2D" uid="uid://csx37mtdxbjne" path="res://Assets/Environment/Starfield_02-512x512.png" id="1_yi813"]
 [ext_resource type="PackedScene" uid="uid://bktor42ahn8qq" path="res://actors/entities/Player_New.tscn" id="2_48cuk"]
+[ext_resource type="Shader" path="res://Scenes/Map.gdshader" id="2_wfpgn"]
 [ext_resource type="PackedScene" uid="uid://brfqb2kn5wiub" path="res://actors/entities/Cam.tscn" id="3_h4kop"]
 [ext_resource type="PackedScene" uid="uid://dljxv7r0moi3q" path="res://Scenes/UI.tscn" id="3_shvpw"]
 [ext_resource type="PackedScene" uid="uid://nk7ajylmjwe5" path="res://Scenes/pause_menu.tscn" id="6_ty56v"]
@@ -13,6 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://c71d4a73qk5eu" path="res://Assets/Environment/DC.png" id="10_bp7a7"]
 [ext_resource type="Texture2D" uid="uid://b68e8v6mqmkd1" path="res://Assets/Environment/shieldability.png" id="11_2nby2"]
 [ext_resource type="Texture2D" uid="uid://d37j0h7sikdrm" path="res://Assets/Environment/allyability.png" id="12_kairu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gsnh"]
+shader = ExtResource("2_wfpgn")
+shader_parameter/u_time = 0.597
+shader_parameter/mouse = Vector2(0.5, 0.5)
+shader_parameter/resolution = Vector2(1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk3kq"]
 bg_color = Color(0.0235294, 0.364706, 0.270588, 1)
@@ -28,6 +35,7 @@ process_mode = 3
 layer = -100
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_0gsnh")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -38,6 +46,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -90
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(512, 512)
@@ -237,7 +246,6 @@ volume_db = -30.198
 autoplay = true
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
-[connection signal="timeout" from="AllySpawnTimer" to="." method="_on_ally_spawn_timer_timeout"]
 [connection signal="update_moduleD_UI" from="GUI" to="GUI" method="_on_update_module_d_ui" binds= [0]]
 [connection signal="update_module_UI" from="GUI" to="GUI" method="_on_update_module_ui" binds= [0]]
 [connection signal="toggled" from="GUI/HUD/CheckButton" to="." method="_on_check_button_toggled"]

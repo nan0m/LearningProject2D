@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://8wj8p546dxej"]
+
+[ext_resource type="Shader" path="res://Assets/fx/Shield/shield.gdshader" id="1_0gmo4"]
+[ext_resource type="Script" path="res://Assets/fx/Shield/shield.gd" id="1_3winx"]
+[ext_resource type="Texture2D" uid="uid://b0eye4pvn11ug" path="res://Assets/fx/glowing_circle500.png" id="2_0uuii"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btk3x"]
+shader = ExtResource("1_0gmo4")
+shader_parameter/shield_color = Vector4(0, 0.5, 1, 0.5)
+shader_parameter/glow_strength = 1.0
+shader_parameter/hit_position = null
+shader_parameter/hit_time = null
+shader_parameter/effect_duration = 1.0
+
+[sub_resource type="Gradient" id="Gradient_41ddv"]
+offsets = PackedFloat32Array(0, 0.490798, 1)
+colors = PackedColorArray(0, 0.2, 0.717647, 1, 0.180392, 0.254902, 0.882353, 1, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tu8v7"]
+gradient = SubResource("Gradient_41ddv")
+
+[sub_resource type="Curve" id="Curve_qqnf8"]
+min_value = -500.0
+max_value = 500.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bsvbs"]
+curve = SubResource("Curve_qqnf8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i3cvf"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 197.11
+emission_ring_inner_radius = 79.755
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 2.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("CurveTexture_bsvbs")
+color_ramp = SubResource("GradientTexture1D_tu8v7")
+turbulence_noise_strength = 12.19
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aukni"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 150.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[sub_resource type="Animation" id="Animation_pbx7h"]
+resource_name = "spawn"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shield:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(2.14355, 0.554785, 0.732043),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.4, 0.4), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2n1jg"]
+_data = {
+"spawn": SubResource("Animation_pbx7h")
+}
+
+[node name="WorldEnvironment" type="Node2D"]
+script = ExtResource("1_3winx")
+
+[node name="Shield" type="GPUParticles2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.223529)
+top_level = true
+amount = 30
+process_material = SubResource("ShaderMaterial_btk3x")
+texture = ExtResource("2_0uuii")
+fixed_fps = 120
+
+[node name="ShieldParticles" type="GPUParticles2D" parent="Shield"]
+top_level = true
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_i3cvf")
+lifetime = 5.0
+speed_scale = 0.5
+explosiveness = 0.58
+randomness = 1.0
+fixed_fps = 120
+trail_enabled = true
+trail_lifetime = 1.05
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Shield/ShieldParticles"]
+amount = 400
+process_material = SubResource("ParticleProcessMaterial_aukni")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shield"]
+libraries = {
+"": SubResource("AnimationLibrary_2n1jg")
+}

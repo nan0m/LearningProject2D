@@ -46,7 +46,7 @@ func update_stats(stat_dictionary):
 	damage = stat_dictionary["attack"]
 	shootingRange = stat_dictionary["range"]
 
-func spawn_bullet(g_pos: Vector2, dir, damage):
+func spawn_bullet(g_pos: Vector2, dir, bullet_damage):
 	var b = bulletahoy.instantiate()
 	b.global_position = g_pos
 	b.dir = dir

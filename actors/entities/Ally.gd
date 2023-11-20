@@ -34,10 +34,26 @@ func _ready():
 	$AttackTimer5.wait_time = (rof + 3)
 	$Range/CollisionShape2D.shape.radius = weapon_range
 	emit_signal("ally_spawned", self)
-	sort = get_parent().get_parent().get_node("Sort")
+	sort = get_parent().get_parent().get_parent().get_node("Sort")
+	var clip_x = self.global_position.x
+	print("FFS" + str(self.global_position.x))
+	set_clip_x_position(clip_x)
+	await get_tree().create_timer(3.0).timeout
+	print("Now i disable the clipping")
+	$"..".set_clip_children_mode(0)
+	$"..".self_modulate = Color(1,1,1,0)
 
 func _physics_process(delta):
 	ally_movement(delta)
+
+func set_clip_x_position(clip_x):
+	print("I AM SUPPOSED TO BE 99")
+	print(clip_x)
+	#$".".material.set_shader_parameter("clip_x", clip_x)
+	#var sprite = $"."  # Adjust this path to your ally's sprite
+	#var material = sprite.material as ShaderMaterial
+	#if material:
+	#	material.set_shader_parameter("clip_x", clip_x)
 
 func ally_movement(delta):
 	global_position += Vector2.RIGHT * int(move_speed) * delta

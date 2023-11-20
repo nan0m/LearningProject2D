@@ -10,12 +10,11 @@ size = Vector2(22, 11)
 
 [node name="Bullet" type="Node2D"]
 top_level = true
-z_index = 4096
+z_index = 3000
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_elyox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 scale = Vector2(2.86521, 2.86521)
 texture = ExtResource("1_rgwuw")
 
@@ -31,8 +30,9 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_a1ss3")
 
 [node name="Smoketrail" parent="." instance=ExtResource("3_akii3")]
+visible = false
 top_level = true
-z_index = -2
+z_index = 3000
 position = Vector2(-6, 1)
 script = ExtResource("4_ovqvk")
 

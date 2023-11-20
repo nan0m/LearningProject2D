@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bktor42ahn8qq"]
+[gd_scene load_steps=12 format=3 uid="uid://bktor42ahn8qq"]
 
 [ext_resource type="Script" path="res://actors/entities/Player_New.gd" id="1_nrdcg"]
-[ext_resource type="Texture2D" uid="uid://ckl3yxdo8r1pw" path="res://Assets/Player/BC.png" id="1_renin"]
+[ext_resource type="Texture2D" uid="uid://cqdaq31f01htd" path="res://Assets/Player/TEMPUSE3.png" id="2_0cq16"]
 [ext_resource type="PackedScene" uid="uid://b46axtx4pgpjv" path="res://actors/objs/Slot.tscn" id="3_h5b40"]
 [ext_resource type="AudioStream" uid="uid://mk636tsvqkdm" path="res://Assets/sfx/mainlazer.wav" id="5_o58cv"]
 [ext_resource type="PackedScene" uid="uid://be2uwldey5pvo" path="res://Assets/fx/Explosion Scenes/TRAIL2.tscn" id="6_s5h0f"]
+[ext_resource type="PackedScene" uid="uid://cq8ygrvjfeqmk" path="res://Assets/fx/Shield/Gate.tscn" id="7_87u0a"]
 [ext_resource type="AudioStream" uid="uid://5rdpnk41s4mi" path="res://Assets/sfx/alarm.mp3" id="7_gw2ad"]
+[ext_resource type="PackedScene" uid="uid://dxokknncfmhmu" path="res://actors/objs/PlayerTurret.tscn" id="8_8hn01"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2b5m"]
 bg_color = Color(0.509804, 0.498039, 0.505882, 1)
@@ -28,11 +30,13 @@ border_color = Color(1, 1, 1, 1)
 size = Vector2(202, 66)
 
 [node name="Player_New" type="CharacterBody2D"]
+texture_filter = 3
+texture_repeat = 1
 script = ExtResource("1_nrdcg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.27439, 0.27439)
-texture = ExtResource("1_renin")
+use_parent_material = true
+texture = ExtResource("2_0cq16")
 
 [node name="HP" type="ProgressBar" parent="."]
 visible = false
@@ -48,20 +52,20 @@ show_percentage = false
 [node name="Slots" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -101.0
-offset_top = -41.0
-offset_right = 375.0
-offset_bottom = 145.0
+offset_left = -541.0
+offset_top = -152.0
+offset_right = 1809.0
+offset_bottom = 542.0
 scale = Vector2(0.431, 0.431)
 mouse_filter = 2
 
 [node name="Slot" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.146
-anchor_top = 0.559
-anchor_right = 0.18
-anchor_bottom = 0.645
+anchor_left = 0.152911
+anchor_top = 0.582403
+anchor_right = 0.186911
+anchor_bottom = 0.668403
 offset_left = 0.144356
 offset_top = 0.026001
 offset_right = -0.0396347
@@ -71,9 +75,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot2" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.147218
+anchor_left = 0.169926
 anchor_top = 0.451425
-anchor_right = 0.147218
+anchor_right = 0.169926
 anchor_bottom = 0.451425
 offset_left = -0.0755615
 offset_top = 0.0350189
@@ -84,10 +88,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot3" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.21963
-anchor_top = 0.586087
-anchor_right = 0.21963
-anchor_bottom = 0.586087
+anchor_left = 0.244313
+anchor_top = 0.612833
+anchor_right = 0.244313
+anchor_bottom = 0.612833
 offset_left = -0.135376
 offset_top = 0.0365143
 offset_right = 13.8646
@@ -97,9 +101,9 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot4" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.218
+anchor_left = 0.241695
 anchor_top = 0.484
-anchor_right = 0.218
+anchor_right = 0.241695
 anchor_bottom = 0.484
 offset_left = 0.231995
 offset_top = -0.0240021
@@ -110,10 +114,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot5" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.350529
-anchor_top = 0.249689
-anchor_right = 0.350529
-anchor_bottom = 0.249689
+anchor_left = 0.38311
+anchor_top = 0.169452
+anchor_right = 0.38311
+anchor_bottom = 0.169452
 offset_left = 0.201599
 offset_top = -0.0385075
 offset_right = 16.2016
@@ -123,10 +127,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot6" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.623546
-anchor_top = 0.274022
-anchor_right = 0.623546
-anchor_bottom = 0.274022
+anchor_left = 0.670937
+anchor_top = 0.167039
+anchor_right = 0.670937
+anchor_bottom = 0.167039
 offset_left = 0.175995
 offset_top = 0.0759964
 offset_right = 15.176
@@ -136,10 +140,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot7" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.644859
-anchor_top = 0.377184
-anchor_right = 0.644859
-anchor_bottom = 0.377184
+anchor_left = 0.708047
+anchor_top = 0.323693
+anchor_right = 0.708047
+anchor_bottom = 0.323693
 offset_left = -0.047821
 offset_top = 0.0897141
 offset_right = 17.9522
@@ -153,10 +157,10 @@ anchor_left = 0.765
 anchor_top = 0.374
 anchor_right = 0.765
 anchor_bottom = 0.374
-offset_left = -11.4719
-offset_top = -20.8401
-offset_right = 5.52814
-offset_bottom = -3.84011
+offset_left = 81.3354
+offset_top = -132.209
+offset_right = 98.3356
+offset_bottom = -115.209
 
 [node name="Slot9" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
@@ -165,18 +169,18 @@ anchor_left = 0.765
 anchor_top = 0.387
 anchor_right = 0.765
 anchor_bottom = 0.387
-offset_left = 0.129211
-offset_top = -0.0562515
-offset_right = 15.1292
-offset_bottom = 14.9437
+offset_left = 167.183
+offset_top = -44.1398
+offset_right = 182.183
+offset_bottom = -29.1399
 
 [node name="Slot10" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.795326
-anchor_top = 0.215248
-anchor_right = 0.795326
-anchor_bottom = 0.215248
+anchor_left = 0.866413
+anchor_top = 0.161757
+anchor_right = 0.866413
+anchor_bottom = 0.161757
 offset_left = -0.104019
 offset_top = 0.00799561
 offset_right = 22.896
@@ -186,10 +190,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot11" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.838
-anchor_top = 0.387
-anchor_right = 0.838
-anchor_bottom = 0.387
+anchor_left = 0.903163
+anchor_top = 0.330165
+anchor_right = 0.903163
+anchor_bottom = 0.330165
 offset_left = 0.111969
 offset_top = 0.0179977
 offset_right = 14.112
@@ -199,10 +203,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot12" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.745715
-anchor_top = 0.698217
-anchor_right = 0.745715
-anchor_bottom = 0.698217
+anchor_left = 0.801005
+anchor_top = 0.781797
+anchor_right = 0.801005
+anchor_bottom = 0.781797
 offset_left = 0.0279541
 offset_top = 0.0619812
 offset_right = 15.028
@@ -212,23 +216,23 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot13" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.720588
-anchor_top = -0.903226
-anchor_right = -0.720588
-anchor_bottom = -0.903226
-offset_left = 546.0
-offset_top = 248.0
-offset_right = 626.0
-offset_bottom = 328.0
+anchor_left = 0.594095
+anchor_top = 0.884893
+anchor_right = 0.594095
+anchor_bottom = 0.884893
+offset_left = -0.581787
+offset_top = 0.085144
+offset_right = 79.4182
+offset_bottom = 80.0851
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot14" parent="Slots" instance=ExtResource("3_h5b40")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.833
-anchor_right = 0.5
-anchor_bottom = 0.833
+anchor_left = 0.525668
+anchor_top = 0.972533
+anchor_right = 0.543115
+anchor_bottom = 1.03305
 offset_left = 1.0
 offset_top = 0.0619812
 offset_right = 13.0
@@ -279,16 +283,22 @@ position = Vector2(94, 6)
 
 [node name="Engine1" parent="." instance=ExtResource("6_s5h0f")]
 show_behind_parent = true
-position = Vector2(-94, 6)
+position = Vector2(-541, -28)
 
 [node name="Engine2" parent="." instance=ExtResource("6_s5h0f")]
-visible = false
 show_behind_parent = true
-position = Vector2(-98, -6)
+position = Vector2(-541, 17)
 
 [node name="Engine3" parent="." instance=ExtResource("6_s5h0f")]
-visible = false
 show_behind_parent = true
-position = Vector2(-96, 15)
+position = Vector2(-524, 83)
+
+[node name="AllySpawnPoint" type="Marker2D" parent="."]
+position = Vector2(-112, -160)
+
+[node name="Node2D" parent="AllySpawnPoint" instance=ExtResource("7_87u0a")]
+
+[node name="PlayerTurret2" parent="." instance=ExtResource("8_8hn01")]
+position = Vector2(-144, 36)
 
 [connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_player_hurtbox_area_entered"]

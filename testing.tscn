@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://btik021fko464"]
+
+[ext_resource type="PackedScene" uid="uid://cha4ac42avxdf" path="res://actors/entities/Ally.tscn" id="1_pp4a0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5wb6t"]
+
+[node name="Control" type="TextureRect"]
+clip_children = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1037.0
+offset_bottom = -482.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_5wb6t")
+
+[node name="Ally" parent="." instance=ExtResource("1_pp4a0")]
+position = Vector2(-100, 26)

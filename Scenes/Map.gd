@@ -8,7 +8,7 @@ extends Node2D
 func _ready():
 	ManagerGame.global_world_ref = self
 	$UICanvas/UI.refresh_info()
-	$AllySpawnTimer.start()
+	#$AllySpawnTimer.start()
 
 func _physics_process(delta):
 	parallax.scroll_offset.x -= 70 * delta
@@ -158,31 +158,31 @@ func _input(event: InputEvent):
 ####################################################################################################
 ###################################### Ally-Spawner ################################################
 ####################################################################################################
-@onready var ally_spawn_timer = $AllySpawnTimer
-var ally_instance = null # To keep track of the ally instance
-func _on_ally_spawn_timer_timeout():
-	# Check if there's already an ally present
-	if ally_instance != null:
-		return
-	# Spawn the ally
-	# Calculate the spawn position for the ally (at the left of the screen)
-	var pos = Vector2.ZERO
-	pos.x = -spawn_point.global_position.x +500 # Spawn from the left
-	pos.y = randf_range(spawn_point.global_position.y - 200, spawn_point.global_position.y + 200)
-	# Spawn the ally
-	spawn_ally(pos)
-
-func spawn_ally(position: Vector2):
-	# Check if there's already an ally instance, if yes, return
-	if ally_instance != null:
-		return
-	# Load the ally scene and instance it
-	var ally_scene = preload("res://actors/entities/Ally.tscn")
-	ally_instance = ally_scene.instantiate()
-	# Set the ally's initial position
-	ally_instance.global_position = position
-	# Add the ally to the scene
-	sort.add_child(ally_instance)
+#@onready var ally_spawn_timer = $AllySpawnTimer
+#var ally_instance = null # To keep track of the ally instance
+#func _on_ally_spawn_timer_timeout():
+#	# Check if there's already an ally present
+#	if ally_instance != null:
+#		return
+#	# Spawn the ally
+#	# Calculate the spawn position for the ally (at the left of the screen)
+#	var pos = Vector2.ZERO
+#	pos.x = -spawn_point.global_position.x +500 # Spawn from the left
+#	pos.y = randf_range(spawn_point.global_position.y - 200, spawn_point.global_position.y + 200)
+#	# Spawn the ally
+#	spawn_ally(pos)
+#
+#func spawn_ally(position: Vector2):
+#	# Check if there's already an ally instance, if yes, return
+#	if ally_instance != null:
+#		return
+#	# Load the ally scene and instance it
+#	var ally_scene = preload("res://actors/entities/Ally.tscn")
+#	ally_instance = ally_scene.instantiate()
+#	# Set the ally's initial position
+#	ally_instance.global_position = position
+#	# Add the ally to the scene
+#	sort.add_child(ally_instance)
 
 #func _on_gui_update_module_ui():
 #	pass # Replace with function body.

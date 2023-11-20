@@ -34,8 +34,8 @@ var passive_repair_rate := 0.02  # Initial passive repair rate
 var passive_repair_upgrade := 0.005  # Increase in repair rate per upgrade
 var passive_repair_level := 1  # Initial repair level
 
-var damage_control_levels = [0.15, 0.2, 0.25, 0.3, 0.35]  # HP recovery percentages for different levels
-var passive_damage_control_levels = [0.0001, 0.0002, 0.0003, 0.0004, 0.0005]  # HP recovery percentages for different levels
+var damage_control_levels = [0.15, 0.2, 0.25, 0.3, 0.35,0.37,0.40]  # HP recovery percentages for different levels
+var passive_damage_control_levels = [0.0001, 0.0002, 0.0003, 0.0004, 0.0005, 0.00055,0.0006]  # HP recovery percentages for different levels
 var damage_control_cooldown = 60  # Cooldown period for the damage control ability
 var damage_control_ready = true  # Flag to track if the ability is ready
 var damage_control_level = 1
@@ -64,10 +64,14 @@ func update_stats(stat_dictionary):
 	passive_repair_rate = int(stat_dictionary["restore"])
 	gui = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("GUI")
 	sort = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_node("Sort")
-	gui._on_update_module_d_ui(damage_control_level,damage_control_cooldown)
+	gui._on_update_module_d_ui(damage_control_level,damage_control_cooldown,spawn_ally_cooldown,shield_cooldown)
 	#damage_control_cooldown = float(stat_dictionary["cooldown"])
 	$DamagecontrolCD.wait_time = damage_control_cooldown
+	$AllyCD.wait_time = spawn_ally_cooldown
+	$ShieldCD.wait_time = shield_cooldown
 	gui.set_max3(damage_control_cooldown)
+	gui.set_max4(spawn_ally_cooldown)
+	gui.set_max5(shield_cooldown)
 	#print(damage_control_cooldown)
 
 func _process(delta):
@@ -80,16 +84,21 @@ func _process(delta):
 		#print("No_Repairs_Needed")
 	if gui != null:
 		var dctime = snapped($DamagecontrolCD.time_left,1) 
+		var allytime = snapped($AllyCD.time_left,1) 
+		var sdtime = snapped($ShieldCD.time_left,1) 
 		if damage_control_ready:
 			dctime = damage_control_cooldown
-		gui._on_update_module_d_ui(damage_control_level,dctime)
+		if spawn_ally_ready:
+			allytime = spawn_ally_cooldown
+		if shield_ready:
+			sdtime = shield_cooldown
+		gui._on_update_module_d_ui(damage_control_level,dctime, allytime,sdtime)
 
 func passive_repair(delta):
 	#print("Passive_Rep_Online")
 	if can_repair == true && DmoduleOnline == true:
 		ManagerGame.global_player_ref.player_data['stats']['hp'] += delta*passive_damage_control_levels[damage_control_level-1]*5000
 		print("repaired")
-
 
 func damagecontrol():
 	if can_repair == true && damage_control_ready:
@@ -116,7 +125,47 @@ func _on_damagecontrol_cd_timeout():
 ################################ Shield ########################################
 ################################################################################
 
+func shield_ability_activated():
+	if shield_ready == true:
+		
+		shield_ready = false
+		$ShieldCD.start()
+
+func _on_shield_cd_timeout():
+	shield_ready = true
 
 ################################################################################
 ################################# Ally #########################################
 ################################################################################
+#When the ally spawns we need to have a warp effect to the spawn location. 
+var ally_instance = null # To keep track of the ally instance
+
+func spawn_ally(position: Vector2):
+	#Check if there's already an ally instance, if yes, return
+	if ally_instance != null:
+		return
+	#Load the ally scene and instance it
+	if spawn_ally_ready == true and ally_instance == null:
+		var ally_scene = preload("res://actors/entities/Ally.tscn")
+		ally_instance = ally_scene.instantiate()
+		#Set the ally's initial position
+		ally_instance.global_position = position
+		#Add the ally to the scene
+		sort.add_child(ally_instance)
+		spawn_ally_ready = false
+		$AllyCD.start()
+	else:
+		return
+
+func _on_ally_cd_timeout():
+	spawn_ally_ready = true
+
+#func _on_ally_spawn_timer_timeout():
+#	# Check if there's already an ally present
+#	if ally_instance != null:
+#		return
+#	# Spawn the ally
+#	# Calculate the spawn position for the ally (at the left of the screen)
+#	var pos = $Marker2D.global_position
+#	# Spawn the ally
+#	spawn_ally(pos)
