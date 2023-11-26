@@ -267,6 +267,9 @@ weapon_type = 2
 layout_mode = 2
 weapon_type = 3
 
+[node name="WeaponDisplay9" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
+layout_mode = 2
+
 [node name="WeaponDisplay8" parent="UpgradePanel/WeaponView/WeaponsSelectionBox" instance=ExtResource("3_7lofs")]
 layout_mode = 2
 weapon_type = 8

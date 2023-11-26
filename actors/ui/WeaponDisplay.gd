@@ -27,6 +27,8 @@ func _ready():
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile226.png")
 		ManagerGame.WEAPON_TYPE.DRONEBAY:
 			$Icon.texture = load("res://Assets/Towers/DroneBay.JPG")
+		ManagerGame.WEAPON_TYPE.RMODULE:
+			$Icon.texture = load("res://Assets/Towers/towerDefense_tile268.png")
 	
 	var key = ManagerGame.WEAPON_TYPE.find_key(weapon_type).to_lower()
 	

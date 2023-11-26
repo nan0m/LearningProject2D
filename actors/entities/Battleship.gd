@@ -2,7 +2,7 @@ extends Sprite2D
 
 var enemy_type = ManagerGame.enemy_data['battleship']['class']
 var move_speed = ManagerGame.enemy_data['battleship']['speed']
-var hp = ManagerGame.enemy_data['battleship']['hp']   #enemy hitpoints, obviously
+var hp = ManagerGame.enemy_data['battleship']['hp'] - 200   #enemy hitpoints, obviously
 var edamage = ManagerGame.enemy_data['battleship']['attack']  #enemy damage
 var rof = ManagerGame.enemy_data['battleship']['rof']   #enemy rate of fire
 var rng = ManagerGame.enemy_data['battleship']['range'] #enemy range
@@ -75,6 +75,7 @@ func _hurt(damage):
 	ManagerGame.global_world_ref.spawn_obj(df1, global_position)
 	if hp <= 0:
 		ManagerGame.global_player_ref.player_data['gold'] += 150
+		#ManagerGame.gold_changed.emit()
 #commented this line to test the enemy in a test scene
 		queue_free()
 		$Enemy_Death.play()

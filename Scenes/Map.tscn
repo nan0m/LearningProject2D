@@ -243,7 +243,6 @@ scroll_active = false
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_v6bi0")
 volume_db = -30.198
-autoplay = true
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="update_moduleD_UI" from="GUI" to="GUI" method="_on_update_module_d_ui" binds= [0]]

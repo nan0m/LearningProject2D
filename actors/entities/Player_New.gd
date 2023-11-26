@@ -102,7 +102,7 @@ func _unhandled_input(event): #this function allows the player to shoot with eit
 			#Use this code when the turret just looks at the mouse
 			#spawn_bullet(playerturretshotmarkerposition.global_position, playerturretshotmarkerposition.global_position.direction_to(get_global_mouse_position()), 6)
 			#Use this code when the turret has a specific rotation speed:
-			var bullet_direction = Vector2(1, 0).rotated($PlayerTurret.rotation)
+			var bullet_direction = Vector2(1, 0).rotated($PlayerTurret2.rotation)
 			spawn_bullet(playerturretshotmarkerposition.global_position,bullet_direction , 6)
 			$PlayerTurret.play()
 		if event.button_index == MOUSE_BUTTON_RIGHT and !event.pressed and railgun_ready:
@@ -131,6 +131,10 @@ func spawn_bullet(g_pos: Vector2, dir, damage):
 	b.dir = dir
 	b.damage = damage
 	b.rotation = dir.angle()
+	var sprite_node = b.get_node("Sprite2D")
+	if sprite_node.material is ShaderMaterial:
+		var random_offset = randf() * 100.0  # Generate a random offset
+		sprite_node.material.set_shader_parameter("time_offset", random_offset)
 	#b.look_at(get_global_mouse_position())
 #Railgun Shooter
 func railgun_burst_fire():

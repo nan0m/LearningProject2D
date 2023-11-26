@@ -1,14 +1,17 @@
-Marker2D
-Sprite2D
 CollisionPolygon2D
+CollisionShape2D
+Line2D
 GPUParticles2D
+Sprite2D
+Node2D
 TextureRect
+ColorRect
+Area2D
+Marker2D
 Window
 CanvasLayer
 CanvasGroup
 Node
-Node2D
-CollisionShape2D
 AnimationPlayer
 WorldEnvironment
 Label
@@ -16,9 +19,7 @@ ProgressBar
 RichTextLabel
 TextureProgressBar
 CheckButton
-ColorRect
 RigidBody2D
-Line2D
 Node3D
 Timer
 Polygon2D
@@ -29,4 +30,3 @@ GridContainer
 MarginContainer
 TextureButton
 Panel
-HBoxContainer

@@ -19,7 +19,8 @@ enum WEAPON_TYPE{
 	PHALANX,  #targets enemy missiles, and fighters ONLY. Very short range.  
 	ASM,      #targets enemy fighters. Long range.
 	LAZER,   #short range lazer weapon. Targets all enemies (no missile). 
-	DRONEBAY  #Launches drones that assist the player with dealing with enemies. 
+	DRONEBAY,  #Launches drones that assist the player with dealing with enemies. 
+	RMODULE
 }
 
 var global_world_ref = null
@@ -87,6 +88,13 @@ var weapons_data = {
 		'cooldown': 2, #defense abilities cooldown bonus + 2% per upgrade (max 5)
 		'price': 3000
 	},
+	'rmodule': {     #Thise module requires different upgrade costs!!!!!
+		'hp': 200,     #0.02 * 200 Bonus to Player's HP per level
+		'stage': 1,    #Level 1 unlocks the "Damage-Control" Ability (Restore ship HP). Level 2 - 5 increases the effectiveness:  10/15/20/25/30% of Max HP over 10 seconds. Level 6 unlocks EMP-PULSE (all enemies and your drones can't attack and are slowed 95% for 5 seconds. 
+		'restore': 1,  #passive HP restoration. 0.01%/0.02%/0.03%/0.04% .... + 0.01% per level (of MAXHP:0.0001*HP)
+		'cooldown': 2, #defense abilities cooldown bonus + 2% per upgrade (max 5)
+		'price': 3500
+	},
 	'dronebay': {      #Thise module requires different upgrade costs!!!!!
 		'drones': 1,   #Number of drones: 1/2/3/4/5/6/7/8/9/10 (max)
 		'rof': 8,      #2% increase in rof per level (10 levels max)
@@ -143,6 +151,8 @@ func get_upgradeable_fields(weapon_type):
 			return ['hp', 'stage', 'restore', 'cooldown']
 		'dronebay':
 			return ['drones', 'rof', 'attack', 'replenish']
+		'rmodule':
+			return ['hp', 'stage', 'restore', 'cooldown']
 
 var weapons_dscr = {
 	'turret': {

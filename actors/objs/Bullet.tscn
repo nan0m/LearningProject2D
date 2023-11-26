@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctapngf7pn2dt"]
+[gd_scene load_steps=8 format=3 uid="uid://ctapngf7pn2dt"]
 
 [ext_resource type="Script" path="res://actors/objs/Bullet.gd" id="1_elyox"]
-[ext_resource type="Texture2D" uid="uid://dqvb6y2dnwci5" path="res://Assets/Towers/projectile3.png" id="1_rgwuw"]
+[ext_resource type="Texture2D" uid="uid://b4uq4hu3ra5s" path="res://Assets/Towers/NewBullet2.png" id="2_4qxmu"]
+[ext_resource type="Shader" path="res://actors/objs/Bullet.gdshader" id="2_w3iut"]
 [ext_resource type="PackedScene" uid="uid://52tex2d8ow3w" path="res://Assets/fx/Explosion Scenes/smoketrail.tscn" id="3_akii3"]
 [ext_resource type="Script" path="res://Assets/fx/Explosion Scenes/Exsmoketrail.gd" id="4_ovqvk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k6ohn"]
+shader = ExtResource("2_w3iut")
+shader_parameter/time_offset = 21.935
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1ss3"]
 size = Vector2(22, 11)
@@ -11,12 +16,12 @@ size = Vector2(22, 11)
 [node name="Bullet" type="Node2D"]
 top_level = true
 z_index = 3000
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_elyox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2.86521, 2.86521)
-texture = ExtResource("1_rgwuw")
+material = SubResource("ShaderMaterial_k6ohn")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_4qxmu")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 1.5)

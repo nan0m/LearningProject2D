@@ -74,7 +74,15 @@ func update_stats(stat_dictionary):
 	gui.set_max5(shield_cooldown)
 	#print(damage_control_cooldown)
 
+var time_pass = 0
 func _process(delta):
+	time_pass += delta
+	if time_pass >= 3:
+		ManagerGame.global_player_ref.player_data['gold'] += 1
+		ManagerGame.gold_changed.emit()
+		time_pass -= 3
+		print("1 RU added")
+
 	var currentHP = ManagerGame.global_player_ref.player_data['stats']['hp']
 	if currentHP < 5000:
 		can_repair = true
@@ -124,12 +132,18 @@ func _on_damagecontrol_cd_timeout():
 ################################################################################
 ################################ Shield ########################################
 ################################################################################
-
+var shield_duration = 3
 func shield_ability_activated():
+	var player = ManagerGame.global_player_ref
 	if shield_ready == true:
-		
+		var shield = player.get_node("Shield")
+		shield.show()
+		shield.get_node("ShieldCollision").disabled = false
 		shield_ready = false
 		$ShieldCD.start()
+		await get_tree().create_timer(shield_duration).timeout
+		shield.hide()
+		shield.get_node("ShieldCollision").disabled = true
 
 func _on_shield_cd_timeout():
 	shield_ready = true

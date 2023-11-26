@@ -1,6 +1,6 @@
 extends Node2D
 
-var rotation_speed = 1.5  #The maximum rotation speed in radians per second
+var rotation_speed = 0.5  #The maximum rotation speed in radians per second
 @onready var reticle = $Reticle
 
 func _process(delta):

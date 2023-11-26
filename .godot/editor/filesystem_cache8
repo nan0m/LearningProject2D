@@ -1,17 +1,17 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1700428310
+::res://::1701010003
 DialogueBox.gd::GDScript::-1::1698700797::0::1::::<>ColorRect<>::
 icon.svg::CompressedTexture2D::4211744173945253730::1693589250::1693589250::1::::<><>::
 License.txt::TextFile::-1::1693589250::0::1::::<><>::
 SceneHandler.tscn::PackedScene::3965672029584950290::1693589250::0::1::::<><>::uid://bh0mmims31l3b
 testing.tscn::PackedScene::3737177008159975647::1700149687::0::1::::<><>::uid://cha4ac42avxdf
 ::res://actors/::1698347155
-::res://actors/entities/::1700428871
+::res://actors/entities/::1700871761
 Ally.gd::GDScript::-1::1700228864::0::1::::<>Sprite2D<>::
-Ally.gdshader::Shader::-1::1700428871::0::1::::<><>::
-Ally.tscn::PackedScene::5265924216716293135::1700428871::0::1::::<><>::uid://b0oqxfcf0pi5i::::res://Assets/Enemies/ally.png<>res://actors/entities/Ally.gd<>uid://rqyg6wryjs6x::::res://Assets/sfx/enemy_kaboom.mp3
-Battleship.gd::GDScript::-1::1699709891::0::1::::<>Sprite2D<>::
-Battleship.tscn::PackedScene::703340598210717301::1698353173::0::1::::<><>::uid://cfafa1hb353nq
+Ally.gdshader::Shader::-1::1700871761::0::1::::<><>::
+Ally.tscn::PackedScene::5265924216716293135::1700598775::0::1::::<><>::uid://b0oqxfcf0pi5i
+Battleship.gd::GDScript::-1::1700702836::0::1::::<>Sprite2D<>::
+Battleship.tscn::PackedScene::703340598210717301::1700752847::0::1::::<><>::uid://b1phshs14mdo7
 Cam.gd::GDScript::-1::1699920370::0::1::::<>Camera2D<>::
 Cam.tscn::PackedScene::3590927606198242041::1700094846::0::1::::<><>::res://actors/entities/Cam.gd
 CapitalEnemy.tscn::PackedScene::5426766413169706589::1693589250::0::1::::<><>::uid://ba5gbnx8cinw2
@@ -25,24 +25,27 @@ Enemy.gd::GDScript::-1::1693589250::0::1::::<>Sprite2D<>::
 Enemy.tscn::PackedScene::111581676349718541::1693589250::0::1::::<><>::uid://ba5gbnx8cinw2
 Frigate.gd::GDScript::-1::1699025608::0::1::::<>Sprite2D<>::
 Frigate.tscn::PackedScene::1597048241152223308::1697731372::0::1::::<><>::uid://bwb76r2d0ub8u
-Player_New.gd::GDScript::-1::1700154286::0::1::::<>CharacterBody2D<>::
-Player_New.gdshader::Shader::-1::1700428871::0::1::::<><>::
-Player_New.tscn::PackedScene::3128414258692451788::1700428871::0::1::::<><>::res://actors/entities/Player_New.gd<>uid://cqdaq31f01htd::::res://Assets/Player/TEMPUSE3.png<>uid://b46axtx4pgpjv::::res://actors/objs/Slot.tscn<>uid://mk636tsvqkdm::::res://Assets/sfx/mainlazer.wav<>uid://be2uwldey5pvo::::res://Assets/fx/Explosion Scenes/TRAIL2.tscn<>uid://cq8ygrvjfeqmk::::res://Assets/fx/Shield/Gate.tscn<>uid://5rdpnk41s4mi::::res://Assets/sfx/alarm.mp3
+Player_New.gd::GDScript::-1::1700699513::0::1::::<>CharacterBody2D<>::
+Player_New.gdshader::Shader::-1::1700871761::0::1::::<><>::
+Player_New.tscn::PackedScene::3128414258692451788::1700871760::0::1::::<><>::res://actors/entities/Player_New.gd<>uid://k2omfelbexml::::res://Assets/Player/Player_Ship.png<>uid://b46axtx4pgpjv::::res://actors/objs/Slot.tscn<>uid://mk636tsvqkdm::::res://Assets/sfx/mainlazer.wav<>uid://be2uwldey5pvo::::res://Assets/fx/Explosion Scenes/TRAIL2.tscn<>uid://cq8ygrvjfeqmk::::res://Assets/fx/Shield/Gate.tscn<>uid://5rdpnk41s4mi::::res://Assets/sfx/alarm.mp3<>uid://dxokknncfmhmu::::res://actors/objs/PlayerTurret.tscn<>res://actors/entities/Shield.gd<>res://actors/entities/shield.gdshader
+Shield.gd::GDScript::-1::1700613904::0::1::::<>Area2D<>::
+shield.gdshader::Shader::-1::1700871761::0::1::::<><>::
 ::res://actors/extras/::1699709780
 DamageFloater.gd::GDScript::-1::1693589250::0::1::::<>Node2D<>::
 DamageFloater.tscn::PackedScene::5532285444627723746::1697911025::0::1::::<><>::res://actors/extras/DamageFloater.gd
 TTarget.gd::GDScript::-1::1697917201::0::1::::<>Node2D<>::
 TTarget.tscn::PackedScene::2847100591626091497::1698353173::0::1::::<><>::res://actors/extras/TTarget.gd<>uid://cqeh50kfdetn6
-::res://actors/objs/::1700428871
+::res://actors/objs/::1700871761
 AmmoBelt.gd::GDScript::-1::1693589250::0::1::::<>TextureProgressBar<>::
 ASM.gd::GDScript::-1::1696191788::0::1::::<>Node2D<>::
 ASM.tscn::PackedScene::4362212237067378314::1697461968::0::1::::<><>::res://actors/objs/ASM.gd<>uid://cucpelcy5a2ug
 ASMMissile.gd::GDScript::-1::1694820400::0::1::::<>Node2D<>::
 ASMMissile.tscn::PackedScene::597341216809171833::1694819608::0::1::::<><>::res://actors/objs/ASMMissile.gd<>uid://d3gjxe2hdbob8
-Bullet.gd::GDScript::-1::1699222087::0::1::::<>Node2D<>::
-Bullet.tscn::PackedScene::6107363691059721853::1699735335::0::1::::<><>::res://actors/objs/Bullet.gd<>uid://dqvb6y2dnwci5
-DModule.gd::GDScript::-1::1699827468::0::1::::Module2<>Node2D<>::
-DModule.tscn::PackedScene::627415573529681664::1699833194::0::1::::<><>::res://actors/objs/DModule.gd<>uid://dj7a8ug7yfle
+Bullet.gd::GDScript::-1::1700752847::0::1::::<>Node2D<>::
+Bullet.gdshader::Shader::-1::1700871761::0::1::::<><>::
+Bullet.tscn::PackedScene::6107363691059721853::1700871760::0::1::::<><>::res://actors/objs/Bullet.gd<>uid://b4uq4hu3ra5s::::res://Assets/Towers/NewBullet2.png<>res://actors/objs/Bullet.gdshader<>uid://52tex2d8ow3w::::res://Assets/fx/Explosion Scenes/smoketrail.tscn<>res://Assets/fx/Explosion Scenes/Exsmoketrail.gd
+DModule.gd::GDScript::-1::1700702474::0::1::::Module2<>Node2D<>::
+DModule.tscn::PackedScene::627415573529681664::1700752848::0::1::::<><>::res://actors/objs/DModule.gd<>uid://dj7a8ug7yfle
 DroneBay.gd::GDScript::-1::1699717722::0::1::::<>Node2D<>::
 DroneBay.tscn::PackedScene::8344612669191730259::1699735335::0::1::::<><>::res://actors/objs/DroneBay.gd<>uid://d0b7iuvqoiohy
 EnemyBullet.gd::GDScript::-1::1693589250::0::1::::<>Node2D<>::
@@ -52,7 +55,7 @@ EnemyMissile.tscn::PackedScene::4404845525695858662::1696167359::0::1::::<><>::r
 LazerTurret.gd::GDScript::-1::1693589250::0::1::::<>Node2D<>::
 LazerTurret.tscn::PackedScene::2002062958250887209::1694531054::0::1::::<><>::uid://dsogtbe36corc
 Missile.gd::GDScript::-1::1699142340::0::1::::<>Node2D<>::
-Missile.tscn::PackedScene::1544396273721906984::1699705823::0::1::::<><>::uid://calxe053tjfq7
+Missile.tscn::PackedScene::1544396273721906984::1700598776::0::1::::<><>::uid://calxe053tjfq7
 MissileLauncher.gd::GDScript::-1::1699218942::0::1::::<>Node2D<>::
 MissileLauncher.tscn::PackedScene::6838047620782553749::1695075277::0::1::::<><>::res://actors/objs/MissileLauncher.gd<>uid://cucpelcy5a2ug
 Module.gd::GDScript::-1::1698950544::0::1::::Module<>Node2D<>::
@@ -61,30 +64,36 @@ Phalanx.gd::GDScript::-1::1696165662::0::1::::<>Node2D<>::
 Phalanx.tscn::PackedScene::2973378062517496198::1696191788::0::1::::<><>::res://actors/objs/Phalanx.gd<>uid://drcu8ghvkgckg
 PhalanxBullet.gd::GDScript::-1::1693589250::0::1::::<>Node2D<>::
 PhalanxBullet.tscn::PackedScene::7811326520106620542::1696167359::0::1::::<><>::res://actors/objs/PhalanxBullet.gd<>uid://dqkjkjtiy10bs
+PlayerTurret.gd::GDScript::-1::1700863281::0::1::::<>Node2D<>::
+PlayerTurret.tscn::PackedScene::8803132474161640440::1700871760::0::1::::<><>::res://actors/objs/PlayerTurret.gd<>uid://bap27pn3vjom1::::res://Assets/Enemies/Enemy Turrets/Turretmain.png<>uid://cqeh50kfdetn6::::res://Assets/fx/TargetRect.png
 Railgun.gd::GDScript::-1::1699810448::0::1::::<>Node2D<>::
 Railgun.tscn::PackedScene::7818209414592498325::1699111201::0::1::::<><>::res://actors/objs/Railgun.gd<>uid://d03kdt3qs3jdb
-Slot.gd::GDScript::-1::1699025608::0::1::::<>TextureButton<>::
-Slot.tscn::PackedScene::4485934967643785987::1693770698::0::1::::<><>::uid://bxnu51escy5qs
+RModule.gd::GDScript::-1::1700701568::0::1::::<>Node2D<>::
+RModule.tscn::PackedScene::949018852716866888::1700752847::0::1::::<><>::res://actors/objs/RModule.gd<>uid://dj7a8ug7yfle
+Slot.gd::GDScript::-1::1700701187::0::1::::<>TextureButton<>::
+Slot.tscn::PackedScene::4485934967643785987::1700752847::0::1::::<><>::uid://bxnu51escy5qs
 Torpedo.gd::GDScript::-1::1699657954::0::1::::<>Node2D<>::
-Torpedo.tscn::PackedScene::3983104973912101056::1700428871::0::1::::<><>::res://actors/objs/Torpedo.gd<>uid://b7vobtjhvxxkn::::res://Assets/Towers/torpedo.png<>uid://52tex2d8ow3w::::res://Assets/fx/Explosion Scenes/smoketrail.tscn<>res://Assets/fx/Explosion Scenes/Exsmoketrail.gd<>uid://dqjoonwwqgytq::::res://Assets/fx/Explosion Scenes/TRAIL1.tscn<>uid://dbqhboefwnbd::::res://Assets/fx/Explosion Scenes/hit.png<>uid://itai7n0t1snq::::res://Assets/fx/Explosion Scenes/explosion2.tscn
+Torpedo.tscn::PackedScene::3983104973912101056::1700598776::0::1::::<><>::res://actors/objs/Torpedo.gd<>uid://b7vobtjhvxxkn
 Weapon.gd::GDScript::-1::1700416504::0::1::::<>Node2D<>::
 Weapon.tscn::PackedScene::5629803065968406318::1696545632::0::1::::<><>::res://actors/objs/Weapon.gd<>uid://bx0wyyhgb7ri2
-::res://actors/ui/::1699025609
+::res://actors/ui/::1700702186
 WeaponDescription.gd::GDScript::-1::1696628393::0::1::::<>Panel<>::
 WeaponDescription.tscn::PackedScene::797564611240872753::1693770698::0::1::::<><>::res://actors/ui/WeaponDescription.gd<>uid://cqd4h8rahad48
-WeaponDisplay.gd::GDScript::-1::1699025609::0::1::::<>Panel<>::
-WeaponDisplay.tscn::PackedScene::1076655574098555161::1697110303::0::1::::<><>::res://actors/ui/WeaponDisplay.gd<>uid://bx0wyyhgb7ri2
+WeaponDisplay.gd::GDScript::-1::1700701214::0::1::::<>Panel<>::
+WeaponDisplay.tscn::PackedScene::1076655574098555161::1700702186::0::1::::<><>::res://actors/ui/WeaponDisplay.gd<>uid://bx0wyyhgb7ri2
 ::res://Assets/::1698705000
-::res://Assets/Enemies/::1700432232
+::res://Assets/Enemies/::1700432240
 ally.png::CompressedTexture2D::4171055874312368460::1697730843::1697731056::1::::<><>::
 Battleship.png::CompressedTexture2D::5124090547044995786::1697730934::1697731056::1::::<><>::
 Cruiser.png::CompressedTexture2D::738462555121148025::1697731022::1697731056::1::::<><>::
 Destroyer.png::CompressedTexture2D::7926656677597765234::1697730645::1697731056::1::::<><>::
 Frigate.png::CompressedTexture2D::3934638859640626634::1697730734::1697731056::1::::<><>::
 Practice_Drone1.png::CompressedTexture2D::4242753844522973944::1700432161::1700432240::1::::<><>::
-::res://Assets/Enemies/Enemy Turrets/::1700432236
+::res://Assets/Enemies/Enemy Turrets/::1700492760
 PT.png::CompressedTexture2D::6510581744333455837::1700432176::1700432240::1::::<><>::
-::res://Assets/Enemies/Old Assets (For deletion in the future)/::1698347155
+scorch_01.png::CompressedTexture2D::7334913838456397101::1700492700::1700492700::1::::<><>::
+Turretmain.png::CompressedTexture2D::2419083663446983746::1700486776::1700486849::1::::<><>::
+::res://Assets/Enemies/Old Assets (For deletion in the future)/::1700524770
 ally.png::CompressedTexture2D::2451268338163486594::1693589250::1697743223::1::::<><>::
 Battleship.png::CompressedTexture2D::8597382450607703167::1693589250::1697743223::1::::<><>::
 Cruiser.png::CompressedTexture2D::1369061152426124499::1693589250::1697743223::1::::<><>::
@@ -105,7 +114,8 @@ RailgunIcon.png::CompressedTexture2D::1315248151670695286::1699802746::169980277
 shieldability.png::CompressedTexture2D::4630702252972384712::1699802288::1699802330::1::::<><>::
 space1.jpg::CompressedTexture2D::3823246559921099601::1693589250::1693589250::1::::<><>::
 Starfield_02-512x512.png::CompressedTexture2D::6085479122215155322::1693589250::1693589250::1::::<><>::
-::res://Assets/fx/::1699831860
+::res://Assets/fx/::1700591922
+BUBBLE.png::CompressedTexture2D::2736203685937945680::1700591883::1700591922::1::::<><>::
 effect64.png::CompressedTexture2D::2365981308063518917::1606936183::1699831860::1::::<><>::
 effect256.png::CompressedTexture2D::3092133802941757932::1606936183::1699831860::1::::<><>::
 explosion1.png::CompressedTexture2D::7407225202785532528::1693589250::1693589250::1::::<><>::
@@ -116,6 +126,8 @@ glowing_circle500.png::CompressedTexture2D::4150865183983953814::1699806402::169
 glowing_circle.png::CompressedTexture2D::4416425013855318304::1693589250::1693589250::1::::<><>::
 particletext64.png::CompressedTexture2D::982812625339957382::1699707431::1699707448::1::::<><>::
 particletext.png::CompressedTexture2D::3935769289605395093::1699140678::1699140720::1::::<><>::
+spark_01.png::CompressedTexture2D::1301026809009357006::1700492682::1700492761::1::::<><>::
+spark_06.png::CompressedTexture2D::166428052760729979::1700492930::1700492930::1::::<><>::
 TargetRect.png::CompressedTexture2D::5904600298140635029::1697750310::1697750362::1::::<><>::
 white_glowing_circle.png::CompressedTexture2D::6773161064868925966::1693589250::1693589250::1::::<><>::
 ::res://Assets/fx/Explosion Scenes/::1700094846
@@ -131,11 +143,11 @@ TRAIL1.tscn::PackedScene::8301738705898232294::1699657569::0::1::::<><>::uid://b
 TRAIL2.tscn::PackedScene::2724168467532357316::1700094846::0::1::::<><>::uid://bwcrsshvjbain
 TRAIL3.tscn::PackedScene::5099634943334236725::1699657569::0::1::::<><>::uid://bwcrsshvjbain
 trail.png::CompressedTexture2D::4942324092872857743::1621959060::1699025675::1::::<><>::
-::res://Assets/fx/Shield/::1700428871
+::res://Assets/fx/Shield/::1700871761
 Gate.gd::GDScript::-1::1699833605::0::1::::<>Node2D<>::
-Gate.tscn::PackedScene::5965456179822139186::1700428871::0::1::::<><>::uid://b36l40gn035eq::::res://Assets/fx/glowing_circle.png<>res://Assets/fx/Shield/Gate.gd
+Gate.tscn::PackedScene::5965456179822139186::1700598775::0::1::::<><>::uid://b36l40gn035eq
 shield.gd::GDScript::-1::1699830578::0::1::::<>Node2D<>::
-shield.gdshader::Shader::-1::1700428871::0::1::::<><>::
+shield.gdshader::Shader::-1::1700871761::0::1::::<><>::
 shield.tscn::PackedScene::2362254370331726485::1699833194::0::1::::<><>::res://Assets/fx/Shield/shield.gdshader<>res://Assets/fx/Shield/shield.gd<>uid://b0eye4pvn11ug
 ::res://Assets/icons/::1698347155
 220px-Flag-corsairs.png::CompressedTexture2D::4785177594556770145::1696198997::1696199029::1::::<><>::
@@ -163,11 +175,12 @@ mouse3.png::CompressedTexture2D::8808712359960299124::1698706550::1698706933::1:
 mouse.png::CompressedTexture2D::2350579346054523612::1698707099::1698707291::1::::<><>::
 mouse_cursor.gd::GDScript::-1::1699025608::0::1::::<>Node2D<>::
 mouse_cursor.tscn::PackedScene::4689745477798353810::1699109172::0::1::::<><>::res://Assets/MouseCursor/mouse_cursor.gd<>uid://8qvx0mersopg
-::res://Assets/Player/::1700428090
+::res://Assets/Player/::1700524772
 BC1.png::CompressedTexture2D::7788482265883956922::1693589250::1697731316::1::::<><>::
 BC2.png::CompressedTexture2D::822866631298495432::1697731277::1698706593::1::::<><>::
 BC.png::CompressedTexture2D::5499182107264722324::1698702234::1699917863::1::::<><>::
 BCgg.png::CompressedTexture2D::3494942959115146165::1700257296::1700328212::1::::<><>::
+Player_Ship.png::CompressedTexture2D::758498372462805647::1700504490::1700524772::1::::<><>::
 TEMPUSE3.png::CompressedTexture2D::5902086082639712933::1700257395::1700428090::1::::<><>::
 ::res://Assets/sfx/::1698347155
 alarm.mp3::AudioStreamMP3::2140969368451570020::1693589250::1693589250::1::::<><>::
@@ -187,10 +200,14 @@ torpedo.wav::AudioStreamWAV::4608699823990364226::1693589250::1693589250::1::::<
 turret_lazer.wav::AudioStreamWAV::9135041470805166193::1693589250::1693589250::1::::<><>::
 weapondescr.mp3::AudioStreamMP3::9139275625293384546::1693589250::1693589250::1::::<><>::
 weapondescrclose.mp3::AudioStreamMP3::5903831051746049975::1693589250::1693589250::1::::<><>::
-::res://Assets/Towers/::1698347156
+::res://Assets/Towers/::1700516836
 asmmissile.png::CompressedTexture2D::9137523717788511699::1693589250::1693589250::1::::<><>::
 DroneBay.JPG::CompressedTexture2D::8918005833557840542::1693589250::1693589250::1::::<><>::
 enemymissile.png::CompressedTexture2D::1152904766633991035::1693589250::1693589250::1::::<><>::
+NewBullet2.png::CompressedTexture2D::131300246001153686::1700516833::1700516836::1::::<><>::
+NewBullet3.png::CompressedTexture2D::8650546440269176066::1700515826::1700515828::1::::<><>::
+NewBullet4.png::CompressedTexture2D::4222795363833125524::1700515871::1700515872::1::::<><>::
+NewBullet.png::CompressedTexture2D::6759769645217865843::1700515511::1700515538::1::::<><>::
 phalanx.png::CompressedTexture2D::6995729552426907884::1693589250::1693589250::1::::<><>::
 phalanx_bullet.png::CompressedTexture2D::8303492140160407720::1693589250::1693589250::1::::<><>::
 projectile3.png::CompressedTexture2D::8325752861151563478::1695147731::1695147745::1::::<><>::
@@ -211,19 +228,19 @@ towerDefense_tile291.png::CompressedTexture2D::8357874746409641618::1693589250::
 towerDefense_tile292.png::CompressedTexture2D::6660481360382131245::1693589250::1693589250::1::::<><>::
 ::res://Resources/::1698347156
 AgencyFB-Bold.ttf::FontFile::8488995800585665224::1693589250::1693589250::1::::<><>::
-::res://Scenes/::1700428871
+::res://Scenes/::1700871761
 DialogueBox.gd::GDScript::-1::1699107701::0::1::::<>ColorRect<>::
-DialogueBox.tscn::PackedScene::4811133332645673939::1700428871::0::1::::<><>::uid://caf8f8j76hs22::::res://Assets/icons/220px-Flag-corsairs.png
+DialogueBox.tscn::PackedScene::4811133332645673939::1700598776::0::1::::<><>::uid://caf8f8j76hs22
 MainMenu.gd::GDScript::-1::1697491151::0::1::::<>CanvasLayer<>::
 MainMenu.tscn::PackedScene::2930102506031623221::1700094846::0::1::::<><>::res://Scenes/MainMenu.gd<>uid://b4oq0itstfeex
 Map.gd::GDScript::-1::1699920634::0::1::::Map<>Node2D<>::
-Map.gdshader::Shader::-1::1700428871::0::1::::<><>::
-Map.tscn::PackedScene::5822239001180201673::1700428871::0::1::::<><>::res://Scenes/Map.gd<>uid://csx37mtdxbjne::::res://Assets/Environment/Starfield_02-512x512.png<>uid://bktor42ahn8qq::::res://actors/entities/Player_New.tscn<>res://Scenes/Map.gdshader<>uid://brfqb2kn5wiub::::res://actors/entities/Cam.tscn<>uid://dljxv7r0moi3q::::res://Scenes/UI.tscn<>uid://nk7ajylmjwe5::::res://Scenes/pause_menu.tscn<>uid://s0d7ekja0nvq::::res://Assets/Environment/RailgunIcon.png<>res://Scenes/ModuleGUI.gd<>uid://dfcqls8568aal::::res://Assets/Environment/Capture.png<>uid://d0scj4spp17po::::res://Assets/sfx/ost1.mp3<>uid://c71d4a73qk5eu::::res://Assets/Environment/DC.png<>uid://b68e8v6mqmkd1::::res://Assets/Environment/shieldability.png<>uid://d37j0h7sikdrm::::res://Assets/Environment/allyability.png
+Map.gdshader::Shader::-1::1700871761::0::1::::<><>::
+Map.tscn::PackedScene::5822239001180201673::1700871761::0::1::::<><>::res://Scenes/Map.gd<>uid://csx37mtdxbjne::::res://Assets/Environment/Starfield_02-512x512.png<>uid://bktor42ahn8qq::::res://actors/entities/Player_New.tscn<>res://Scenes/Map.gdshader<>uid://brfqb2kn5wiub::::res://actors/entities/Cam.tscn<>uid://dljxv7r0moi3q::::res://Scenes/UI.tscn<>uid://nk7ajylmjwe5::::res://Scenes/pause_menu.tscn<>uid://s0d7ekja0nvq::::res://Assets/Environment/RailgunIcon.png<>res://Scenes/ModuleGUI.gd<>uid://dfcqls8568aal::::res://Assets/Environment/Capture.png<>uid://d0scj4spp17po::::res://Assets/sfx/ost1.mp3<>uid://c71d4a73qk5eu::::res://Assets/Environment/DC.png<>uid://b68e8v6mqmkd1::::res://Assets/Environment/shieldability.png<>uid://d37j0h7sikdrm::::res://Assets/Environment/allyability.png
 ModuleGUI.gd::GDScript::-1::1699805248::0::1::::<>CanvasLayer<>::
 pause_menu.gd::GDScript::-1::1698425209::0::1::::<>Control<>::
 pause_menu.tscn::PackedScene::935042198905207910::1698353260::0::1::::<><>::res://Scenes/pause_menu.gd
 UI.gd::GDScript::-1::1699025608::0::1::::<>Control<>::
-UI.tscn::PackedScene::7951354431551190648::1699109172::0::1::::<><>::res://Scenes/UI.gd<>uid://ckl3yxdo8r1pw
+UI.tscn::PackedScene::7951354431551190648::1700752847::0::1::::<><>::res://Scenes/UI.gd<>uid://ckl3yxdo8r1pw
 ::res://Scenes/Chapters/::1699807298
 Chapter1.gd::GDScript::-1::1699025608::0::1::::ChapterOne<>Node2D<>::
 Chapter1.tscn::PackedScene::5514161822386891330::1698443617::0::1::::<><>::res://Scenes/Chapters/Chapter1.gd<>uid://csx37mtdxbjne
@@ -260,5 +277,5 @@ Wikipage.gd::GDScript::-1::1696710822::0::1::::<>Panel<>::
 level_selection.gd::GDScript::-1::1698435113::0::1::::<>Control<>::
 level_selection.tscn::PackedScene::3073188281281087662::1698425633::0::1::::<><>::res://Scenes/LevelSelection/level_selection.gd<>uid://cj3jpf58vn7mb
 ::res://Scripts/::1698700802
-::res://Scripts/globals/::1699716496
-ManagerGame.gd::GDScript::-1::1699716496::0::1::::<>Node<>::
+::res://Scripts/globals/::1700752847
+ManagerGame.gd::GDScript::-1::1700752847::0::1::::<>Node<>::
