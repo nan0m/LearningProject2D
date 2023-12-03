@@ -1,0 +1,77 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://iye3x6sjvbyy"]
+
+[ext_resource type="Texture2D" uid="uid://ca1ko6xyfcw3e" path="res://Assets/materials/shield/honeyC.png" id="1_3su4p"]
+
+[sub_resource type="Shader" id="Shader_vbydk"]
+code = "shader_type canvas_item;
+//#define USE_NORMAL_MAP
+
+uniform vec4 shield_base_tint: source_color;
+uniform float rim_inner: hint_range(0.0,1.0) = 0.1;
+
+uniform float time_scale:hint_range(0.0,0.2) = 0.0;
+uniform float distort_strength:hint_range(0.0,0.2) = 0.0;
+uniform float distort_tiling:hint_range(0.0,10.0) = 0.0;
+uniform vec2 distort_scroll_direction = vec2(1.0,1.0);
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
+uniform sampler2D distortion_texture;
+uniform bool use_normal_map_instead = false;
+uniform sampler2D hex_normals:repeat_enable;
+uniform sampler2D rim_gradient;
+
+float circle(vec2 position, float radius, float feather)
+{
+	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));
+}
+
+
+void fragment() {
+	vec3 distorted = vec3(0.0);
+	if (!use_normal_map_instead){
+	float n = texture(distortion_texture, mod(UV * distort_tiling + TIME * time_scale * distort_scroll_direction, 1.0)).r;
+	distorted = texture(SCREEN_TEXTURE, mod(SCREEN_UV + distort_scroll_direction *(n * distort_strength - distort_strength / 2.0), 1.0)).rgb;
+	}
+	else {
+	vec2 n = texture(hex_normals, mod(UV * distort_tiling + TIME * time_scale * normalize(distort_scroll_direction), 1.0)).rg;
+	vec2 offset =  n * distort_scroll_direction * (distort_strength)  ;
+	distorted = texture(SCREEN_TEXTURE, mod(SCREEN_UV + offset , 1.0)).rgb;
+	}
+
+	float new = smoothstep(rim_inner,0.5,length(UV - vec2(0.5)));
+	float inside = new == 0.0 ? 1.0 : 0.0;
+	float outside = new == 1.0 ? 1.0 : 0.0;
+	vec4 rim_color = texture(rim_gradient,vec2(new, 0.0)).rgba;
+	distorted = mix(distorted, shield_base_tint.rgb, shield_base_tint.a);
+	COLOR.rgb = mix(distorted, rim_color.rgb, new) ;
+	
+	COLOR.a = (1.0 - outside) *  (  rim_color.a);
+}
+
+
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u3uhu"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_64kyu"]
+seamless = true
+noise = SubResource("FastNoiseLite_u3uhu")
+
+[sub_resource type="Gradient" id="Gradient_7iehw"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0.619608, 0.329412, 0.615686)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bh3rt"]
+gradient = SubResource("Gradient_7iehw")
+
+[resource]
+shader = SubResource("Shader_vbydk")
+shader_parameter/shield_base_tint = Color(0.980392, 0.698039, 0.352941, 0.0784314)
+shader_parameter/rim_inner = 0.418
+shader_parameter/time_scale = 0.063
+shader_parameter/distort_strength = 0.011
+shader_parameter/distort_tiling = 1.715
+shader_parameter/distort_scroll_direction = Vector2(1, 0)
+shader_parameter/use_normal_map_instead = false
+shader_parameter/distortion_texture = SubResource("NoiseTexture2D_64kyu")
+shader_parameter/hex_normals = ExtResource("1_3su4p")
+shader_parameter/rim_gradient = SubResource("GradientTexture1D_bh3rt")
