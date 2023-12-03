@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bktor42ahn8qq"]
+[gd_scene load_steps=23 format=3 uid="uid://bktor42ahn8qq"]
 
 [ext_resource type="Script" path="res://actors/entities/Player_New.gd" id="1_nrdcg"]
 [ext_resource type="Texture2D" uid="uid://k2omfelbexml" path="res://Assets/Player/Player_Ship.png" id="2_f50l2"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" path="res://actors/entities/Shield.gd" id="9_c4mdv"]
 [ext_resource type="Texture2D" uid="uid://bhv6npku0p86h" path="res://Assets/fx/glow.png" id="10_oxxj6"]
 [ext_resource type="Shader" path="res://actors/entities/shield.gdshader" id="11_b0sp5"]
+[ext_resource type="Material" uid="uid://iye3x6sjvbyy" path="res://Assets/materials/shield/shield_mat.tres" id="12_5uopi"]
 [ext_resource type="Texture2D" uid="uid://bjgyugrfwbg8m" path="res://Assets/fx/honeycombs.png" id="12_c7bru"]
+[ext_resource type="Texture2D" uid="uid://b1ag2t0ptpete" path="res://icon.svg" id="13_uhs31"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2b5m"]
 bg_color = Color(0.509804, 0.498039, 0.505882, 1)
@@ -364,6 +366,7 @@ polygon = PackedVector2Array(-385, -182, -307, -204, -238, -218, -166, -227, -80
 disabled = true
 
 [node name="ShieldOverlay" type="MeshInstance2D" parent="Shield"]
+visible = false
 modulate = Color(0.545098, 0, 0, 1)
 self_modulate = Color(1, 1, 1, 0.407843)
 material = SubResource("ShaderMaterial_usup7")
@@ -371,6 +374,12 @@ position = Vector2(0.182304, 6.00006)
 scale = Vector2(1193.72, 484)
 mesh = SubResource("SphereMesh_xe2v6")
 texture = ExtResource("12_c7bru")
+
+[node name="ShieldNan0m" type="Sprite2D" parent="Shield"]
+material = ExtResource("12_5uopi")
+position = Vector2(7.50006, 3.99997)
+scale = Vector2(9.78906, 3.9375)
+texture = ExtResource("13_uhs31")
 
 [node name="MissileIndicatorRed" type="GPUParticles2D" parent="."]
 position = Vector2(46, -136)
