@@ -152,7 +152,7 @@ func torpedolaunch(spawn_position):
 	#if e:
 	#	ManagerGame.global_world_ref.spawn_torpedo(torpedoSpawnPosition, e, damageTP)
 
-func spawn_torpedo(g_pos: Vector2, target, damage):
+func spawn_torpedo(g_pos, target, damage):
 	var b = torpedoahoy.instantiate()
 	b.global_position = g_pos
 	b.target = target

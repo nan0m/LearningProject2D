@@ -11,8 +11,11 @@ var notu = ManagerGame.enemy_data['battleship']['not']  #number of turret
 var target_distance = rng
 var mi_damage = edamage*2
 var tclicks = 0
-
+var base_gold_reward = ManagerGame.enemy_data['battleship']['value']
 var screen_size
+
+signal enemy_killed(base_gold_amount)
+
 func _ready():
 	$HP.max_value = hp
 	$HP.value = hp
@@ -74,7 +77,9 @@ func _hurt(damage):
 	df1.orig_pos = global_position
 	ManagerGame.global_world_ref.spawn_obj(df1, global_position)
 	if hp <= 0:
-		ManagerGame.global_player_ref.player_data['gold'] += 150
+		ManagerGame.global_player_ref.player_data['gold'] += base_gold_reward
+		emit_signal("enemy_killed", base_gold_reward)
+		print(base_gold_reward)
 		#ManagerGame.gold_changed.emit()
 #commented this line to test the enemy in a test scene
 		queue_free()
@@ -98,5 +103,4 @@ func _on_hurtbox_input_event(_viewport, event, _shape_idx):
 		$Node2D.show()
 		add_to_group("TorpedoTarget")
 	$Node2D/TTarget.get_node('Label').text = str(tclicks) #tclicks for torpedo clicks
-	print(tclicks)
 

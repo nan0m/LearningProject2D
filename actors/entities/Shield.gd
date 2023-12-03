@@ -1,4 +1,5 @@
 extends Area2D
+var global_collision_point : Vector2
 
 func _ready():
 	connect("area_entered", Callable(self, "_on_Area2D_area_entered"))

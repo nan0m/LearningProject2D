@@ -76,13 +76,6 @@ func update_stats(stat_dictionary):
 
 var time_pass = 0
 func _process(delta):
-	time_pass += delta
-	if time_pass >= 3:
-		ManagerGame.global_player_ref.player_data['gold'] += 1
-		ManagerGame.gold_changed.emit()
-		time_pass -= 3
-		print("1 RU added")
-
 	var currentHP = ManagerGame.global_player_ref.player_data['stats']['hp']
 	if currentHP < 5000:
 		can_repair = true
@@ -108,6 +101,9 @@ func passive_repair(delta):
 		ManagerGame.global_player_ref.player_data['stats']['hp'] += delta*passive_damage_control_levels[damage_control_level-1]*5000
 		print("repaired")
 
+################################################################################
+################################ Repair ########################################
+################################################################################
 func damagecontrol():
 	if can_repair == true && damage_control_ready:
 		damage_control_ready = false

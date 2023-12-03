@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8k7rip2b12de"]
+
+[ext_resource type="Shader" path="res://actors/entities/shield1.gdshader" id="1_7yoj6"]
+[ext_resource type="Texture2D" uid="uid://6uvirlhilgya" path="res://Assets/fx/HoneyNormal.jpg" id="2_hm26r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7aswi"]
+render_priority = 0
+shader = ExtResource("1_7yoj6")
+shader_parameter/rimWidth = 3.0
+shader_parameter/rimColor = Color(0, 0, 0, 1)
+shader_parameter/outerRimColor = Color(0.584314, 0.00784314, 0, 1)
+shader_parameter/normalStrength = 0.12
+shader_parameter/normalTiling = Vector2(4, 6)
+shader_parameter/normalOffset = Vector2(0.53, 0.665)
+shader_parameter/normalMap = ExtResource("2_hm26r")
+
+[sub_resource type="SphereMesh" id="SphereMesh_epu4p"]
+material = SubResource("ShaderMaterial_7aswi")
+rings = 64
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1189.84, 0, 0, 0, 518, 0, 0, 0, 518, 0, 0, 0)
+mesh = SubResource("SphereMesh_epu4p")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
+transform = Transform3D(0.000840449, 0, 0, 0, 0.0019305, 0, 0, 0, 0.0019305, 0, 0, 1.07145)

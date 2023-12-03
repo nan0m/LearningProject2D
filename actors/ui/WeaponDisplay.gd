@@ -17,6 +17,8 @@ func _ready():
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile269.png")
 		ManagerGame.WEAPON_TYPE.DEFMODULE:
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile268.png")
+		ManagerGame.WEAPON_TYPE.RMODULE:
+			$Icon.texture = load("res://Assets/Towers/towerDefense_tile268.png")
 		ManagerGame.WEAPON_TYPE.MISSILE:
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile226.png")
 		ManagerGame.WEAPON_TYPE.PHALANX:
@@ -27,11 +29,7 @@ func _ready():
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile226.png")
 		ManagerGame.WEAPON_TYPE.DRONEBAY:
 			$Icon.texture = load("res://Assets/Towers/DroneBay.JPG")
-		ManagerGame.WEAPON_TYPE.RMODULE:
-			$Icon.texture = load("res://Assets/Towers/towerDefense_tile268.png")
-	
 	var key = ManagerGame.WEAPON_TYPE.find_key(weapon_type).to_lower()
-	
 	price = ManagerGame.weapons_data[key]['price']
 	$Name.text = ManagerGame.WEAPON_TYPE.find_key(weapon_type)
 	$Price.text = '%sG' % price

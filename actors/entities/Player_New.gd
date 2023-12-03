@@ -75,6 +75,9 @@ func on_weapon_equipped(slot_name, icon, weapon_type): #This function loads the 
 		weapon = load('res://actors/objs/Module.tscn').instantiate()
 	elif weapon_type == ManagerGame.WEAPON_TYPE.DEFMODULE:
 		weapon = load('res://actors/objs/DModule.tscn').instantiate()
+	elif weapon_type == ManagerGame.WEAPON_TYPE.RMODULE:
+		weapon = load('res://actors/objs/RModule.tscn').instantiate()
+		ManagerGame.register_r_module(weapon)
 	elif weapon_type == ManagerGame.WEAPON_TYPE.DRONEBAY:
 		weapon = load('res://actors/objs/DroneBay.tscn').instantiate()
 	else:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dljxv7r0moi3q"]
 
 [ext_resource type="Script" path="res://Scenes/UI.gd" id="1_axsyv"]
-[ext_resource type="Texture2D" uid="uid://ckl3yxdo8r1pw" path="res://Assets/Player/BC.png" id="1_mgbco"]
+[ext_resource type="Texture2D" uid="uid://c7xgdei4dj615" path="res://Assets/Player/yesy_biew1.png" id="2_6u0av"]
 [ext_resource type="PackedScene" uid="uid://plsmifum5itd" path="res://actors/ui/WeaponDisplay.tscn" id="3_7lofs"]
 [ext_resource type="PackedScene" uid="uid://b46axtx4pgpjv" path="res://actors/objs/Slot.tscn" id="3_wwoqq"]
 [ext_resource type="Script" path="res://actors/ui/WeaponDescription.gd" id="4_oyrk4"]
@@ -34,6 +34,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_axsyv")
+metadata/_edit_vertical_guides_ = []
+metadata/_edit_horizontal_guides_ = []
 
 [node name="UpgradePanel" type="Panel" parent="."]
 layout_mode = 1
@@ -86,10 +88,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -50.0
+offset_right = 37.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.95, 0.95)
 mouse_filter = 2
-texture = ExtResource("1_mgbco")
+texture = ExtResource("2_6u0av")
 expand_mode = 1
 stretch_mode = 5
 

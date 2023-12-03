@@ -4,8 +4,13 @@ signal weapon_equipped(slot_name)
 signal gold_changed
 signal weapon_scrapped(slot_name)
 signal toggle_drones(toggled)
+#signal enemy_destroyed(gold_amount)
+
 var testmouse = preload("res://Assets/MouseCursor/mouse2.png")
 var testmouse2 = preload("res://Assets/MouseCursor/mouse.png")
+
+var r_module_instance: Node2D = null
+
 func _ready():
 	Input.set_custom_mouse_cursor(testmouse,Input.CURSOR_POINTING_HAND)
 	Input.set_custom_mouse_cursor(testmouse2,Input.CURSOR_ARROW)
@@ -14,13 +19,13 @@ enum WEAPON_TYPE{
 	TURRET,   #artillery turret, long range, good damage
 	BLASTER,  #lazer blaster shot, short range, good damage, fast bullet.
 	MODULE,   #level 1 allows torpedo launcher ability. level 2, unlocks 1 railgun shot. Level 3, unlocks 2nd railgun shot. Lvl 4 unlocks the final 3rd shot.  
+	RMODULE, 
 	DEFMODULE,#level 1 unlocks the "Damage-Control" Ability (Restore ship HP). Level 2 - 5 increases the effectiveness:  10/15/20/25/30% over 10 seconds.    
 	MISSILE,  #turret that launches 1 missile that targets capitals. 
 	PHALANX,  #targets enemy missiles, and fighters ONLY. Very short range.  
 	ASM,      #targets enemy fighters. Long range.
 	LAZER,   #short range lazer weapon. Targets all enemies (no missile). 
-	DRONEBAY,  #Launches drones that assist the player with dealing with enemies. 
-	RMODULE
+	DRONEBAY  #Launches drones that assist the player with dealing with enemies. 
 }
 
 var global_world_ref = null
@@ -88,11 +93,11 @@ var weapons_data = {
 		'cooldown': 2, #defense abilities cooldown bonus + 2% per upgrade (max 5)
 		'price': 3000
 	},
-	'rmodule': {     #Thise module requires different upgrade costs!!!!!
-		'hp': 200,     #0.02 * 200 Bonus to Player's HP per level
-		'stage': 1,    #Level 1 unlocks the "Damage-Control" Ability (Restore ship HP). Level 2 - 5 increases the effectiveness:  10/15/20/25/30% of Max HP over 10 seconds. Level 6 unlocks EMP-PULSE (all enemies and your drones can't attack and are slowed 95% for 5 seconds. 
-		'restore': 1,  #passive HP restoration. 0.01%/0.02%/0.03%/0.04% .... + 0.01% per level (of MAXHP:0.0001*HP)
-		'cooldown': 2, #defense abilities cooldown bonus + 2% per upgrade (max 5)
+	'rmodule': {         #Thise module requires different upgrade costs!!!!!
+		'stage': 1,      #Stage (upgrade passive RU and from destroyed Enemies)
+		'drones': 1,     #Number of drones: 1/2/3/4/5/6/7/8/9/10 (max) 
+		'attack': 10,    #abilities damage + 5% per updrade (max 5): 
+		'replenish': 1, #frequency at which the destroyed drone gets replenished.  
 		'price': 3500
 	},
 	'dronebay': {      #Thise module requires different upgrade costs!!!!!
@@ -128,7 +133,7 @@ func formatted_stats(weapon_type):
 	if data.has('drones'):
 		stats += "Drone amount: " + str(data['drones']) + "\n"
 	if data.has('replenish'):
-		stats += "Replenish amount: " + str(data['replenish']) + "\n"
+		stats += "Replenish timer: " + str(data['replenish']) + "\n"
 	return stats
 		
 func get_upgradeable_fields(weapon_type):
@@ -152,7 +157,7 @@ func get_upgradeable_fields(weapon_type):
 		'dronebay':
 			return ['drones', 'rof', 'attack', 'replenish']
 		'rmodule':
-			return ['hp', 'stage', 'restore', 'cooldown']
+			return ['stage', 'drone', 'attack','replenish']
 
 var weapons_dscr = {
 	'turret': {
@@ -186,6 +191,9 @@ var weapons_dscr = {
 	'defmodule': {     #Thise module requires different upgrade costs!!!!!
 		'description': str('This dm')
 	},
+	'rmodule': {     #Thise module requires different upgrade costs!!!!!
+		'description': str('This is Rmodule for money')
+	},
 	'dronebay': {      #Thise module requires different upgrade costs!!!!!
 		'description': str('This drone')
 	}
@@ -209,7 +217,8 @@ var enemy_data = {
 		'not': 1,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 1   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 1,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships. 
+		'value': 50
 	},
 	'bomber': {
 		'hp': 20,    #the hitpoints
@@ -220,7 +229,8 @@ var enemy_data = {
 		'not': 1,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 1   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 1,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value':60
 	},
 	'fighter2': {
 		'hp': 20,    #the hitpoints
@@ -231,7 +241,8 @@ var enemy_data = {
 		'not': 1,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 1   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 1,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships. 
+		'value': 50 
 	},
 	'bomber2': {
 		'hp': 20,    #the hitpoints
@@ -242,7 +253,8 @@ var enemy_data = {
 		'not': 1,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 1   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 1,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 65
 	},
 	'fighter3': {
 		'hp': 20,    #the hitpoints
@@ -253,7 +265,8 @@ var enemy_data = {
 		'not': 1,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 1   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 1,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 50
 	},
 	'bomber3': {
 		'hp': 20,    #the hitpoints
@@ -264,7 +277,8 @@ var enemy_data = {
 		'not': 1,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 1   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 1,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 65
 	},
 	'gunboat': {
 		'hp': 20,    #the hitpoints
@@ -275,7 +289,8 @@ var enemy_data = {
 		'not': 2,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 1   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 1,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships. 
+		'value': 80
 	},
 	'frigate': {
 		'hp': 120,    #the hitpoints
@@ -286,7 +301,8 @@ var enemy_data = {
 		'not': 3,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 2   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 2,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 100
 	},
 	'bfrigate': {    #Boarding frigate
 		'hp': 20,    #the hitpoints
@@ -297,7 +313,8 @@ var enemy_data = {
 		'not': 3,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 2   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 2,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 100
 	},
 	'destroyer': {
 		'hp': 350,    #the hitpoints
@@ -308,7 +325,8 @@ var enemy_data = {
 		'not': 6,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 2   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 2,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 150
 	},
 	'cruiser': {
 		'hp': 800,    #the hitpoints
@@ -319,7 +337,8 @@ var enemy_data = {
 		'not': 5,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 2   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 2,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 200
 	},
 	'battleship': {
 		'hp': 1000,    #the hitpoints
@@ -330,7 +349,8 @@ var enemy_data = {
 		'not': 4,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 2   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 2,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 250
 	},
 	'dreadnaught': {
 		'hp': 20,    #the hitpoints
@@ -341,7 +361,8 @@ var enemy_data = {
 		'not': 4,    #number of turrets it has
 		'craft': 0,  #number of fighters it launches
 		'launch': 0, #launch frequency
-		'class': 2   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 2,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 300
 	},
 	'carrier': {
 		'hp': 20,    #the hitpoints
@@ -352,7 +373,8 @@ var enemy_data = {
 		'not': 1,    #number of turrets it has
 		'craft': 5,  #number of fighters it launches
 		'launch': 10,#launch frequency
-		'class': 2   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'class': 2,   #Class 1 refers to a small spacecraft. Class 2 refers to capital ships.  
+		'value': 500
 	}
 }
 

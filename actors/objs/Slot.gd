@@ -27,6 +27,8 @@ func display(weapon_type):
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile269.png")
 		ManagerGame.WEAPON_TYPE.DEFMODULE:
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile268.png")
+		ManagerGame.WEAPON_TYPE.RMODULE:
+			$Icon.texture = load("res://Assets/Towers/towerDefense_tile268.png")
 		ManagerGame.WEAPON_TYPE.MISSILE:
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile226.png")
 		ManagerGame.WEAPON_TYPE.PHALANX:
@@ -37,8 +39,6 @@ func display(weapon_type):
 			$Icon.texture = load("res://Assets/Towers/towerDefense_tile226.png")
 		ManagerGame.WEAPON_TYPE.DRONEBAY:
 			$Icon.texture = load("res://Assets/Towers/DroneBay.JPG")
-		ManagerGame.WEAPON_TYPE.RMODULE:
-			$Icon.texture = load("res://Assets/Towers/towerDefense_tile268.png")
 	
 	ManagerGame.weapon_equipped.emit(name, $Icon.texture, weapon_type)
 

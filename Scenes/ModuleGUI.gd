@@ -47,9 +47,12 @@ func _on_update_module_ui(level,timeleftRG,timeleftTP):
 		$HUD/AbilitiesBar/TorpedoCD.show()
 		if max_timer2 == timeleftTP:
 			$HUD/AbilitiesBar/TorpedoCD.value = max_timer2
+			player.get_node("MissileIndicatorRed").hide()
 		else:
 			$HUD/AbilitiesBar/TorpedoCD.value = max_timer2 - timeleftTP
+			player.get_node("MissileIndicatorRed").show()
 		$HUD/AbilitiesBar/TorpedoCD/TorpedoCDlabel.text = str(timeleftTP)
+		
 	if level > 2: 
 		if max_timer == timeleftRG:
 			$HUD/AbilitiesBar/RailgunCD.value = max_timer
