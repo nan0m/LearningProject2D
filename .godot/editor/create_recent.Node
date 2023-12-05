@@ -1,3 +1,4 @@
+WorldEnvironment
 MeshInstance2D
 Marker2D
 Timer
@@ -21,7 +22,6 @@ CanvasLayer
 CanvasGroup
 Node
 AnimationPlayer
-WorldEnvironment
 Label
 ProgressBar
 RichTextLabel

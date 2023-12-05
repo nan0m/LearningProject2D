@@ -1,8 +1,4 @@
 res://actors/entities/Player_New.tscn
-res://actors/objs/Bullet.gdshader
-res://actors/entities/shield.gdshader
-res://actors/entities/Player_New.gdshader
-res://Assets/fx/Shield/shield.gdshader
-res://actors/entities/Ally.gdshader
-res://Scenes/Map.gdshader
-res://actors/entities/shield1.gdshader
+res://Assets/materials/EnergyShield/shield_shader.gdshader
+res://Assets/materials/EnergyShield/shield_mat.tres
+res://Assets/materials/EnergyShield/energy_shield.gd
