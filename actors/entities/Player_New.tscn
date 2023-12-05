@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=21 format=3 uid="uid://bktor42ahn8qq"]
-=======
 [gd_scene load_steps=24 format=3 uid="uid://bktor42ahn8qq"]
->>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://actors/entities/Player_New.gd" id="1_nrdcg"]
 [ext_resource type="Texture2D" uid="uid://k2omfelbexml" path="res://Assets/Player/Player_Ship.png" id="2_f50l2"]
@@ -16,12 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bhv6npku0p86h" path="res://Assets/fx/glow.png" id="10_oxxj6"]
 [ext_resource type="Shader" path="res://actors/entities/shield.gdshader" id="11_b0sp5"]
 [ext_resource type="Texture2D" uid="uid://bjgyugrfwbg8m" path="res://Assets/fx/honeycombs.png" id="12_c7bru"]
-<<<<<<< Updated upstream
-=======
 [ext_resource type="Material" uid="uid://iye3x6sjvbyy" path="res://Assets/materials/EnergyShield/shield_mat.tres" id="12_kpoqr"]
 [ext_resource type="Texture2D" uid="uid://b1ag2t0ptpete" path="res://icon.svg" id="13_uhs31"]
 [ext_resource type="Script" path="res://Assets/materials/EnergyShield/energy_shield.gd" id="14_x3ork"]
->>>>>>> Stashed changes
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2b5m"]
 bg_color = Color(0.509804, 0.498039, 0.505882, 1)
@@ -382,8 +375,6 @@ scale = Vector2(1193.72, 484)
 mesh = SubResource("SphereMesh_xe2v6")
 texture = ExtResource("12_c7bru")
 
-<<<<<<< Updated upstream
-=======
 [node name="EnergyShield" type="Sprite2D" parent="Shield"]
 material = ExtResource("12_kpoqr")
 position = Vector2(0.49995, 6.5)
@@ -391,7 +382,6 @@ scale = Vector2(9.32031, 3.75781)
 texture = ExtResource("13_uhs31")
 script = ExtResource("14_x3ork")
 
->>>>>>> Stashed changes
 [node name="MissileIndicatorRed" type="GPUParticles2D" parent="."]
 position = Vector2(46, -136)
 amount = 1
