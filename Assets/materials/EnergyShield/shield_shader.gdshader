@@ -24,8 +24,8 @@ uniform sampler2D normal_distortion_tex:repeat_enable;
 
 
 group_uniforms impacts;
-uniform float impact_width: hint_range(0.01,0.99) = 1;
-uniform float impact_depth: hint_range(0.0,0.2) = 0.06;
+uniform float impact_width: hint_range(0.01,0.9999) = 1;
+uniform float impact_depth: hint_range(-0.5,0.5) = 0.06;
 uniform vec4 impact_color: source_color;
 uniform float impact_texture_tiling: hint_range(0.0,1000.0) = 7.0; 
 uniform sampler2D impact_texture: repeat_enable;
@@ -39,14 +39,28 @@ uniform ivec2 impact_texture_size;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
 
-varying vec2 world_pos;
+varying vec2 local_pos;
 
 vec2 unpack_location(vec2 location){
 	return (location - 0.5) * 65535.0;
 }
+vec2 unpack_dir_vec(vec2 color){
+	return (color - 0.5) * 2.0;
+}
+
+float line(vec2 p1, vec2 p2, float width, vec2 uv)
+{
+	float dist = distance(p1, p2); // Distance between points
+	float dist_uv = distance(p1, uv); // Distance from p1 to current pixel
+
+	// If point is on line, according to dist, it should match current UV
+	// Ideally the '0.001' should be SCREEN_PIXEL_SIZE.x, but we can't use that outside of the fragment function.
+	return 1.0 - floor(1.0 - (0.001 * width) + distance (mix(p1, p2, clamp(dist_uv / dist, 0.0, 1.0)),  uv));
+}
 
 void vertex() {
-	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+//	local_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0, 1.0)).xy;
+	local_pos = VERTEX;
 }
 
 
@@ -76,19 +90,26 @@ void fragment() {
 
 
 	float impact_tex = texture(normal_distortion_tex, UV * impact_texture_tiling).b;
+	
+
 
 //IMPACTS
 	for (int i = 0; i < impact_texture_size.y; i++) {
 		vec3 data = texelFetch(_impact_data_texture, ivec2(0,i),0).rgb;
-		vec2 location = unpack_location(data.rg);
+//		vec2 location = unpack_location(data.rg);
+		vec2 impact_dir = normalize(unpack_dir_vec(data.rg) );
 		float lifetime_elapsed = data.b;
-//		float circle_mask = step(length( world_pos - location), 50.0);
-		float edge = smoothstep(inner_size_rim - impact_depth,0.5,length(UV - vec2(0.5)));
-		float dot_to_impact = clamp((dot(normalize(- world_pos +location), normalize(UV - 0.5)) ), 0.0,1.0);
-		dot_to_impact = pow(dot_to_impact, (1.0 - impact_width) * 400.0);
-		
 		float intensity = texture(impact_intensity_curve,vec2(lifetime_elapsed,0.0)).r;
-		COLOR.rgb = mix(COLOR.rgb, impact_color.rgb * impact_glow_overload,dot_to_impact * edge * impact_color.a  *impact_tex *intensity ); //
+		float edge = smoothstep(inner_size_rim - impact_depth,0.5,length(UV - vec2(0.5)));
+//		float dot_to_impact = clamp((dot(normalize(- local_pos +location), normalize(UV - 0.5)) ), 0.0,1.0);
+//		dot_to_impact = pow(dot_to_impact, (1.0 - impact_width) * 400.0);
+		
+
+		vec2 dir = normalize(UV - vec2(0.5));
+		float alignment = dot(impact_dir, dir);
+		float impact_line = step(impact_width , alignment);
+		COLOR.rgb = mix(COLOR.rgb, impact_color.rgb * impact_glow_overload,impact_line * edge * impact_color.a  *impact_tex *intensity ); //
+
 	}
 
 }
